@@ -1,0 +1,167 @@
+pageType: content
+background:
+  type: solid
+  color: "$background"
+elements:
+  - elementId: p8-title
+    elementType: text
+    bounds: [60, 30, 900, 42]
+    content:
+      style: "$heading"
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>API 设计与响应体规范</strong></p>
+  - elementId: p8-line
+    elementType: shape
+    bounds: [60, 78, 1160, 2]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$border"
+  - elementId: p8-http-title
+    elementType: text
+    bounds: [60, 95, 300, 30]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>HTTP Method 语义</strong></p>
+  - elementId: p8-http-table
+    elementType: table
+    bounds: [60, 135, 560, 200]
+    style: "$default"
+    columnWidths: [0.22, 0.42, 0.36]
+    rowHeights: [0.2, 0.16, 0.16, 0.16, 0.16, 0.16]
+    rows:
+      - - content: {text: "Method"}
+        - content: {text: "用途"}
+        - content: {text: "成功状态码"}
+      - - content: {text: "GET"}
+        - content: {text: "查询"}
+        - content: {text: "200 OK"}
+      - - content: {text: "POST"}
+        - content: {text: "创建"}
+        - content: {text: "201 Created"}
+      - - content: {text: "PUT"}
+        - content: {text: "全量更新"}
+        - content: {text: "200 OK"}
+      - - content: {text: "PATCH"}
+        - content: {text: "部分更新"}
+        - content: {text: "200 OK"}
+      - - content: {text: "DELETE"}
+        - content: {text: "删除"}
+        - content: {text: "204 No Content"}
+  - elementId: p8-url-title
+    elementType: text
+    bounds: [60, 355, 400, 30]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>URL 与响应体规范</strong></p>
+  - elementId: p8-url-bg
+    elementType: shape
+    bounds: [60, 395, 560, 250]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$lightBg"
+    border:
+      style: solid
+      width: 1
+      color: "#A7F3D0"
+  - elementId: p8-url-text
+    elementType: text
+    bounds: [80, 410, 520, 220]
+    content:
+      style: "$body"
+      fontSize: 15
+      lineHeight: 1.6
+      align: [left, top]
+      text: |
+        <p><strong>基础路径</strong>：/api/v{version}/{resource}</p>
+        <p><strong>资源名词复数</strong>：/users, /orders</p>
+        <p><strong>动作使用 HTTP Method</strong>，URL 中不体现动词</p>
+        <p style="margin-top:8px"><strong>成功响应</strong>：code + data + message + timestamp + traceId</p>
+        <p><strong>错误响应</strong>：额外包含 errors 数组</p>
+        <p style="margin-top:4px"><span style="color:$secondary; font-size:14px;">{ field, message, rejectedValue }</span></p>
+  - elementId: p8-test-title
+    elementType: text
+    bounds: [660, 95, 300, 30]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>测试分层规范</strong></p>
+  - elementId: p8-test-table
+    elementType: table
+    bounds: [660, 135, 560, 200]
+    style: "$default"
+    columnWidths: [0.2, 0.35, 0.2, 0.25]
+    rowHeights: [0.2, 0.16, 0.16, 0.16, 0.16, 0.16]
+    rows:
+      - - content: {text: "层级"}
+        - content: {text: "注解"}
+        - content: {text: "数据库"}
+        - content: {text: "命名"}
+      - - content: {text: "单元"}
+        - content: {text: "@ExtendWith(MockitoExtension)"}
+        - content: {text: "无"}
+        - content: {text: "*Test"}
+      - - content: {text: "集成"}
+        - content: {text: "@SpringBootTest + MockMvc"}
+        - content: {text: "H2"}
+        - content: {text: "*IT"}
+      - - content: {text: "Contract"}
+        - content: {text: "@AutoConfigureStubRunner"}
+        - content: {text: "H2"}
+        - content: {text: "*ContractTest"}
+      - - content: {text: ""}
+        - content: {text: ""}
+        - content: {text: ""}
+        - content: {text: ""}
+      - - content: {text: ""}
+        - content: {text: ""}
+        - content: {text: ""}
+        - content: {text: ""}
+  - elementId: p8-test-rule-bg
+    elementType: shape
+    bounds: [660, 355, 560, 290]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p8-test-rule-text
+    elementType: text
+    bounds: [680, 370, 520, 260]
+    content:
+      style: "$body"
+      fontSize: 15
+      lineHeight: 1.6
+      align: [left, top]
+      text: |
+        <p><strong style="color:$accent;">强制规则</strong></p>
+        <p>· 测试必须独立，禁止 @DependsOn</p>
+        <p>· 使用 @Sql 或 TestDataBuilder 准备数据</p>
+        <p>· 每个测试一个断言主题（Arrange-Act-Assert）</p>
+        <p>· 禁用 Spring 上下文缓存污染：@DirtiesContext 按需使用</p>
+        <p>· <span style="color:$accent;">禁止在测试中使用真实 MySQL</span></p>
+  - elementId: p8-page-num
+    elementType: text
+    bounds: [1160, 690, 60, 20]
+    content:
+      style: "$caption"
+      align: [right, middle]
+      wrap: false
+      text: "08"

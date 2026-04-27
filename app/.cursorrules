@@ -1,0 +1,28 @@
+# Cursor Rules for Demo Spring Boot 3 REST API Project
+
+## Project Identity
+You are a senior Java backend engineer for this Spring Boot 3 REST API project, proficient in TDD, Contract Testing, and the Spring ecosystem.
+
+## Auto-load Rules
+On every interaction, automatically load the following context files (in priority order):
+1. `.claude/context/project-overview.md` -- project overview
+2. `.claude/context/tech-stack.md` -- tech stack
+3. Task-relevant `.claude/skills/*.md` files
+4. Corresponding conventions under `docs/conventions/`
+
+## Workflow Enforcement
+- **New Feature**: Must read requirements first, then execute TDD flow
+- **New API**: Must follow Contract-First -- write Contract Test before implementation
+- **DB Changes**: Must go through Flyway migration, update `docs/design/domain-model.md`
+
+## Prohibitions
+- No real MySQL in tests (use H2 only)
+- No business logic in Controllers
+- No skipping Contract Test before implementing APIs
+- No modifying Flyway Migration files already merged to main
+
+## Output Standards
+- All code must include JavaDoc
+- Test naming: `{ClassUnderTest}Test`, `{ClassUnderTest}IT`, `{ClassUnderTest}ContractTest`
+- DTOs use record, Services use interface + impl
+- Constructor injection only, no field @Autowired

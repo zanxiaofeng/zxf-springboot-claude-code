@@ -1,0 +1,219 @@
+pageType: content
+background:
+  type: solid
+  color: "$background"
+elements:
+  - elementId: p12-title
+    elementType: text
+    bounds: [60, 30, 900, 42]
+    content:
+      style: "$heading"
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>TestDataBuilder 模式与测试数据管理</strong></p>
+  - elementId: p12-line
+    elementType: shape
+    bounds: [60, 78, 1160, 2]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$border"
+  - elementId: p12-layer1-bg
+    elementType: shape
+    bounds: [60, 105, 360, 200]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p12-layer1-bar
+    elementType: shape
+    bounds: [60, 105, 360, 4]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p12-layer1-title
+    elementType: text
+    bounds: [80, 122, 320, 28]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>TestDataBuilder<T></strong></p>
+  - elementId: p12-layer1-text
+    elementType: text
+    bounds: [80, 158, 320, 130]
+    content:
+      style: "$body"
+      fontSize: 14
+      lineHeight: 1.5
+      align: [left, top]
+      text: |
+        <p>基础接口</p>
+        <p>· T build()</p>
+        <p>· default T buildAndPersist()</p>
+        <p style="margin-top:6px"><span style="color:$secondary;">纯 Builder 与持久化 Builder 的共同契约</span></p>
+  - elementId: p12-layer2-bg
+    elementType: shape
+    bounds: [440, 105, 360, 200]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p12-layer2-bar
+    elementType: shape
+    bounds: [440, 105, 360, 4]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "#047857"
+  - elementId: p12-layer2-title
+    elementType: text
+    bounds: [460, 122, 320, 28]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>{Entity}Builder</strong></p>
+  - elementId: p12-layer2-text
+    elementType: text
+    bounds: [460, 158, 320, 130]
+    content:
+      style: "$body"
+      fontSize: 14
+      lineHeight: 1.5
+      align: [left, top]
+      text: |
+        <p>纯 Builder（单元测试）</p>
+        <p>· Randomizer 生成默认值</p>
+        <p>· 链式 withXxx() 方法</p>
+        <p>· but() 复制方法</p>
+        <p>· aUser().withEmail("x").build()</p>
+  - elementId: p12-layer3-bg
+    elementType: shape
+    bounds: [820, 105, 360, 200]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p12-layer3-bar
+    elementType: shape
+    bounds: [820, 105, 360, 4]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "#059669"
+  - elementId: p12-layer3-title
+    elementType: text
+    bounds: [840, 122, 320, 28]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>PersistableBuilder</strong></p>
+  - elementId: p12-layer3-text
+    elementType: text
+    bounds: [840, 158, 320, 130]
+    content:
+      style: "$body"
+      fontSize: 14
+      lineHeight: 1.5
+      align: [left, top]
+      text: |
+        <p>持久化 Builder（集成测试）</p>
+        <p>· 代理 {Entity}Builder</p>
+        <p>· 持有 Repository</p>
+        <p>· buildAndPersist() 保存到 DB</p>
+        <p>· build() 仅构造不保存</p>
+  - elementId: p12-fixture-title
+    elementType: text
+    bounds: [60, 330, 400, 32]
+    content:
+      style: "$subheading"
+      fontSize: 20
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>Randomizer 与 Fixture</strong></p>
+  - elementId: p12-fixture-left-bg
+    elementType: shape
+    bounds: [60, 375, 560, 270]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$lightBg"
+    border:
+      style: solid
+      width: 1
+      color: "#A7F3D0"
+  - elementId: p12-fixture-left-text
+    elementType: text
+    bounds: [80, 390, 520, 240]
+    content:
+      style: "$body"
+      fontSize: 15
+      lineHeight: 1.6
+      align: [left, top]
+      text: |
+        <p><strong style="color:$primary;">Randomizer 工具类</strong></p>
+        <p>· nextId() → Long (1 ~ 1,000,000)</p>
+        <p>· uuid() → UUID 字符串</p>
+        <p>· username() → user_ + 8位随机字符</p>
+        <p>· email() → 随机 + @test.com</p>
+        <p>· password() → Pass + 随机 + 1!</p>
+        <p>· now() / past() → OffsetDateTime</p>
+  - elementId: p12-fixture-right-bg
+    elementType: shape
+    bounds: [640, 375, 560, 290]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p12-fixture-right-text
+    elementType: text
+    bounds: [660, 390, 520, 250]
+    content:
+      style: "$body"
+      fontSize: 15
+      lineHeight: 1.6
+      align: [left, top]
+      text: |
+        <p><strong style="color:$primary;">Fixture 预定义数据集</strong></p>
+        <p>· UserFixtures.activeUser()</p>
+        <p>· UserFixtures.inactiveUser()</p>
+        <p><span style="color:$secondary;">用于固定数据场景，减少重复 Builder 调用</span></p>
+        <p><strong style="color:$accent;">使用原则</strong></p>
+        <p>· 单元测试 → 纯 Builder</p>
+        <p>· 集成测试 → 持久化 Builder</p>
+        <p>· 通用数据 → Fixture 复用</p>
+  - elementId: p12-page-num
+    elementType: text
+    bounds: [1160, 690, 60, 20]
+    content:
+      style: "$caption"
+      align: [right, middle]
+      wrap: false
+      text: "12"

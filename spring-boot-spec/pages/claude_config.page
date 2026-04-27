@@ -1,0 +1,238 @@
+pageType: content
+background:
+  type: solid
+  color: "$background"
+elements:
+  - elementId: p5-title
+    elementType: text
+    bounds: [60, 30, 1000, 42]
+    content:
+      style: "$heading"
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>Claude Code 配置体系：上下文驱动的 AI 编程</strong></p>
+  - elementId: p5-line
+    elementType: shape
+    bounds: [60, 78, 1160, 2]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$border"
+  - elementId: p5-config1-bg
+    elementType: shape
+    bounds: [60, 105, 360, 200]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p5-config1-accent
+    elementType: shape
+    bounds: [60, 105, 360, 4]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p5-config1-icon
+    elementType: icon
+    bounds: [85, 125, 28, 28]
+    iconName: "fas:sliders"
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p5-config1-title
+    elementType: text
+    bounds: [125, 122, 270, 32]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>.cursorrules</strong></p>
+  - elementId: p5-config1-text
+    elementType: text
+    bounds: [85, 165, 310, 120]
+    content:
+      style: "$body"
+      fontSize: 15
+      color: "$secondary"
+      lineHeight: 1.5
+      align: [left, top]
+      text: |
+        <p>全局行为规则入口</p>
+        <p>自动加载上下文文件</p>
+        <p>工作流强制要求</p>
+        <p>禁止事项清单</p>
+  - elementId: p5-config2-bg
+    elementType: shape
+    bounds: [440, 105, 360, 200]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p5-config2-accent
+    elementType: shape
+    bounds: [440, 105, 360, 4]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p5-config2-icon
+    elementType: icon
+    bounds: [465, 125, 28, 28]
+    iconName: "fas:anchor"
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p5-config2-title
+    elementType: text
+    bounds: [505, 122, 270, 32]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>claude.md</strong></p>
+  - elementId: p5-config2-text
+    elementType: text
+    bounds: [465, 165, 310, 120]
+    content:
+      style: "$body"
+      fontSize: 15
+      color: "$secondary"
+      lineHeight: 1.5
+      align: [left, top]
+      text: |
+        <p>项目上下文锚点</p>
+        <p>快速导航文档索引</p>
+        <p>当前 Sprint 状态</p>
+        <p>技术栈版本清单</p>
+  - elementId: p5-config3-bg
+    elementType: shape
+    bounds: [820, 105, 360, 200]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p5-config3-accent
+    elementType: shape
+    bounds: [820, 105, 360, 4]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p5-config3-icon
+    elementType: icon
+    bounds: [845, 125, 28, 28]
+    iconName: "fas:gear"
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p5-config3-title
+    elementType: text
+    bounds: [885, 122, 270, 32]
+    content:
+      style: "$subheading"
+      fontSize: 18
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>config.json</strong></p>
+  - elementId: p5-config3-text
+    elementType: text
+    bounds: [845, 165, 310, 120]
+    content:
+      style: "$body"
+      fontSize: 15
+      color: "$secondary"
+      lineHeight: 1.5
+      align: [left, top]
+      text: |
+        <p>自动引用触发器</p>
+        <p>文件模式匹配加载</p>
+        <p>关键词 Skill 激活</p>
+        <p>条件上下文注入</p>
+  - elementId: p5-rule-title
+    elementType: text
+    bounds: [60, 330, 400, 32]
+    content:
+      style: "$subheading"
+      fontSize: 20
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>工作流强制规则</strong></p>
+  - elementId: p5-rule-left-bg
+    elementType: shape
+    bounds: [60, 375, 560, 270]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$lightBg"
+    border:
+      style: solid
+      width: 1
+      color: "#A7F3D0"
+  - elementId: p5-rule-left-text
+    elementType: text
+    bounds: [80, 390, 520, 240]
+    content:
+      style: "$body"
+      fontSize: 16
+      lineHeight: 1.6
+      align: [left, top]
+      text: |
+        <p><strong style="color:$primary;">新增功能</strong></p>
+        <p>必须先读取 docs/requirements/ 对应需求，再执行 TDD 流程</p>
+        <p style="margin-top:6px"><strong style="color:$primary;">新增 API</strong></p>
+        <p>必须遵循 Contract-First，先写 Contract Test 再实现</p>
+        <p style="margin-top:6px"><strong style="color:$primary;">数据库变更</strong></p>
+        <p>必须通过 Flyway migration，并更新领域模型文档</p>
+  - elementId: p5-rule-right-bg
+    elementType: shape
+    bounds: [640, 375, 560, 270]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "#FEF3C7"
+    border:
+      style: solid
+      width: 1
+      color: "#FCD34D"
+  - elementId: p5-rule-right-text
+    elementType: text
+    bounds: [660, 390, 520, 240]
+    content:
+      style: "$body"
+      fontSize: 16
+      lineHeight: 1.6
+      align: [left, top]
+      text: |
+        <p><strong style="color:$accent;">禁止事项</strong></p>
+        <p>· 测试中使用真实 MySQL（必须使用 H2）</p>
+        <p>· 在 Controller 中写业务逻辑</p>
+        <p>· 跳过 Contract Test 直接实现 API</p>
+        <p>· 修改已合并到 main 分支的 Flyway Migration</p>
+        <p>· 字段注入 @Autowired（必须使用构造器注入）</p>
+  - elementId: p5-page-num
+    elementType: text
+    bounds: [1160, 690, 60, 20]
+    content:
+      style: "$caption"
+      align: [right, middle]
+      wrap: false
+      text: "05"

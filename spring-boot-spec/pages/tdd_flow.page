@@ -1,0 +1,263 @@
+pageType: content
+background:
+  type: solid
+  color: "$background"
+elements:
+  - elementId: p10-title
+    elementType: text
+    bounds: [60, 30, 900, 42]
+    content:
+      style: "$heading"
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>TDD 开发流程：七步严格顺序</strong></p>
+  - elementId: p10-line
+    elementType: shape
+    bounds: [60, 78, 1160, 2]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$border"
+  - elementId: p10-step1-shape
+    elementType: shape
+    bounds: [60, 110, 145, 80]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p10-step1-text
+    elementType: text
+    bounds: [60, 110, 145, 80]
+    content:
+      fontSize: 14
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Step 1</strong></p>
+        <p>需求分析</p>
+  - elementId: p10-arrow1
+    elementType: shape
+    bounds: [210, 145, 25, 0]
+    shapeName: straightConnector1
+    arrow: [null, "arrow"]
+    border: {style: solid, width: 2, color: "$secondary"}
+  - elementId: p10-step2-shape
+    elementType: shape
+    bounds: [240, 110, 145, 80]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p10-step2-text
+    elementType: text
+    bounds: [240, 110, 145, 80]
+    content:
+      fontSize: 14
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Step 2</strong></p>
+        <p>识别 Builder</p>
+  - elementId: p10-arrow2
+    elementType: shape
+    bounds: [390, 145, 25, 0]
+    shapeName: straightConnector1
+    arrow: [null, "arrow"]
+    border: {style: solid, width: 2, color: "$secondary"}
+  - elementId: p10-step3-shape
+    elementType: shape
+    bounds: [420, 110, 145, 80]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "#DC2626"
+  - elementId: p10-step3-text
+    elementType: text
+    bounds: [420, 110, 145, 80]
+    content:
+      fontSize: 14
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Step 3</strong></p>
+        <p>编写失败测试</p>
+  - elementId: p10-arrow3
+    elementType: shape
+    bounds: [570, 145, 25, 0]
+    shapeName: straightConnector1
+    arrow: [null, "arrow"]
+    border: {style: solid, width: 2, color: "$secondary"}
+  - elementId: p10-step4-shape
+    elementType: shape
+    bounds: [600, 110, 145, 80]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "#059669"
+  - elementId: p10-step4-text
+    elementType: text
+    bounds: [600, 110, 145, 80]
+    content:
+      fontSize: 14
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Step 4</strong></p>
+        <p>最小实现</p>
+  - elementId: p10-arrow4
+    elementType: shape
+    bounds: [750, 145, 25, 0]
+    shapeName: straightConnector1
+    arrow: [null, "arrow"]
+    border: {style: solid, width: 2, color: "$secondary"}
+  - elementId: p10-step5-shape
+    elementType: shape
+    bounds: [780, 110, 145, 80]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p10-step5-text
+    elementType: text
+    bounds: [780, 110, 145, 80]
+    content:
+      fontSize: 14
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Step 5</strong></p>
+        <p>重构</p>
+  - elementId: p10-arrow5
+    elementType: shape
+    bounds: [930, 145, 25, 0]
+    shapeName: straightConnector1
+    arrow: [null, "arrow"]
+    border: {style: solid, width: 2, color: "$secondary"}
+  - elementId: p10-step6-shape
+    elementType: shape
+    bounds: [960, 110, 145, 80]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p10-step6-text
+    elementType: text
+    bounds: [960, 110, 145, 80]
+    content:
+      fontSize: 14
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Step 6</strong></p>
+        <p>Contract Test</p>
+  - elementId: p10-arrow6
+    elementType: shape
+    bounds: [1110, 145, 25, 0]
+    shapeName: straightConnector1
+    arrow: [null, "arrow"]
+    border: {style: solid, width: 2, color: "$secondary"}
+  - elementId: p10-step7-shape
+    elementType: shape
+    bounds: [1140, 110, 80, 80]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p10-step7-text
+    elementType: text
+    bounds: [1140, 110, 80, 80]
+    content:
+      fontSize: 14
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Step 7</strong></p>
+        <p>文档</p>
+  - elementId: p10-detail-title
+    elementType: text
+    bounds: [60, 215, 400, 32]
+    content:
+      style: "$subheading"
+      fontSize: 20
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>关键步骤说明</strong></p>
+  - elementId: p10-detail-left-bg
+    elementType: shape
+    bounds: [60, 260, 560, 380]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p10-detail-left-text
+    elementType: text
+    bounds: [80, 275, 520, 350]
+    content:
+      style: "$body"
+      fontSize: 15
+      lineHeight: 1.6
+      align: [left, top]
+      text: |
+        <p><strong style="color:$primary;">Step 1 需求分析</strong></p>
+        <p>读取 docs/requirements/ 对应需求；如不存在，拒绝实现并要求先补充需求</p>
+        <p style="margin-top:8px"><strong style="color:$primary;">Step 2 识别 Builder</strong></p>
+        <p>新增 Entity → 创建 {Entity}Builder；复用已有 Builder → 检查 src/test/support/builder/</p>
+        <p style="margin-top:8px"><strong style="color:$primary;">Step 3 编写失败测试（红）</strong></p>
+        <p>单元测试：Service 层（Mockito）；集成测试：Controller 层（MockMvc + H2）</p>
+        <p style="margin-top:8px"><strong style="color:$primary;">Step 4 最小实现（绿）</strong></p>
+        <p>Controller → Service → Repository 分层实现</p>
+  - elementId: p10-detail-right-bg
+    elementType: shape
+    bounds: [640, 260, 560, 380]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p10-detail-right-text
+    elementType: text
+    bounds: [660, 275, 520, 350]
+    content:
+      style: "$body"
+      fontSize: 15
+      lineHeight: 1.6
+      align: [left, top]
+      text: |
+        <p><strong style="color:$primary;">Step 5 重构</strong></p>
+        <p>检查代码是否符合 docs/conventions/；提取重复代码，优化命名</p>
+        <p style="margin-top:8px"><strong style="color:$primary;">Step 6 Contract Test（API 层）</strong></p>
+        <p>为每个新增 Endpoint 编写 Contract；生成 Stub 并验证 API 契约</p>
+        <p style="margin-top:8px"><strong style="color:$primary;">Step 7 文档更新</strong></p>
+        <p>更新 docs/design/api-spec-v1.md；更新 claude.md 中的 Sprint 状态</p>
+        <p style="margin-top:16px"><span style="color:$accent;"><strong>核心原则：红 → 绿 → 重构，循环往复</strong></span></p>
+  - elementId: p10-page-num
+    elementType: text
+    bounds: [1160, 690, 60, 20]
+    content:
+      style: "$caption"
+      align: [right, middle]
+      wrap: false
+      text: "10"

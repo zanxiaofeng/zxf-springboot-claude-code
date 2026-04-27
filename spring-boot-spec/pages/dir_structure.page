@@ -1,0 +1,183 @@
+pageType: content
+background:
+  type: solid
+  color: "$background"
+elements:
+  - elementId: p4-title
+    elementType: text
+    bounds: [60, 30, 900, 42]
+    content:
+      style: "$heading"
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>项目目录结构：分层与职责分离</strong></p>
+  - elementId: p4-line
+    elementType: shape
+    bounds: [60, 78, 1160, 2]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$border"
+  - elementId: p4-layer-title
+    elementType: text
+    bounds: [60, 100, 400, 32]
+    content:
+      style: "$subheading"
+      fontSize: 20
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>四层架构分层</strong></p>
+  - elementId: p4-layer-domain
+    elementType: shape
+    bounds: [60, 145, 270, 90]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$primary"
+  - elementId: p4-layer-domain-text
+    elementType: text
+    bounds: [60, 145, 270, 90]
+    content:
+      fontSize: 18
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Domain</strong></p>
+        <p><span style="font-size:14px;">Entity / Repository Interface</span></p>
+  - elementId: p4-layer-app
+    elementType: shape
+    bounds: [350, 145, 270, 90]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "#047857"
+  - elementId: p4-layer-app-text
+    elementType: text
+    bounds: [350, 145, 270, 90]
+    content:
+      fontSize: 18
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Application</strong></p>
+        <p><span style="font-size:14px;">Service / DTO / Mapper</span></p>
+  - elementId: p4-layer-infra
+    elementType: shape
+    bounds: [640, 145, 270, 90]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "#059669"
+  - elementId: p4-layer-infra-text
+    elementType: text
+    bounds: [640, 145, 270, 90]
+    content:
+      fontSize: 18
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Infrastructure</strong></p>
+        <p><span style="font-size:14px;">RepositoryImpl / Config</span></p>
+  - elementId: p4-layer-if
+    elementType: shape
+    bounds: [930, 145, 270, 90]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "#10B981"
+  - elementId: p4-layer-if-text
+    elementType: text
+    bounds: [930, 145, 270, 90]
+    content:
+      fontSize: 18
+      color: "$white"
+      fontFamily: "Liter, MiSans"
+      align: [center, middle]
+      wrap: false
+      text: |
+        <p><strong>Interfaces</strong></p>
+        <p><span style="font-size:14px;">Controller / Filter</span></p>
+  - elementId: p4-dir-title
+    elementType: text
+    bounds: [60, 260, 400, 32]
+    content:
+      style: "$subheading"
+      fontSize: 20
+      align: [left, middle]
+      wrap: false
+      text: |
+        <p><strong>关键目录说明</strong></p>
+  - elementId: p4-dir-left-bg
+    elementType: shape
+    bounds: [60, 305, 560, 350]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p4-dir-left-text
+    elementType: text
+    bounds: [80, 315, 520, 330]
+    content:
+      style: "$body"
+      fontSize: 16
+      color: "$text"
+      lineHeight: 1.5
+      align: [left, top]
+      text: |
+        <p><strong style="color:$primary;">.claude/</strong></p>
+        <p>  skills/ — TDD、Contract Test 等可调用技能</p>
+        <p>  context/ — 动态上下文片段（自动注入）</p>
+        <p>  prompts/ — 可复用 Prompt 模板</p>
+        <p style="margin-top:8px"><strong style="color:$primary;">docs/</strong></p>
+        <p>  requirements/ — 需求文档（Markdown）</p>
+        <p>  design/ — ADR、架构图、API 规范</p>
+        <p>  conventions/ — 团队编码规范</p>
+  - elementId: p4-dir-right-bg
+    elementType: shape
+    bounds: [640, 305, 560, 350]
+    shapeName: rect
+    fill:
+      type: solid
+      color: "$cardBg"
+    border:
+      style: solid
+      width: 1
+      color: "$border"
+  - elementId: p4-dir-right-text
+    elementType: text
+    bounds: [660, 315, 520, 330]
+    content:
+      style: "$body"
+      fontSize: 16
+      color: "$text"
+      lineHeight: 1.5
+      align: [left, top]
+      text: |
+        <p><strong style="color:$primary;">src/test/</strong></p>
+        <p>  unit/ — 纯单元测试（Mockito）</p>
+        <p>  integration/ — 集成测试（@SpringBootTest）</p>
+        <p>  contract/ — Contract Test（Spring Cloud Contract）</p>
+        <p>  support/ — TestDataBuilder / Fixture</p>
+        <p style="margin-top:8px"><strong style="color:$primary;">scripts/ & CI</strong></p>
+        <p>  run-contract-tests.sh / fast-test.sh</p>
+        <p>  .github/workflows/ci.yml</p>
+  - elementId: p4-page-num
+    elementType: text
+    bounds: [1160, 690, 60, 20]
+    content:
+      style: "$caption"
+      align: [right, middle]
+      wrap: false
+      text: "04"
