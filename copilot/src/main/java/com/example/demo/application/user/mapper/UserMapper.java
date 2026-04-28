@@ -3,6 +3,8 @@ package com.example.demo.application.user.mapper;
 import com.example.demo.application.user.dto.CreateUserRequest;
 import com.example.demo.application.user.dto.UserResponse;
 import com.example.demo.domain.user.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,10 +14,14 @@ import org.springframework.stereotype.Component;
  * @since 1.0.0
  */
 @Component
+@RequiredArgsConstructor
 public class UserMapper {
+
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * Converts a CreateUserRequest to a User entity.
+     * Passwords are hashed using BCrypt before storage.
      *
      * @param request the creation request
      * @return the user entity
@@ -24,7 +30,7 @@ public class UserMapper {
         return User.builder()
                 .username(request.username())
                 .email(request.email())
-                .password(request.password())
+                .password(passwordEncoder.encode(request.password()))
                 .build();
     }
 

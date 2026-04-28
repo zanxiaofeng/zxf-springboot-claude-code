@@ -1,6 +1,7 @@
 package com.example.demo.interfaces.common;
 
 import com.example.demo.domain.common.BusinessException;
+import com.example.demo.domain.common.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class GlobalExceptionHandler {
         log.warn("[{}] Business exception: {} - {}", traceId, ex.getErrorCode().getCode(), ex.getMessage());
         return ResponseEntity.status(ex.getErrorCode().getHttpStatus())
                 .header(TRACE_ID_HEADER, traceId)
-                .body(ApiResponse.error(ex.getErrorCode(), ex.getMessage()));
+                .body(ApiResponse.error(ex.getErrorCode(), ex.getMessage(), traceId));
     }
 
     /**
@@ -63,7 +64,7 @@ public class GlobalExceptionHandler {
                 .collect(Collectors.toList());
         return ResponseEntity.status(ErrorCode.VALIDATION_ERROR.getHttpStatus())
                 .header(TRACE_ID_HEADER, traceId)
-                .body(ApiResponse.error(ErrorCode.VALIDATION_ERROR, "Request validation failed", errors));
+                .body(ApiResponse.error(ErrorCode.VALIDATION_ERROR, "Request validation failed", traceId, errors));
     }
 
     /**
@@ -81,7 +82,7 @@ public class GlobalExceptionHandler {
         log.warn("[{}] NoSuchElementException: {}", traceId, ex.getMessage());
         return ResponseEntity.status(ErrorCode.NOT_FOUND.getHttpStatus())
                 .header(TRACE_ID_HEADER, traceId)
-                .body(ApiResponse.error(ErrorCode.NOT_FOUND, "Resource not found: " + ex.getMessage()));
+                .body(ApiResponse.error(ErrorCode.NOT_FOUND, "Resource not found", traceId));
     }
 
     /**
@@ -97,7 +98,7 @@ public class GlobalExceptionHandler {
         log.error("[{}] Unexpected error: {}", traceId, ex.getMessage(), ex);
         return ResponseEntity.status(ErrorCode.INTERNAL_ERROR.getHttpStatus())
                 .header(TRACE_ID_HEADER, traceId)
-                .body(ApiResponse.error(ErrorCode.INTERNAL_ERROR, "An unexpected error occurred"));
+                .body(ApiResponse.error(ErrorCode.INTERNAL_ERROR, "An unexpected error occurred", traceId));
     }
 
     /**

@@ -68,4 +68,11 @@ public interface UserRepository {
      * @param id the user ID
      */
     void deleteById(Long id);
+
+    /**
+     * Deletes a user entity.
+     *
+     * @param user the user to delete
+     */
+    void delete(User user);
 }

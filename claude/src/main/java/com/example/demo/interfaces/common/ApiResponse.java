@@ -1,5 +1,7 @@
 package com.example.demo.interfaces.common;
 
+import com.example.demo.domain.common.ErrorCode;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,56 +25,34 @@ public class ApiResponse<T> {
     private final String code;
     private final T data;
     private final String message;
-
-    @Builder.Default
-    private final OffsetDateTime timestamp = OffsetDateTime.now();
-
+    private final OffsetDateTime timestamp;
     private final String traceId;
     private final List<FieldError> errors;
 
-    /**
-     * Creates a success response with data.
-     *
-     * @param data the response data
-     * @param <T>  the data type
-     * @return success ApiResponse
-     */
     public static <T> ApiResponse<T> success(T data) {
         return ApiResponse.<T>builder()
                 .code(ErrorCode.SUCCESS.getCode())
                 .data(data)
+                .timestamp(OffsetDateTime.now())
                 .build();
     }
 
-    /**
-     * Creates an error response with the given error code and message.
-     *
-     * @param errorCode the error code
-     * @param message   the error message
-     * @param <T>       the data type
-     * @return error ApiResponse
-     */
-    public static <T> ApiResponse<T> error(ErrorCode errorCode, String message) {
+    public static <T> ApiResponse<T> error(ErrorCode errorCode, String message, String traceId) {
         return ApiResponse.<T>builder()
                 .code(errorCode.getCode())
                 .message(message)
+                .traceId(traceId)
+                .timestamp(OffsetDateTime.now())
                 .build();
     }
 
-    /**
-     * Creates an error response with field validation errors.
-     *
-     * @param errorCode the error code
-     * @param message   the error message
-     * @param errors    the list of field errors
-     * @param <T>       the data type
-     * @return error ApiResponse with field errors
-     */
-    public static <T> ApiResponse<T> error(ErrorCode errorCode, String message, List<FieldError> errors) {
+    public static <T> ApiResponse<T> error(ErrorCode errorCode, String message, String traceId, List<FieldError> errors) {
         return ApiResponse.<T>builder()
                 .code(errorCode.getCode())
                 .message(message)
+                .traceId(traceId)
                 .errors(errors)
+                .timestamp(OffsetDateTime.now())
                 .build();
     }
 

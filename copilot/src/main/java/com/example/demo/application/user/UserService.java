@@ -6,8 +6,6 @@ import com.example.demo.application.user.dto.UserResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Optional;
-
 /**
  * Service interface for user management operations.
  * Defines the contract for user CRUD operations.
@@ -30,9 +28,10 @@ public interface UserService {
      * Retrieves a user by their unique identifier.
      *
      * @param id the user ID
-     * @return optional containing the user if found
+     * @return the user response
+     * @throws com.example.demo.domain.common.BusinessException if user not found
      */
-    Optional<UserResponse> findUserById(Long id);
+    UserResponse findUserById(Long id);
 
     /**
      * Lists all users with pagination.

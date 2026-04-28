@@ -1,4 +1,4 @@
-package com.example.demo.interfaces.common;
+package com.example.demo.domain.common;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorCode {
 
-    SUCCESS("000000", "Success", HttpStatus.OK),
+    SUCCESS("SUCCESS", "Success", HttpStatus.OK),
     INTERNAL_ERROR("000001", "Internal server error", HttpStatus.INTERNAL_SERVER_ERROR),
     BAD_REQUEST("000002", "Bad request", HttpStatus.BAD_REQUEST),
     NOT_FOUND("000003", "Resource not found", HttpStatus.NOT_FOUND),

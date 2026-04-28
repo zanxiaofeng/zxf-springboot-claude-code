@@ -1,6 +1,5 @@
 package com.example.demo.domain.common;
 
-import com.example.demo.interfaces.common.ErrorCode;
 
 /**
  * Base exception for all business logic errors.

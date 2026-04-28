@@ -63,4 +63,10 @@ public class UserJpaAdapter implements UserRepository {
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }
+
+    /** {@inheritDoc} */
+    @Override
+    public void delete(User user) {
+        jpaRepository.delete(user);
+    }
 }

@@ -19,7 +19,7 @@ public record CreateUserRequest(
 
         @NotBlank(message = "Username is required")
         @Size(min = 3, max = 20, message = "Username must be 3-20 characters")
-        @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must be alphanumeric")
+        @Pattern(regexp = "^[a-zA-Z0-9._]+$", message = "Username must be alphanumeric (dots and underscores allowed)")
         String username,
 
         @NotBlank(message = "Email is required")

@@ -7,21 +7,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 
-/**
- * Configuration for HTTP clients used to communicate with downstream services.
- *
- * @author Demo Team
- * @since 1.0.0
- */
 @Configuration
 public class RestTemplateConfig {
 
-    /**
-     * Creates a {@link RestTemplate} with reasonable timeouts for downstream calls.
-     *
-     * @param builder the Spring Boot RestTemplateBuilder
-     * @return configured RestTemplate
-     */
     @Bean
     public RestTemplate downstreamRestTemplate(RestTemplateBuilder builder) {
         return builder

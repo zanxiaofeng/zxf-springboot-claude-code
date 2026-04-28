@@ -9,8 +9,8 @@ spring:
   # --- Datasource (MySQL for production) ---
   datasource:
     url: jdbc:mysql://localhost:3306/demo?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-    username: root
-    password: root
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   # --- Downstream Services ---
@@ -35,6 +35,13 @@ app:
     locations: classpath:db/migration,classpath:db/migration/mysql
     baseline-on-migrate: true
     validate-on-migrate: true
+
+  # --- Data / Pagination ---
+  data:
+    web:
+      pageable:
+        max-page-size: 100
+        default-page-size: 20
 
 # --- Server ---
 server:
