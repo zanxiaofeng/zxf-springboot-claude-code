@@ -18,10 +18,18 @@ All responses use `ApiResponse<T>` wrapper:
 }
 ```
 
+## Downstream Integration
+Certain endpoints trigger calls to the downstream notification service:
+- Base URL: `http://localhost:8090` (production), random port via WireMock (tests)
+- Timeout: 3s connect / 5s read
+- Failure mode: downstream failures are logged but do not break the main response
+
 ## Users
 
 ### POST /api/v1/users
 Create a new user.
+
+**Downstream Side Effect**: On successful creation, sends a `POST /api/v1/notifications/user-created` request to the downstream notification service with `{userId, username, email, eventType: "USER_CREATED"}`.
 
 **Request Body:**
 ```json

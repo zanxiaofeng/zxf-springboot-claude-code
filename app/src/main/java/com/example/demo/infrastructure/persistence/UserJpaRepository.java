@@ -7,14 +7,14 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * JPA implementation of User repository.
- * Extends JpaRepository for CRUD operations.
+ * Spring Data JPA repository for {@link User} entities.
+ * Provides CRUD operations and custom query methods.
  *
  * @author Demo Team
  * @since 1.0.0
  */
 @Repository
-public interface UserRepositoryImpl extends JpaRepository<User, Long> {
+public interface UserJpaRepository extends JpaRepository<User, Long> {
 
     /**
      * Finds a user by their email address.

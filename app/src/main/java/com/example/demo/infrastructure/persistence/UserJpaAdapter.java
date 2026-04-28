@@ -11,7 +11,7 @@ import java.util.Optional;
 
 /**
  * Adapter that bridges the {@link UserRepository} domain interface
- * to the JPA {@link UserRepositoryImpl} implementation.
+ * to the JPA {@link UserJpaRepository} implementation.
  *
  * @author Demo Team
  * @since 1.0.0
@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserJpaAdapter implements UserRepository {
 
-    private final UserRepositoryImpl jpaRepository;
+    private final UserJpaRepository jpaRepository;
 
     /** {@inheritDoc} */
     @Override

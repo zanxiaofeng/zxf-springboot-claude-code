@@ -1,6 +1,7 @@
 package com.example.demo.application.user;
 
 import com.example.demo.application.user.dto.CreateUserRequest;
+import com.example.demo.application.user.dto.UpdateUserRequest;
 import com.example.demo.application.user.dto.UserResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,7 +49,7 @@ public interface UserService {
      * @param request the update request
      * @return the updated user response
      */
-    UserResponse updateUser(Long id, CreateUserRequest request);
+    UserResponse updateUser(Long id, UpdateUserRequest request);
 
     /**
      * Deletes a user by their ID.

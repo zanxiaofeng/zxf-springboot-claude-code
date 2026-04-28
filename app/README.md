@@ -27,7 +27,7 @@ my-project/
 │   ├── main/resources/
 │   │   └── db/migration/               # Flyway migrations (H2 & MySQL compatible)
 │   └── test/                             # Tests
-│       ├── unit/                         # Pure unit tests (Mockito)
+
 │       ├── integration/                  # Integration tests (@SpringBootTest + H2)
 │       ├── contract/                     # Contract tests (Spring Cloud Contract)
 │       └── support/                      # Test utilities (Builder, Fixture, Randomizer)
@@ -64,10 +64,10 @@ mvn spring-boot:run
 
 ### Run Tests
 ```bash
-# Quick test (unit only, skip contract)
+# Quick test (skip contract)
 ./scripts/fast-test.sh
 
-# Full CI pipeline (unit + contract + integration)
+# Full CI pipeline (integration + contract)
 ./scripts/full-ci.sh
 
 # Contract tests only
@@ -93,7 +93,7 @@ mvn spring-boot:run
 - Spring Security
 - Flyway Migration
 - MySQL 8.0 (prod) / H2 (test)
-- JUnit 5 / Mockito / AssertJ
+- JUnit 5 / AssertJ
 - Spring Cloud Contract
 - Lombok
 
@@ -103,4 +103,4 @@ mvn spring-boot:run
 - **TDD**: Red → Green → Refactor workflow
 - **Contract First**: Write Contract Test before API implementation
 - **Code Standards**: All code includes JavaDoc, constructor injection, DTOs use record
-- **Testing**: Unit tests (Mockito) + Integration tests (H2) + Contract tests (Stub)
+- **Testing**: Integration tests (TestRestTemplate + H2 on real server) + Contract tests (Spring Cloud Contract)

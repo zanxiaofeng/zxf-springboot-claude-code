@@ -29,4 +29,5 @@ None (standalone entity for demo).
 
 ## Repository
 - `UserRepository` (interface in domain layer)
-- `UserRepositoryImpl` (implementation in infrastructure layer)
+- `UserJpaRepository` (JPA repository in infrastructure layer)
+- `UserJpaAdapter` (adapter bridging domain interface to JPA)

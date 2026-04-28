@@ -8,12 +8,18 @@
 
 ## Testing
 - JUnit 5
-- Mockito
 - AssertJ
-- Spring Cloud Contract
+- Spring Cloud Contract 4.3.0
+- WireMock (via spring-cloud-contract-wiremock)
 
 ## Infrastructure
-- Flyway (database migration)
+- Flyway 10.x (database migration)
 - Spring Data JPA
 - Spring Validation
 - Spring Web
+- Spring Security (CSRF disabled for demo)
+- RestTemplate (downstream HTTP client)
+
+## Downstream Integration
+- WireMock 3.x (test stubbing for downstream services)
+- RestTemplate with 3s connect / 5s read timeout

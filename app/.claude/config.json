@@ -23,12 +23,18 @@
           ".*Repository\\.java$": [
             ".claude/context/db-conventions.md"
           ],
-          ".*Test\\.java$": [
-            ".claude/context/test-conventions.md",
-            ".claude/skills/tdd-workflow.md"
+          ".*Client\\.java$": [
+            ".claude/context/downstream-conventions.md"
+          ],
+          ".*Mapper\\.java$": [
+            ".claude/context/service-conventions.md"
+          ],
+          ".*Config\\.java$": [
+            ".claude/context/tech-stack.md"
           ],
           ".*IT\\.java$": [
-            ".claude/context/test-conventions.md"
+            ".claude/context/test-conventions.md",
+            ".claude/skills/tdd-workflow.md"
           ],
           ".*Contract.*\\.groovy$": [
             ".claude/skills/contract-test.md"
@@ -54,6 +60,10 @@
       "database": {
         "keywords": ["database", "table", "migration", "flyway", "schema"],
         "files": [".claude/skills/db-migration.md"]
+      },
+      "downstream": {
+        "keywords": ["downstream", "notification", "third-party", "external API", "wiremock"],
+        "files": [".claude/context/downstream-conventions.md"]
       }
     }
   }

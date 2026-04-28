@@ -2,6 +2,7 @@ package com.example.demo.interfaces.user;
 
 import com.example.demo.application.user.UserService;
 import com.example.demo.application.user.dto.CreateUserRequest;
+import com.example.demo.application.user.dto.UpdateUserRequest;
 import com.example.demo.application.user.dto.UserResponse;
 import com.example.demo.interfaces.common.ApiResponse;
 import jakarta.validation.Valid;
@@ -77,7 +78,7 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<UserResponse>> updateUser(
             @PathVariable Long id,
-            @Valid @RequestBody CreateUserRequest request) {
+            @Valid @RequestBody UpdateUserRequest request) {
         return ResponseEntity.ok(ApiResponse.success(userService.updateUser(id, request)));
     }
 

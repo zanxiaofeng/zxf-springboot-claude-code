@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -63,6 +64,24 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(ErrorCode.VALIDATION_ERROR.getHttpStatus())
                 .header(TRACE_ID_HEADER, traceId)
                 .body(ApiResponse.error(ErrorCode.VALIDATION_ERROR, "Request validation failed", errors));
+    }
+
+    /**
+     * Handles NoSuchElementException from unchecked Optional.get() calls.
+     * Returns 404 NOT_FOUND with trace ID.
+     *
+     * @param ex      the NoSuchElementException
+     * @param request the HTTP request
+     * @return 404 error response
+     */
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ApiResponse<Void>> handleNoSuchElement(
+            NoSuchElementException ex, HttpServletRequest request) {
+        String traceId = generateTraceId(request);
+        log.warn("[{}] NoSuchElementException: {}", traceId, ex.getMessage());
+        return ResponseEntity.status(ErrorCode.NOT_FOUND.getHttpStatus())
+                .header(TRACE_ID_HEADER, traceId)
+                .body(ApiResponse.error(ErrorCode.NOT_FOUND, "Resource not found: " + ex.getMessage()));
     }
 
     /**

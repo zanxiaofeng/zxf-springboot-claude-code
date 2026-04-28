@@ -8,7 +8,7 @@
 ## Steps
 1. Add method to Service implementation
 2. Create/update Controller endpoint
-3. Write integration test (MockMvc + H2)
+3. Write integration test (TestRestTemplate + H2 on real server)
 4. Write Contract Test
 5. Update OpenAPI spec
 

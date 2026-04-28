@@ -23,6 +23,6 @@ On every interaction, automatically load the following context files (in priorit
 
 ## Output Standards
 - All code must include JavaDoc
-- Test naming: `{ClassUnderTest}Test`, `{ClassUnderTest}IT`, `{ClassUnderTest}ContractTest`
+- Test naming: `{ClassUnderTest}IT`, `{ClassUnderTest}ContractTest`
 - DTOs use record, Services use interface + impl
 - Constructor injection only, no field @Autowired

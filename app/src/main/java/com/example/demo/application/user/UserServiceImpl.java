@@ -1,9 +1,11 @@
 package com.example.demo.application.user;
 
 import com.example.demo.application.user.dto.CreateUserRequest;
+import com.example.demo.application.user.dto.UpdateUserRequest;
 import com.example.demo.application.user.dto.UserResponse;
 import com.example.demo.application.user.mapper.UserMapper;
 import com.example.demo.domain.common.BusinessException;
+import com.example.demo.domain.downstream.NotificationClient;
 import com.example.demo.domain.user.User;
 import com.example.demo.domain.user.UserRepository;
 import com.example.demo.interfaces.common.ErrorCode;
@@ -29,10 +31,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final NotificationClient notificationClient;
 
     /**
      * {@inheritDoc}
-     * <p>Validates email uniqueness before creation.</p>
+     * <p>Validates email uniqueness before creation.
+     * Sends downstream notification on success.</p>
      *
      * @throws BusinessException if email already exists
      */
@@ -44,6 +48,11 @@ public class UserServiceImpl implements UserService {
         }
         User user = userMapper.toEntity(request);
         User saved = userRepository.save(user);
+        notificationClient.sendUserCreatedNotification(
+                saved.getId(),
+                saved.getUsername(),
+                saved.getEmail()
+        );
         return userMapper.toResponse(saved);
     }
 
@@ -63,13 +72,13 @@ public class UserServiceImpl implements UserService {
 
     /**
      * {@inheritDoc}
-     * <p>Fully replaces user data with the request.</p>
+     * <p>Updates user data. Password is only changed if provided in the request.</p>
      *
      * @throws BusinessException if user not found
      */
     @Override
     @Transactional
-    public UserResponse updateUser(Long id, CreateUserRequest request) {
+    public UserResponse updateUser(Long id, UpdateUserRequest request) {
         User existing = userRepository.findById(id)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND, id));
         existing.update(User.builder()
