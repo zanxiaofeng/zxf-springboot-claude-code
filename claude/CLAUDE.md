@@ -89,6 +89,7 @@ my-project/
 ├── src/test/resources/
 │   ├── sql/cleanup/                     # @Sql cleanup scripts
 │   ├── sql/init/                        # @Sql seed data
+│   ├── sql/cases/                       # @Sql case-level scripts (with FILE_READ for CLOB)
 │   ├── test-data/{entity}/             # JSON fixtures (request, response per endpoint)
 │   ├── mock-data/mappings/             # WireMock static stubs
 │   ├── mock-data/__files/              # WireMock response body files

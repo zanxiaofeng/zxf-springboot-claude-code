@@ -19,7 +19,7 @@ import com.example.demo.apitest.support.sql.DatabaseVerifier;
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
-@AutoConfigureWireMock(port = 0, stubs = "classpath:mock-data")
+@AutoConfigureWireMock(port = 0)
 @ActiveProfiles("test")
 @Sql(scripts = {"classpath:sql/cleanup/clean-up.sql", "classpath:sql/init/data.sql"})
 public abstract class BaseApiTest {

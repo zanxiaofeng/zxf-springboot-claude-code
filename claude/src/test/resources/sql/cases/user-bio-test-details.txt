@@ -1,0 +1,3 @@
+John Doe is a senior software engineer with over 10 years of experience in building scalable distributed systems.
+He specializes in Spring Boot microservices, cloud-native architecture, and performance optimization.
+In his spare time, he contributes to open-source projects and writes technical blogs about Java and Kubernetes.

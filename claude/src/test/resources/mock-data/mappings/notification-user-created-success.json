@@ -13,8 +13,6 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "jsonBody": {
-      "status": "ACCEPTED"
-    }
+    "body": "{\"status\":\"ACCEPTED\"}"
   }
 }

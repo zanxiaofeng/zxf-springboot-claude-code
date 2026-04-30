@@ -46,6 +46,9 @@ public class User {
 
     private OffsetDateTime updatedAt;
 
+    @Column(columnDefinition = "TEXT")
+    private String bio;
+
     public Optional<OffsetDateTime> getUpdatedAt() {
         return Optional.ofNullable(updatedAt);
     }

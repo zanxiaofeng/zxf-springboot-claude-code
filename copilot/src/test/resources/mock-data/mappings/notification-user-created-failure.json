@@ -8,8 +8,6 @@
     "headers": {
       "Content-Type": "application/json"
     },
-    "jsonBody": {
-      "error": "Internal Server Error"
-    }
+    "body": "{\"error\":\"Internal Server Error\"}"
   }
 }

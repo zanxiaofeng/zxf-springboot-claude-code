@@ -21,6 +21,7 @@ public record UserResponse(
         String username,
         String email,
         UserStatus status,
+        String bio,
         OffsetDateTime createdAt
 ) {
 }

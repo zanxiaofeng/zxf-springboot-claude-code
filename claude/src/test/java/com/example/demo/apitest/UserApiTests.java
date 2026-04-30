@@ -3,6 +3,7 @@ package com.example.demo.apitest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+import org.springframework.test.context.jdbc.Sql;
 import org.skyscreamer.jsonassert.comparator.JSONComparator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -256,5 +257,23 @@ public class UserApiTests extends BaseApiTest {
         // Then
         String expectedJson = JsonLoader.load("user/delete/not-found.json");
         JSONAssert.assertEquals(expectedJson, response.getBody(), jsonComparator);
+    }
+
+    // ==================== Case-level SQL Demo ====================
+
+    @Test
+    @Sql(scripts = "classpath:sql/cases/user-bio-test.sql")
+    void testGetUserById_WithCaseLevelSql() throws Exception {
+        // Given - 使用 case-level SQL 创建的用户 (id=10, bio loaded from external file)
+        String url = "/api/v1/users/10";
+
+        // When
+        ResponseEntity<String> response = httpGetAndAssert(url, commonHeaders(),
+                String.class, HttpStatus.OK, MediaType.APPLICATION_JSON);
+
+        // Then
+        assertThat(response.getBody()).contains("bio.user");
+        assertThat(response.getBody()).contains("bio@example.com");
+        assertThat(response.getBody()).contains("senior software engineer");
     }
 }
