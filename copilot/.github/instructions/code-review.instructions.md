@@ -10,7 +10,7 @@ applyTo: "**/*.java"
 - [ ] DTOs use record
 - [ ] Service has interface + impl
 - [ ] No business logic in Controller
-- [ ] Test naming: `*IT` for integration, `*ContractTest` for contract
+- [ ] Test naming: `*ApiTests` for API tests, `*ContractTest` for contract
 - [ ] Contract Test covers new endpoints
 - [ ] Flyway migration for DB changes
 - [ ] Error handling uses BusinessException

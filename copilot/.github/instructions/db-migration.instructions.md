@@ -10,10 +10,16 @@ src/main/resources/db/
 ├── migration/              -- Core DDL (environment-agnostic)
 │   ├── V1__create_users_table.sql
 │   └── V2__create_orders_table.sql
-├── migration/mysql/        -- MySQL-specific DDL (optional)
-│   └── V1.1__mysql_specific_ddl.sql
-└── test-migration/         -- H2 test data (test env only)
-    └── V999.001__insert_test_users.sql
+└── migration/mysql/        -- MySQL-specific DDL (optional)
+    └── V1.1__mysql_specific_ddl.sql
+
+src/test/resources/sql/     -- Test data (@Sql scripts)
+├── cleanup/                -- Truncate/delete before each test
+│   └── clean-up.sql
+├── init/                   -- Seed data for all tests
+│   └── data.sql
+└── cases/                  -- Case-level overrides (CLOB via FILE_READ)
+    └── user-bio-test.sql
 ```
 
 ## H2 Compatibility

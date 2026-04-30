@@ -36,7 +36,8 @@ Create a new user.
 {
   "username": "john.doe",
   "email": "john@example.com",
-  "password": "SecurePass123!"
+  "password": "SecurePass123!",
+  "bio": "Full-stack developer"
 }
 ```
 
@@ -48,8 +49,9 @@ Create a new user.
     "id": 1,
     "username": "john.doe",
     "email": "john@example.com",
-    "createdAt": "2026-04-27T12:00:00+08:00",
-    "status": "ACTIVE"
+    "status": "ACTIVE",
+    "bio": "Full-stack developer",
+    "createdAt": "2026-04-27T12:00:00+08:00"
   },
   "message": null
 }
@@ -66,8 +68,9 @@ Get user by ID.
     "id": 1,
     "username": "john.doe",
     "email": "john@example.com",
-    "createdAt": "2026-04-27T12:00:00+08:00",
-    "status": "ACTIVE"
+    "status": "ACTIVE",
+    "bio": "Full-stack developer",
+    "createdAt": "2026-04-27T12:00:00+08:00"
   }
 }
 ```
@@ -100,7 +103,8 @@ Update user.
 ```json
 {
   "username": "john.doe.updated",
-  "email": "john.updated@example.com"
+  "email": "john.updated@example.com",
+  "bio": "Updated bio text"
 }
 ```
 

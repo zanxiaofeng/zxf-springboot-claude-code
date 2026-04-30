@@ -8,7 +8,7 @@ applyTo: "**/*.sql,**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 - All DDL via Flyway migration
 - Naming: `V{version}__{description}.sql`
 - H2 compatible: avoid MySQL-specific syntax in core migrations
-- Test data in `db/test-migration/`
+- Test data via `@Sql` scripts in `src/test/resources/sql/` (cleanup + init + cases)
 - MySQL-specific in `db/migration/mysql/`
 
 ## Entity Rules

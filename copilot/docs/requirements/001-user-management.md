@@ -21,7 +21,8 @@ User management is the core module of the system, providing basic CRUD operation
 1. Username is required, 3-20 characters, alphanumeric
 2. Email is required, must be valid format
 3. Password is required, min 8 characters, at least 1 uppercase, 1 number, 1 special char
-4. Returns 409 CONFLICT if email already exists
+4. Bio is optional, max 500 characters
+5. Returns 409 CONFLICT if email already exists
 
 ### UC-002: Get User by ID
 **Given** a user exists in the system  

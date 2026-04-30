@@ -9,6 +9,7 @@
 | username | String | 3-20 chars, alphanumeric, unique |
 | email | String | Valid email format, unique |
 | password | String | Min 8 chars, 1 uppercase, 1 number, 1 special |
+| bio | String | Optional, max 500 chars, TEXT column |
 | status | UserStatus | ACTIVE or INACTIVE |
 | createdAt | OffsetDateTime | Auto-set on creation |
 | updatedAt | OffsetDateTime | Auto-updated on modification |

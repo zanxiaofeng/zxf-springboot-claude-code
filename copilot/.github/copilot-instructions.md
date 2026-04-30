@@ -27,7 +27,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 | **Implement Feature** | 1. Read requirement doc in `docs/requirements/` → 2. Prepare @Sql seed data + JSON fixtures → 3. Write failing API test (Red) with WebTestClient + JSON fixtures + @Sql, stub downstream via WireMock → 4. Minimal implementation (Green): Controller → Service → Repository → 5. Refactor → 6. Write Contract Test → 7. Update docs |
 | **Add Endpoint** | 1. Update API spec → 2. Define DTO as `record` → 3. Add method to Service interface + impl → 4. Create Controller endpoint returning `ApiResponse<T>` → 5. Write API test → 6. Write Contract Test |
 | **Refactor Module** | 1. Ensure all tests pass → 2. Identify code smells (duplication, long methods) → 3. Add characterization tests if coverage low → 4. Apply refactoring incrementally → 5. Run tests after each change → 6. Update docs if API changed |
-| **Add Downstream Call** | 1. Define `{Service}Client` interface in `domain/downstream/` → 2. Implement in `infrastructure/downstream/` using RestTemplate → 3. Add timeout config → 4. Add base URL to `application.yml` and `application-test.yml` → 5. Stub with WireMock in tests → 6. Add WireMock JSON stubs under `src/test/resources/wiremock/` |
+| **Add Downstream Call** | 1. Define `{Service}Client` interface in `domain/downstream/` → 2. Implement in `infrastructure/downstream/` using RestTemplate → 3. Add timeout config → 4. Add base URL to `application.yml` and `application-test.yml` → 5. Stub with WireMock in tests → 6. Add WireMock JSON stubs under `src/test/resources/mock-data/mappings/` |
 
 ## Requirement Template
 
@@ -88,7 +88,15 @@ my-project/
 │   └── interfaces/                      # Controller, ExceptionHandler
 ├── src/test/
 │   ├── apitest/                         # API tests (WebTestClient + JSON fixtures + @Sql)
+│   │   ├── {Entity}ApiTests.java
+│   │   └── support/                     # BaseApiTest, JsonLoader, DatabaseVerifier, mocks
 │   ├── contract/                        # Spring Cloud Contract
-│   └── resources/mock-data/            # WireMock stubs (mappings/ + __files/)
+│   └── resources/
+│       ├── sql/cleanup/                 # @Sql cleanup scripts
+│       ├── sql/init/                    # @Sql seed data
+│       ├── sql/cases/                   # @Sql case-level scripts (with FILE_READ for CLOB)
+│       ├── test-data/{entity}/          # JSON fixtures (request, response per endpoint)
+│       ├── mock-data/mappings/          # WireMock static stubs
+│       └── mock-data/__files/           # WireMock response body files
 └── pom.xml
 ```
