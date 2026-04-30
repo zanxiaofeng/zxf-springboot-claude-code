@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/v1/notifications/user-created"
+  },
+  "response": {
+    "status": 500,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "error": "Internal Server Error"
+    }
+  }
+}

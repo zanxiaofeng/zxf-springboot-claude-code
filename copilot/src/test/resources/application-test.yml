@@ -24,7 +24,7 @@ app:
     show-sql: true
 
   flyway:
-    locations: classpath:db/migration,classpath:db/test-migration
+    locations: classpath:db/migration
     clean-disabled: false
 
 logging:

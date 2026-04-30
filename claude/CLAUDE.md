@@ -90,8 +90,9 @@ my-project/
 │   ├── sql/cleanup/                     # @Sql cleanup scripts
 │   ├── sql/init/                        # @Sql seed data
 │   ├── test-data/{entity}/             # JSON fixtures (request, response per endpoint)
-│   ├── contracts/                       # Spring Cloud Contract Groovy files
-│   └── wiremock/                        # WireMock JSON stubs
+│   ├── mock-data/mappings/             # WireMock static stubs
+│   ├── mock-data/__files/              # WireMock response body files
+│   └── contracts/                       # Spring Cloud Contract Groovy files
 ├── scripts/                             # Utility scripts
 └── pom.xml
 ```
