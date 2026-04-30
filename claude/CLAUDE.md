@@ -28,7 +28,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 
 ## Recently Completed
 
-1. API test refactoring: TestRestTemplate → WebTestClient + JSON fixtures + DatabaseVerifier + @Sql seed data
+1. API test refactoring: replaced TestRestTemplate integration tests with WebTestClient + JSON fixtures + DatabaseVerifier + @Sql seed data
 2. Downstream notification service integration (NotificationClientImpl + WireMock test stubs)
 3. Four-layer architecture: Domain -> Application -> Infrastructure -> Interfaces
 4. Claude Code config restructured into `.claude/` standard directory
@@ -51,7 +51,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 ## Output Standards
 
 - All code must include JavaDoc
-- Test class naming: `{ClassUnderTest}IT` (integration), `{ClassUnderTest}ContractTest` (contract), `{Entity}ApiTests` (API tests)
+- Test class naming: `{Entity}ApiTests` (API tests), `{ClassUnderTest}ContractTest` (contract)
 - DTOs use `record`, Services use interface + impl
 - Constructor injection with `@RequiredArgsConstructor`
 - All Controllers return `ApiResponse<T>`
@@ -85,7 +85,6 @@ my-project/
 │   ├── apitest/                         # API tests (WebTestClient + JSON fixtures + @Sql)
 │   │   ├── {Entity}ApiTests.java
 │   │   └── support/                     # BaseApiTest, JsonLoader, DatabaseVerifier, mocks
-│   ├── integration/                     # Integration tests (TestRestTemplate + H2)
 │   ├── contract/                        # Contract tests (Spring Cloud Contract)
 │   └── support/                         # Builder, Fixture, Randomizer
 ├── src/test/resources/

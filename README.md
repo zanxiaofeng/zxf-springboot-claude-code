@@ -140,7 +140,6 @@ CLAUDE.md                                # 主指令
 
 - **四层架构**：Domain（纯 Java）→ Application（Service + DTO）→ Infrastructure（RepositoryImpl + Config + Downstream）→ Interfaces（Controller + ExceptionHandler）
 - **API 测试**：WebTestClient + JSON fixtures + DatabaseVerifier + `@Sql` seed data + WireMock stub
-- **集成测试**：TestRestTemplate + `@SpringBootTest(RANDOM_PORT)` + H2 + WireMock
 - **契约测试**：Spring Cloud Contract Groovy DSL，生成 Stub 验证 API 契约
 - **下游通知**：`POST /api/v1/users` 成功后发送 `POST /api/v1/notifications/user-created`
 

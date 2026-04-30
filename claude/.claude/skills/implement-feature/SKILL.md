@@ -1,6 +1,6 @@
 ---
 name: implement-feature
-description: Implement a new feature following the TDD workflow — from requirement analysis through integration tests, implementation, contract tests, and documentation update.
+description: Implement a new feature following the TDD workflow — from requirement analysis through API tests, implementation, contract tests, and documentation update.
 ---
 
 # Implement Feature
@@ -12,8 +12,8 @@ description: Implement a new feature following the TDD workflow — from require
 ## Steps
 
 1. **Read requirement doc** — extract business rules and acceptance criteria
-2. **Identify or create TestDataBuilder** — check `src/test/support/builder/`
-3. **Write failing integration test (Red)** — TestRestTemplate + H2 + real server (`RANDOM_PORT`)
+2. **Prepare test data** — add seed data to `sql/init/data.sql`, create JSON fixtures under `test-data/{entity}/`
+3. **Write failing API test (Red)** — WebTestClient + JSON fixtures + @Sql seed data + DatabaseVerifier
 4. **Minimal implementation (Green)** — Controller -> Service -> Repository in layers
 5. **Refactor** — check against conventions, extract duplicates, optimize naming
 6. **Write Contract Test** — Spring Cloud Contract Groovy DSL for each new endpoint
@@ -25,12 +25,11 @@ description: Implement a new feature following the TDD workflow — from require
 2. Create `{Service}ClientImpl` in `infrastructure/downstream/` using RestTemplate
 3. Add `RestTemplateConfig` in `infrastructure/config/` if not present
 4. Add downstream base URL to `application.yml` and `application-test.yml`
-5. Create WireMock stubs under `src/test/resources/wiremock/`
-6. Stub downstream calls in integration tests via `wireMockServer.stubFor(...)`
+5. Create MockFactory/Verifier in `apitest/support/mocks/` for WireMock stubs
 
 ## Output
 - Implementation code (Domain -> Application -> Infrastructure -> Interfaces)
-- Integration tests (`*IT.java`)
+- API tests (`*ApiTests.java`)
+- JSON fixtures under `test-data/{entity}/`
 - Contract tests (`*.groovy`)
-- WireMock stubs (if downstream involved, under `src/test/resources/wiremock/`)
 - Updated documentation

@@ -28,10 +28,10 @@ public RestTemplate downstreamRestTemplate(RestTemplateBuilder builder) {
 - Consider circuit breaker for production (not in demo)
 
 ## Testing with WireMock
-1. Add `@AutoConfigureWireMock(port = 0)` to `IntegrationTestBase`
-2. Use `wireMockServer.stubFor(...)` to define expected downstream responses
-3. Use `wireMockServer.verify(...)` to confirm downstream was called
-4. Reset stubs in `@BeforeEach` to ensure test isolation
+1. Use `NotificationMockFactory` (in `apitest/support/mocks/`) to create stubs
+2. Use `NotificationMockVerifier` to confirm downstream was called (or not called)
+3. WireMock is auto-reset in `BaseApiTest` via `@BeforeEach`
+4. WireMock port is dynamically assigned via `@AutoConfigureWireMock(port = 0)`
 
 ## Configuration
 Production: `app.downstream.{service}.base-url` in `application.yml`

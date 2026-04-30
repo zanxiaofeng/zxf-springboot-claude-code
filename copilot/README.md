@@ -20,7 +20,6 @@ my-project/
 │   │   └── db/migration/                 # Flyway migrations (H2 & MySQL compatible)
 │   └── test/
 │       ├── apitest/                      # API tests (WebTestClient + JSON fixtures + @Sql)
-│       ├── integration/                  # Integration tests (@SpringBootTest + H2)
 │       ├── contract/                     # Contract tests (Spring Cloud Contract)
 │       └── support/                      # Test utilities (Builder, Fixture, Randomizer)
 ├── scripts/                              # Utility scripts
@@ -96,5 +95,4 @@ mvn spring-boot:run
 - **Contract First**: Write Contract Test before API implementation
 - **Code Standards**: All code includes JavaDoc, constructor injection, DTOs use record
 - **API Tests**: WebTestClient + JSON fixtures + DatabaseVerifier + @Sql seed data
-- **Integration Tests**: TestRestTemplate + H2 + WireMock on real server
 - **Contract Tests**: Spring Cloud Contract with Groovy DSL

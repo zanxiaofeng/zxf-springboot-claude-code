@@ -1,46 +1,41 @@
 ---
-files: ["**/test/**/*.java", "**/*IT.java", "**/*ContractTest.java"]
+files: ["**/test/**/*.java", "**/*ApiTests.java", "**/*ContractTest.java"]
 ---
 
 # Testing Conventions
 
 ## Test Layers
-| Layer | Annotation | DB | Client | Naming |
-|-------|-----------|-----|--------|--------|
-| Integration | @SpringBootTest(webEnvironment = RANDOM_PORT) + TestRestTemplate | H2 | @AutoConfigureWireMock (when stubbing downstream) | *IT |
+| Layer | Tool | DB | Downstream | Naming |
+|-------|------|-----|------------|--------|
+| API Test | WebTestClient + @Sql + JSON fixtures + DatabaseVerifier | H2 | WireMock (MockFactory/Verifier) | *ApiTests |
 | Contract | @AutoConfigureStubRunner | H2 | RestAssuredMockMvc | *ContractTest |
 
 ## Rules
 1. Tests must be independent, no @DependsOn
-2. Use @Sql or TestDataBuilder to prepare data
-3. One assertion subject per test (Arrange-Act-Assert)
-4. @DirtiesContext used sparingly
-5. No real MySQL in tests (use H2)
-6. Downstream calls must be stubbed via WireMock in integration tests
-7. Prepare test data via public API, not by directly accessing domain layer
+2. Use @Sql seed data (not runtime API calls) to prepare data
+3. One assertion subject per test (Given/When/Then)
+4. No real MySQL in tests (use H2)
+5. Downstream calls must be stubbed via WireMock (NotificationMockFactory/Verifier)
+6. JSON fixtures in `test-data/{entity}/` with `${variable}` template support
+7. Use JSONAssert + JsonComparatorFactory for response validation (ignores dynamic fields)
 
-## Test Data via API
+## API Test Structure
 ```java
-// Preferred: create data through the API surface
-UserResponse user = createUserViaApi("john.doe", "john@test.com", "Pass1234!");
+// Test class extends BaseApiTest
+public class UserApiTests extends BaseApiTest {
+    // Given: load JSON fixture + setup WireMock mock
+    String request = JsonLoader.load("user/post/request.json", Map.of("username", "new.user", ...));
+    NotificationMockFactory.mockNotificationAccepted();
 
-// Alternative: use TestDataBuilder with repository (test support only)
-User user = UserBuilder.aUser().withEmail("unique@test.com").build();
+    // When: call API via WebTestClient helper
+    ResponseEntity<String> response = httpPostAndAssert(url, commonHeadersAndJson(),
+        request, String.class, HttpStatus.CREATED, MediaType.APPLICATION_JSON);
 
-// Fixture reuse
-User admin = UserFixtures.activeUser();
-```
+    // Then: assert response with JSONAssert
+    JSONAssert.assertEquals(expected, response.getBody(), jsonComparator);
 
-## Integration Test Base
-```java
-@SpringBootTest(webEnvironment = RANDOM_PORT)
-@AutoConfigureWireMock(port = 0)
-@ActiveProfiles("test")
-@DirtiesContext(classMode = AFTER_CLASS)
-public abstract class IntegrationTestBase {
-    @Autowired protected WireMockServer wireMockServer;
-
-    @BeforeEach
-    void resetWireMock() { wireMockServer.resetAll(); }
+    // And: verify DB state + downstream calls
+    assertThat(databaseVerifier.countUsers()).isEqualTo(initialCount + 1);
+    NotificationMockVerifier.verifyNotificationCalledWith(username, email);
 }
 ```

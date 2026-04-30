@@ -24,8 +24,8 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 
 | Task | Steps |
 |------|-------|
-| **Implement Feature** | 1. Read requirement doc in `docs/requirements/` → 2. Identify/reuse TestDataBuilder → 3. Write failing integration test (Red) with TestRestTemplate + H2 + real server, stub downstream via WireMock → 4. Minimal implementation (Green): Controller → Service → Repository → 5. Refactor → 6. Write Contract Test → 7. Update docs |
-| **Add Endpoint** | 1. Update API spec → 2. Define DTO as `record` → 3. Add method to Service interface + impl → 4. Create Controller endpoint returning `ApiResponse<T>` → 5. Write integration test → 6. Write Contract Test |
+| **Implement Feature** | 1. Read requirement doc in `docs/requirements/` → 2. Prepare @Sql seed data + JSON fixtures → 3. Write failing API test (Red) with WebTestClient + JSON fixtures + @Sql, stub downstream via WireMock → 4. Minimal implementation (Green): Controller → Service → Repository → 5. Refactor → 6. Write Contract Test → 7. Update docs |
+| **Add Endpoint** | 1. Update API spec → 2. Define DTO as `record` → 3. Add method to Service interface + impl → 4. Create Controller endpoint returning `ApiResponse<T>` → 5. Write API test → 6. Write Contract Test |
 | **Refactor Module** | 1. Ensure all tests pass → 2. Identify code smells (duplication, long methods) → 3. Add characterization tests if coverage low → 4. Apply refactoring incrementally → 5. Run tests after each change → 6. Update docs if API changed |
 | **Add Downstream Call** | 1. Define `{Service}Client` interface in `domain/downstream/` → 2. Implement in `infrastructure/downstream/` using RestTemplate → 3. Add timeout config → 4. Add base URL to `application.yml` and `application-test.yml` → 5. Stub with WireMock in tests → 6. Add WireMock JSON stubs under `src/test/resources/wiremock/` |
 
@@ -37,13 +37,13 @@ For new features, create requirement docs following `docs/templates/requirement-
 
 | ID | Task | Status | Last Action |
 |----|------|--------|-------------|
-| 001 | User Management Module | In Progress | Downstream notification integration completed |
+| 001 | User Management Module | In Progress | API test migration to WebTestClient + JSON fixture pattern completed |
 | — | — | — | Next: API spec update to document downstream side effects |
 
 ## Recently Completed
 
-1. Downstream notification service integration (NotificationClientImpl + WireMock test stubs)
-2. Integration test migration: MockMvc -> TestRestTemplate with real server + WireMock
+1. API test refactoring: replaced TestRestTemplate integration tests with WebTestClient + JSON fixtures + DatabaseVerifier + @Sql seed data
+2. Downstream notification service integration (NotificationClientImpl + WireMock test stubs)
 3. Four-layer architecture: Domain -> Application -> Infrastructure -> Interfaces
 
 ## Workflow Enforcement
@@ -64,7 +64,7 @@ For new features, create requirement docs following `docs/templates/requirement-
 ## Output Standards
 
 - All code must include JavaDoc
-- Test class naming: `{ClassUnderTest}IT`, `{ClassUnderTest}ContractTest`
+- Test class naming: `{Entity}ApiTests`, `{ClassUnderTest}ContractTest`
 - DTOs use `record`, Services use interface + impl
 - Constructor injection with `@RequiredArgsConstructor`
 - All Controllers return `ApiResponse<T>`
@@ -87,7 +87,7 @@ my-project/
 │   ├── infrastructure/                  # RepositoryImpl, Config, Security, Downstream Client Impl
 │   └── interfaces/                      # Controller, ExceptionHandler
 ├── src/test/
-│   ├── integration/                     # TestRestTemplate + H2 + real server + WireMock
+│   ├── apitest/                         # API tests (WebTestClient + JSON fixtures + @Sql)
 │   ├── contract/                        # Spring Cloud Contract
 │   ├── resources/wiremock/              # WireMock JSON stubs
 │   └── support/                         # Builder, Fixture, Randomizer

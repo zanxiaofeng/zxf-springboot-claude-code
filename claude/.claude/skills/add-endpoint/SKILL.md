@@ -1,6 +1,6 @@
 ---
 name: add-endpoint
-description: Add a new REST API endpoint following the contract-first approach with integration tests and Spring Cloud Contract tests.
+description: Add a new REST API endpoint following the contract-first approach with API tests and Spring Cloud Contract tests.
 ---
 
 # Add Endpoint
@@ -14,7 +14,7 @@ description: Add a new REST API endpoint following the contract-first approach w
 
 1. **Add method to Service implementation** — business logic in Service layer
 2. **Create/update Controller endpoint** — return `ApiResponse<T>`, URL follows `/api/v1/{resource}`
-3. **Write integration test** — TestRestTemplate + H2 on real server
+3. **Write API test** — WebTestClient + JSON fixtures + @Sql seed data
 4. **Write Contract Test** — Spring Cloud Contract Groovy DSL
 5. **Update OpenAPI spec** if applicable
 

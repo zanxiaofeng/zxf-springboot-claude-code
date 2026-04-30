@@ -58,7 +58,7 @@ When an endpoint triggers a downstream call, document it in the API spec:
 ### Steps
 1. Add method to Service implementation
 2. Create/update Controller endpoint
-3. Write integration test (TestRestTemplate + H2 on real server)
+3. Write API test (WebTestClient + JSON fixtures + @Sql seed data)
 4. Write Contract Test
 5. Update OpenAPI spec
 
