@@ -14,6 +14,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 | Service Layer Conventions | [instructions/service-conventions.instructions.md](instructions/service-conventions.instructions.md) |
 | Database Conventions | [instructions/db-conventions.instructions.md](instructions/db-conventions.instructions.md) |
 | Testing Conventions | [instructions/test-conventions.instructions.md](instructions/test-conventions.instructions.md) |
+| **API Test Guide** | [instructions/apitest-guide.instructions.md](instructions/apitest-guide.instructions.md) |
 | Downstream Integration | [instructions/downstream-conventions.instructions.md](instructions/downstream-conventions.instructions.md) |
 | TDD Workflow | [instructions/tdd-workflow.instructions.md](instructions/tdd-workflow.instructions.md) |
 | Contract Testing | [instructions/contract-test.instructions.md](instructions/contract-test.instructions.md) |
