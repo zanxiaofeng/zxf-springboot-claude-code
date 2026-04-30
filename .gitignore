@@ -11,7 +11,13 @@ target/
 .project
 .classpath
 
-.claude/
+# Claude Code local files (shared config is committed)
+.claude/settings.local.json
+.claude/sessions/
+.claude/memory/
+.claude/plans/
+.claude/worktrees/
+.claude/scheduled_tasks.json
 
 # OS
 .DS_Store
