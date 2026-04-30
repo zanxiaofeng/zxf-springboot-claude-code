@@ -8,16 +8,6 @@ spring:
     password:
     driver-class-name: org.h2.Driver
 
-  # --- WireMock port for downstream stubs ---
-wiremock:
-  server:
-    port: 0
-
-app:
-  downstream:
-    notification:
-      base-url: http://localhost:${wiremock.server.port}
-
   jpa:
     hibernate:
       ddl-auto: none
@@ -26,6 +16,16 @@ app:
   flyway:
     locations: classpath:db/migration
     clean-disabled: false
+
+# WireMock port for downstream stubs
+wiremock:
+  server:
+    port: 0
+
+app:
+  downstream:
+    notification:
+      base-url: http://localhost:${wiremock.server.port}
 
 logging:
   level:
