@@ -89,7 +89,6 @@ my-project/
 ├── src/test/
 │   ├── apitest/                         # API tests (WebTestClient + JSON fixtures + @Sql)
 │   ├── contract/                        # Spring Cloud Contract
-│   ├── resources/wiremock/              # WireMock JSON stubs
-│   └── support/                         # Builder, Fixture, Randomizer
+│   └── resources/wiremock/              # WireMock JSON stubs
 └── pom.xml
 ```

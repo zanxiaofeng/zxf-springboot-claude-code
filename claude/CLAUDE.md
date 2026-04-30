@@ -85,8 +85,7 @@ my-project/
 │   ├── apitest/                         # API tests (WebTestClient + JSON fixtures + @Sql)
 │   │   ├── {Entity}ApiTests.java
 │   │   └── support/                     # BaseApiTest, JsonLoader, DatabaseVerifier, mocks
-│   ├── contract/                        # Contract tests (Spring Cloud Contract)
-│   └── support/                         # Builder, Fixture, Randomizer
+│   └── contract/                        # Contract tests (Spring Cloud Contract)
 ├── src/test/resources/
 │   ├── sql/cleanup/                     # @Sql cleanup scripts
 │   ├── sql/init/                        # @Sql seed data

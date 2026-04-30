@@ -20,8 +20,7 @@ my-project/
 │   │   └── db/migration/                 # Flyway migrations (H2 & MySQL compatible)
 │   └── test/
 │       ├── apitest/                      # API tests (WebTestClient + JSON fixtures + @Sql)
-│       ├── contract/                     # Contract tests (Spring Cloud Contract)
-│       └── support/                      # Test utilities (Builder, Fixture, Randomizer)
+│       └── contract/                     # Contract tests (Spring Cloud Contract)
 ├── scripts/                              # Utility scripts
 ├── docker-compose.yml                    # Docker Compose
 ├── pom.xml                               # Maven config
