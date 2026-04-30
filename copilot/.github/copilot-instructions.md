@@ -75,8 +75,7 @@ For new features, create requirement docs following `docs/templates/requirement-
 my-project/
 ├── .github/
 │   ├── copilot-instructions.md          # This file
-│   ├── instructions/                    # Scoped instruction files (*.instructions.md)
-│   └── workflows/ci.yml                 # CI/CD
+│   └── instructions/                    # Scoped instruction files (*.instructions.md)
 ├── docs/
 │   ├── requirements/                    # Requirement docs
 │   ├── design/                          # ADR, API spec, domain model

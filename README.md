@@ -9,7 +9,6 @@
 ├── copilot/                  # GitHub Copilot 完整项目副本
 │   ├── copilot-instructions.md
 │   ├── instructions/           # 11 个 .instructions.md 子指令
-│   ├── .github/workflows/ci.yml
 │   ├── docs/                   # 项目文档
 │   ├── scripts/                # 构建脚本
 │   ├── src/                    # 完整源代码
@@ -22,7 +21,6 @@
     ├── rules/                  # 11 个路径限定规则
     ├── skills/                 # 3 个可复用工作流
     ├── agents/                 # 2 个子代理
-    ├── .github/workflows/ci.yml
     ├── docs/                   # 项目文档
     ├── scripts/                # 构建脚本
     ├── src/                    # 完整源代码

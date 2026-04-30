@@ -1,16 +1,11 @@
 # Spring Boot 3 REST API Demo Project
 
-A structured Spring Boot 3.x REST API demo project following best practices including TDD, Contract Testing, Flyway Migration, and CI/CD.
+A structured Spring Boot 3.x REST API demo project following best practices including TDD, Contract Testing, and Flyway Migration.
 
 ## Architecture
 
 ```
 my-project/
-├── .github/
-│   ├── copilot-instructions.md           # GitHub Copilot main instructions
-│   ├── copilot-instructions.d/           # Sub-instructions (conventions, workflows)
-│   ├── prompts/                          # Prompt templates
-│   └── workflows/                        # CI/CD Pipeline
 ├── docs/                                 # Documentation
 │   ├── requirements/                     # Requirements
 │   ├── design/                           # Design docs (ADR, API spec, domain model)
@@ -29,7 +24,6 @@ my-project/
 │       ├── contract/                     # Contract tests (Spring Cloud Contract)
 │       └── support/                      # Test utilities (Builder, Fixture, Randomizer)
 ├── scripts/                              # Utility scripts
-├── .github/workflows/                   # CI/CD Pipeline
 ├── docker-compose.yml                    # Docker Compose
 ├── pom.xml                               # Maven config
 └── README.md
