@@ -24,14 +24,14 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 
 | ID | Task | Status | Last Action |
 |----|------|--------|-------------|
-| 001 | User Management Module | In Progress | Downstream notification integration completed |
-| — | — | — | Next: API spec update to document downstream side effects |
+| 001 | User Management Module | In Progress | API test migration to WebTestClient + JSON fixture pattern completed |
 
 ## Recently Completed
 
-1. Downstream notification service integration (NotificationClientImpl + WireMock test stubs)
-2. Integration test migration: MockMvc -> TestRestTemplate with real server + WireMock
+1. API test refactoring: TestRestTemplate → WebTestClient + JSON fixtures + DatabaseVerifier + @Sql seed data
+2. Downstream notification service integration (NotificationClientImpl + WireMock test stubs)
 3. Four-layer architecture: Domain -> Application -> Infrastructure -> Interfaces
+4. Claude Code config restructured into `.claude/` standard directory
 
 ## Workflow Enforcement
 
@@ -51,7 +51,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 ## Output Standards
 
 - All code must include JavaDoc
-- Test class naming: `{ClassUnderTest}IT`, `{ClassUnderTest}ContractTest`
+- Test class naming: `{ClassUnderTest}IT` (integration), `{ClassUnderTest}ContractTest` (contract), `{Entity}ApiTests` (API tests)
 - DTOs use `record`, Services use interface + impl
 - Constructor injection with `@RequiredArgsConstructor`
 - All Controllers return `ApiResponse<T>`
@@ -68,10 +68,9 @@ my-project/
 │   │   ├── implement-feature/SKILL.md
 │   │   ├── add-endpoint/SKILL.md
 │   │   └── refactor-module/SKILL.md
-│   ├── agents/                          # Specialized subagents
-│   │   ├── code-reviewer.md
-│   │   └── security-auditor.md
-│   └── docs/                            # Shared reference docs
+│   └── agents/                          # Specialized subagents
+│       ├── code-reviewer.md
+│       └── security-auditor.md
 ├── docs/
 │   ├── requirements/                    # Requirement docs
 │   ├── design/                          # ADR, API spec, domain model
@@ -83,9 +82,18 @@ my-project/
 │   ├── infrastructure/                  # RepositoryImpl, Config, Security, Downstream Client Impl
 │   └── interfaces/                      # Controller, ExceptionHandler
 ├── src/test/
-│   ├── integration/                     # TestRestTemplate + H2 + real server + WireMock
-│   ├── contract/                        # Spring Cloud Contract
-│   ├── resources/wiremock/              # WireMock JSON stubs
+│   ├── apitest/                         # API tests (WebTestClient + JSON fixtures + @Sql)
+│   │   ├── {Entity}ApiTests.java
+│   │   └── support/                     # BaseApiTest, JsonLoader, DatabaseVerifier, mocks
+│   ├── integration/                     # Integration tests (TestRestTemplate + H2)
+│   ├── contract/                        # Contract tests (Spring Cloud Contract)
 │   └── support/                         # Builder, Fixture, Randomizer
+├── src/test/resources/
+│   ├── sql/cleanup/                     # @Sql cleanup scripts
+│   ├── sql/init/                        # @Sql seed data
+│   ├── test-data/{entity}/             # JSON fixtures (request, response per endpoint)
+│   ├── contracts/                       # Spring Cloud Contract Groovy files
+│   └── wiremock/                        # WireMock JSON stubs
+├── scripts/                             # Utility scripts
 └── pom.xml
 ```

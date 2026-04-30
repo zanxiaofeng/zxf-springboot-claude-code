@@ -15,11 +15,11 @@ my-project/
 │   │   ├── domain/                       # Domain layer (Entity, Value Object, Repository Interface)
 │   │   ├── application/                  # Application layer (Service, DTO, Mapper)
 │   │   ├── infrastructure/              # Infrastructure (RepositoryImpl, Config, Security)
-│   │   └── interfaces/                   # Interface layer (Controller, ExceptionHandler, Filter)
+│   │   └── interfaces/                   # Interface layer (Controller, ExceptionHandler)
 │   ├── main/resources/
-│   │   └── db/migration/               # Flyway migrations (H2 & MySQL compatible)
-│   └── test/                             # Tests
-
+│   │   └── db/migration/                 # Flyway migrations (H2 & MySQL compatible)
+│   └── test/
+│       ├── apitest/                      # API tests (WebTestClient + JSON fixtures + @Sql)
 │       ├── integration/                  # Integration tests (@SpringBootTest + H2)
 │       ├── contract/                     # Contract tests (Spring Cloud Contract)
 │       └── support/                      # Test utilities (Builder, Fixture, Randomizer)
@@ -84,14 +84,17 @@ mvn spring-boot:run
 - Spring Security
 - Flyway Migration
 - MySQL 8.0 (prod) / H2 (test)
-- JUnit 5 / AssertJ
+- JUnit 5 / AssertJ / JSONAssert
 - Spring Cloud Contract
+- WireMock
 - Lombok
 
 ## Project Standards
 
-- **Architecture**: Four-layer architecture (Domain → Application → Infrastructure → Interfaces)
-- **TDD**: Red → Green → Refactor workflow
+- **Architecture**: Four-layer architecture (Domain -> Application -> Infrastructure -> Interfaces)
+- **TDD**: Red -> Green -> Refactor workflow
 - **Contract First**: Write Contract Test before API implementation
 - **Code Standards**: All code includes JavaDoc, constructor injection, DTOs use record
-- **Testing**: Integration tests (TestRestTemplate + H2 on real server) + Contract tests (Spring Cloud Contract)
+- **API Tests**: WebTestClient + JSON fixtures + DatabaseVerifier + @Sql seed data
+- **Integration Tests**: TestRestTemplate + H2 + WireMock on real server
+- **Contract Tests**: Spring Cloud Contract with Groovy DSL
