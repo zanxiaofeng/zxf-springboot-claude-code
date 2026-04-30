@@ -1,0 +1,9 @@
+{
+  "code": "SUCCESS",
+  "data": {
+    "id": 1,
+    "username": "john.doe",
+    "email": "john@example.com",
+    "status": "ACTIVE"
+  }
+}

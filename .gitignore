@@ -11,6 +11,8 @@ target/
 .project
 .classpath
 
+.claude/
+
 # OS
 .DS_Store
 Thumbs.db

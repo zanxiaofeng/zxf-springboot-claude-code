@@ -1,0 +1,8 @@
+{
+  "code": "SUCCESS",
+  "data": {
+    "username": "${username}",
+    "email": "${email}",
+    "status": "ACTIVE"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "code": "SUCCESS",
+  "data": {
+    "content": [
+      {
+        "username": "john.doe",
+        "email": "john@example.com",
+        "status": "ACTIVE"
+      },
+      {
+        "username": "jane.smith",
+        "email": "jane@example.com",
+        "status": "ACTIVE"
+      }
+    ],
+    "totalElements": 2
+  }
+}
