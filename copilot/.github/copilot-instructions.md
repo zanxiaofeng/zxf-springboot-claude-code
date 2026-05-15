@@ -20,6 +20,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 | Contract Testing | [instructions/contract-test.instructions.md](instructions/contract-test.instructions.md) |
 | Database Migration | [instructions/db-migration.instructions.md](instructions/db-migration.instructions.md) |
 | Code Review Checklist | [instructions/code-review.instructions.md](instructions/code-review.instructions.md) |
+| Java Coding Standard | [instructions/java-coding-standard.instructions.md](instructions/java-coding-standard.instructions.md) |
 
 ## Prompt Templates (Quick Reference)
 
@@ -80,7 +81,6 @@ my-project/
 ├── docs/
 │   ├── requirements/                    # Requirement docs
 │   ├── design/                          # ADR, API spec, domain model
-│   ├── conventions/                     # Team conventions
 │   └── templates/                       # Document templates
 ├── src/main/java/.../
 │   ├── domain/                          # Entity, Value Object, Repository Interface, Downstream Client Interface

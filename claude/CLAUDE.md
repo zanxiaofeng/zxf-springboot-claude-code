@@ -20,6 +20,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 | Contract Testing | @.claude/rules/contract-test.md |
 | Database Migration | @.claude/rules/db-migration.md |
 | Code Review Checklist | @.claude/rules/code-review.md |
+| Java Coding Standard | @.claude/rules/java-coding-standard.md |
 
 ## Current Sprint
 
@@ -75,7 +76,6 @@ my-project/
 ├── docs/
 │   ├── requirements/                    # Requirement docs
 │   ├── design/                          # ADR, API spec, domain model
-│   ├── conventions/                     # Team conventions
 │   └── templates/                       # Document templates
 ├── src/main/java/.../
 │   ├── domain/                          # Entity, VO, Repository Interface, Downstream Client Interface
