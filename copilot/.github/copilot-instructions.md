@@ -60,4 +60,5 @@ src/test/resources/
 - New APIs: Contract-First (write Contract Test before implementation)
 - Downstream calls: define interface in `domain/downstream/`, implement in `infrastructure/downstream/`, stub with WireMock in tests
 - See `.github/instructions/` for detailed conventions per layer
+- Validation: use `@Valid`/`@Validated` on Controller, validation annotations on DTOs, `ValidationExceptionHandler` for error responses — see `validation.instructions.md`
 - Logging: use `@Slf4j`, SLF4J placeholders, always include exception object in error logs — see `logging.instructions.md`
