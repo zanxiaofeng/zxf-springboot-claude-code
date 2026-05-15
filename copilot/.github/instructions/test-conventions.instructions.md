@@ -1,5 +1,5 @@
 ---
-files: ["**/test/**/*.java", "**/*ApiTests.java", "**/*ContractTest.java"]
+applyTo: "**/test/**/*.java,**/*ApiTests.java,**/*ContractTest.java"
 ---
 
 # Testing Conventions

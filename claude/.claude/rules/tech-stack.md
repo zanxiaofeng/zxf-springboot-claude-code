@@ -17,6 +17,8 @@ files: ["**/pom.xml", "**/*.java", "**/*.yml", "**/*.yaml", "**/*.properties"]
 - WireMock (via spring-cloud-contract-wiremock)
 
 ## Infrastructure
+- Lombok (boilerplate reduction: @Data, @Builder, @Slf4j, @RequiredArgsConstructor)
+- Apache Commons Lang 3 (StringUtils, ObjectUtils)
 - Flyway 10.x (database migration)
 - Spring Data JPA
 - Spring Validation

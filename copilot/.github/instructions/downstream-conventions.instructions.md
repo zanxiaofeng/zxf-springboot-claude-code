@@ -1,5 +1,5 @@
 ---
-files: ["**/*.java", "**/*.yml", "**/*.yaml", "**/*.properties"]
+applyTo: "**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 ---
 
 # Downstream Integration Conventions

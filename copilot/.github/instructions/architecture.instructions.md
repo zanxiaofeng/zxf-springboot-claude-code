@@ -1,5 +1,5 @@
 ---
-applyTo: "**/*.java"
+applyTo: "**/domain/**/*.java,**/application/**/*.java,**/infrastructure/**/*.java,**/interfaces/**/*.java"
 ---
 
 # Architecture Overview
@@ -15,8 +15,8 @@ This is a demo Spring Boot 3 REST API project following hexagonal architecture (
 ├─────────────────────────────────────┤
 │  Application  Service, DTO, Mapper  │  Business logic, orchestration
 ├─────────────────────────────────────┤
-│  Domain       Entity, Repository    │  Pure Java — no Spring deps
-│               Interface, VO         │
+│  Domain       Entity, Repository    │  Business entities, JPA annotations
+│               Interface, VO         │  allowed for simplicity
 ├─────────────────────────────────────┤
 │  Infrastructure RepositoryImpl,    │  Technical details
 │               Config, Security      │
@@ -25,7 +25,7 @@ This is a demo Spring Boot 3 REST API project following hexagonal architecture (
 
 ## Layer Rules
 
-- **Domain**: No framework dependencies. Entities, Repository interfaces, Value Objects, domain exceptions
+- **Domain**: Business entities with JPA annotations (pragmatic simplification). Repository interfaces, Value Objects, domain exceptions, downstream client interfaces. No Spring service/component annotations
 - **Application**: Services contain business logic. DTOs use `record`. Mappers convert Entity <-> DTO
 - **Infrastructure**: Repository implementations, configuration, security, downstream HTTP clients
 - **Interfaces**: Controllers return `ApiResponse<T>`. Exception handlers. No business logic

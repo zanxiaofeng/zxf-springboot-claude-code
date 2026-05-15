@@ -16,7 +16,7 @@ applyTo: "**/interfaces/**/*.java,**/*.md"
 | POST   | Create  | 201 |
 | PUT    | Full update | 200 |
 | PATCH  | Partial update | 200 |
-| DELETE | Delete  | 204 |
+| DELETE | Delete  | 200 |
 
 ## Response Body
 ```json
@@ -38,7 +38,7 @@ applyTo: "**/interfaces/**/*.java,**/*.md"
   "timestamp": "2026-04-27T12:00:00+08:00",
   "traceId": "abc123",
   "errors": [
-    { "field": "email", "message": "must be a valid email" }
+    { "field": "email", "message": "must be a valid email", "rejectedValue": "invalid" }
   ]
 }
 ```
