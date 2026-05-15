@@ -1,7 +1,7 @@
 ---
-files: ["**/*.java"]
+paths:
+  - "**/*.java"
 ---
-
 # Code Review Checklist
 
 ## Checklist

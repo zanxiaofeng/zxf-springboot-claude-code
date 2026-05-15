@@ -1,7 +1,8 @@
 ---
-files: ["**/*.groovy", "**/contract/**/*.java"]
+paths:
+  - "**/*.groovy"
+  - "**/contract/**/*.java"
 ---
-
 # Contract Test Guide
 
 ## Directory

@@ -1,7 +1,9 @@
 ---
-files: ["**/*.java", "**/*.groovy", "**/*.md"]
+paths:
+  - "**/*.java"
+  - "**/*.groovy"
+  - "**/*.md"
 ---
-
 # TDD Workflow
 
 ## Step-by-Step (Strict Order)

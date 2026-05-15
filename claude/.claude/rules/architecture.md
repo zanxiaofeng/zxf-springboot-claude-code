@@ -1,7 +1,7 @@
 ---
-files: ["**/*.java"]
+paths:
+  - "**/*.java"
 ---
-
 # Architecture Overview
 
 This is a demo Spring Boot 3 REST API project following hexagonal architecture (Domain-Driven Design).

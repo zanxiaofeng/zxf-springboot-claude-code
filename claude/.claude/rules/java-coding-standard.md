@@ -1,7 +1,7 @@
 ---
-files: ["**/*.java"]
+paths:
+  - "**/*.java"
 ---
-
 # Java 编码规范：工具库与简洁性实践
 
 **版本：** 1.0
@@ -59,45 +59,13 @@ files: ["**/*.java"]
 | 类型判断分支 | `if (obj instanceof X) { X x = (X) obj; ... }` | `if (obj instanceof X x) { ... }` (JDK 16+ 模式匹配) |
 | 获取集合首/末元素 | 手动 `get(0)` / `get(size()-1)` | `sequencedCollection.getFirst()` / `getLast()` (JDK 21) |
 
-#### JDK 21 新特性示例
-
-```java
-// 模式匹配 switch（JDK 21 正式版）
-String formatted = switch (obj) {
-    case Integer i -> String.format("int %d", i);
-    case Long l    -> String.format("long %d", l);
-    case Double d  -> String.format("double %f", d);
-    case String s  -> String.format("String %s", s);
-    case null      -> "null";
-    default        -> obj.toString();
-};
-
-// Record Pattern（JDK 21 正式版）
-if (obj instanceof Point(int x, int y)) {
-    System.out.println("x=" + x + ", y=" + y);
-}
-
-// SequencedCollection - 获取首末元素（JDK 21）
-SequencedCollection<String> seq = new ArrayList<>(List.of("a", "b", "c"));
-String first = seq.getFirst();   // "a"
-String last  = seq.getLast();    // "c"
-
-// Math.clamp - 数值范围限制（JDK 21）
-int clamped = Math.clamp(value, 0, 100);
-
-// Virtual Threads - 虚拟线程（JDK 21）
-try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-    executor.submit(() -> doSomething());
-}
-```
+> **JDK 21 新特性：** 模式匹配 switch、Record Pattern、SequencedCollection、`Math.clamp()`、Virtual Threads 等应在项目中积极使用。
 
 ---
 
 ### 2.2 Lombok 简化代码
 
 **原则：** 在允许使用 Lombok 的项目中，使用注解替代手写样板代码。
-
-#### 推荐注解
 
 | 注解 | 用途 | 示例 |
 |------|------|------|
@@ -106,8 +74,6 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 | `@Slf4j` | 自动创建 log 对象 | `@Slf4j public class Service { ... }` |
 | `@AllArgsConstructor` / `@NoArgsConstructor` | 生成构造器 | - |
 | `@Value` | 创建不可变类 | `@Value public class Config { ... }` |
-
-#### 限制
 
 - 若团队禁用 Lombok，则手动编写等价代码，但必须遵循可读性原则。
 - 避免滥用 `@Data` 在 JPA 实体上，可能导致循环依赖问题。
@@ -118,45 +84,15 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 
 **原则：** Spring 项目中，优先使用 spring-core、spring-web 等模块提供的工具类。
 
-#### 常用工具类
-
 | 类 | 常用方法 | 说明 |
 |----|----------|------|
 | `org.springframework.util.StringUtils` | `hasText()`, `trimAllWhitespace()`, `commaDelimitedListToSet()` | 字符串工具 |
 | `org.springframework.util.CollectionUtils` | `isEmpty()`, `mergeArrayIntoCollection()` | 集合工具 |
 | `org.springframework.util.Assert` | `notNull()`, `hasLength()`, `state()`, `isTrue()` | 参数校验（Spring Boot 项目首选） |
 | `org.springframework.util.FileCopyUtils` | `copy()`, `copyToByteArray()` | 文件/流复制 |
-| `org.springframework.web.client.RestClient` | `get()`, `post()`, `delete()` | HTTP 客户端（Spring 6.1+，推荐替代 RestTemplate） |
 | `org.springframework.beans.BeanUtils` | `copyProperties()`, `instantiateClass()` | Bean 操作 |
 
-#### Spring Boot 3.5 特性
-
-| 特性 | 配置/说明 |
-|------|-----------|
-| Virtual Threads | `spring.threads.virtual.enabled=true` — 一键启用虚拟线程，无需代码改动 |
-| RestClient | 替代 RestTemplate 的现代 HTTP 客户端，Fluent API |
-| CDS 支持 | `spring-boot-maven-plugin` 支持 CDS 加速启动 |
-
-#### RestClient 示例（Spring Boot 3.5 推荐的 HTTP 客户端）
-
-```java
-// 注入 RestClient（替代 RestTemplate）
-@Autowired
-private RestClient restClient;
-
-// GET 请求
-String result = restClient.get()
-    .uri("https://api.example.com/users/{id}", userId)
-    .retrieve()
-    .body(String.class);
-
-// POST 请求
-User created = restClient.post()
-    .uri("/users")
-    .body(newUser)
-    .retrieve()
-    .body(User.class);
-```
+**Spring Boot 3.5 特性：** Virtual Threads（`spring.threads.virtual.enabled=true`）、RestClient（替代 RestTemplate 的 Fluent API）、CDS 加速启动。
 
 ---
 
@@ -164,17 +100,13 @@ User created = restClient.post()
 
 **原则：** 当 JDK 和 Spring 均无法简洁实现时，引入具体的 Commons 模块，并注释说明原因。
 
-#### 常用模块与场景
-
 | 模块 | 常见用途 | 典型场景 |
 |------|----------|----------|
-| commons-lang3 | 字符串增强（StringUtils）、对象工具（ObjectUtils）、枚举（EnumUtils） | 需要 `join()` 复杂分隔符、`abbreviate()` 等高级操作 |
+| commons-lang3 | 字符串增强、对象工具、枚举工具 | `join()` 复杂分隔符、`abbreviate()` 等高级操作 |
 | commons-io | 文件/流操作（FileUtils、IOUtils） | 递归删除目录、复制大文件、读取资源流 |
-| commons-collections4 | 高级集合（Bag、BidiMap）、集合工具（CollectionUtils） | 需要集合交集、差集或双向 Map |
-| commons-codec | 编码解码（Base64、Hex、DigestUtils） | 需要 MD5 或 Hex 编码（若 JDK 未覆盖） |
+| commons-collections4 | 高级集合（Bag、BidiMap）、集合工具 | 集合交集、差集或双向 Map |
+| commons-codec | 编码解码（Base64、Hex、DigestUtils） | MD5 或 Hex 编码（若 JDK 未覆盖） |
 | commons-pool2 | 对象池 | 连接池、资源池 |
-
-#### 引入规范
 
 - 只引入具体模块，避免 commons 父依赖。
 - 在 pom.xml 或 build.gradle 中添加注释说明引入原因。
@@ -185,16 +117,13 @@ User created = restClient.post()
 
 **原则：** 仅在以上所有层次都无法满足时使用，并严格按需引入模块。
 
-#### 典型场景与推荐库
-
 | 场景 | 推荐库 | 原因 |
 |------|--------|------|
 | 本地缓存 | Guava `CacheBuilder` 或 Caffeine | JDK 无原生支持，且实现复杂 |
 | 限流 | Guava `RateLimiter` | 简单可靠的令牌桶实现 |
-| 不可变集合增强 | Guava `ImmutableXXX` | JDK 不可变集合功能有限（如 builder 模式） |
+| 不可变集合增强 | Guava `ImmutableXXX` | JDK 不可变集合功能有限 |
 | Excel 简单读写 | Hutool `ExcelUtil` | 封装简洁，避免直接操作 POI |
-| 验证码生成 | Hutool `CaptchaUtil` | 开箱即用，无需自己绘图 |
-| HTTP 快速调用 | Hutool `HttpUtil` | 一行代码完成，适合简单场景 |
+| 验证码生成 | Hutool `CaptchaUtil` | 开箱即用 |
 
 ---
 
@@ -218,67 +147,16 @@ User created = restClient.post()
 
 ---
 
-## 5. 命名规范
+## 5-10. 编码规范速查
 
-- Classes: PascalCase
-- Constants: UPPER_SNAKE
-- Other: camelCase
-
-## 6. 依赖注入
-
-- Constructor injection only
-- Use `@RequiredArgsConstructor` from Lombok
-
-## 7. Null 处理
-
-- Return `Optional<T>` instead of raw null
-- Never return null from service methods
-
-## 8. 日期时间
-
-- Use `OffsetDateTime`, never `Date` or `Calendar`
-
-## 9. 集合
-
-- Return immutable collections: `List.of()`, `Collections.unmodifiableList()`
-
-## 10. 异常
-
-- Business exceptions extend `BusinessException`
-- Never throw raw `RuntimeException`
-
----
-
-## 决策流程
-
-```
-功能需求 → JDK 原生可简洁实现?
-  是 → 使用 JDK 原生 API
-  否 → 项目使用 Spring?
-    是 → Spring 内置工具可满足?
-      是 → 使用 Spring 工具类
-      否 → Commons 库可显著简化?
-    否 → Commons 库可显著简化?
-      是 → 引入对应 Commons 模块并注释原因
-      否 → 其他库提供必需功能?
-        是 → 按需引入 Guava/Hutool 等并注释原因
-        否 → 手工实现，保持可读性
-```
-
----
-
-## 附录：常用工具库推荐版本
-
-| 库 | 推荐版本 | 说明 |
-|----|----------|------|
-| commons-lang3 | 3.17.0 | 与 Spring Boot 3.5.x 兼容 |
-| commons-io | 2.18.0 | 稳定版本 |
-| commons-collections4 | 4.4 | 避免使用 commons-collections（旧版） |
-| commons-codec | 1.17.1 | 编码工具 |
-| guava | 33.4.0-jre | 选择 -jre 变体以获得更好的 Java 兼容性 |
-| hutool | 5.8.34 | 按需引入模块 |
-
-> **注意：** Spring Boot 3.5.x 通过 BOM 管理了大部分依赖版本。使用 `spring-boot-dependencies` BOM 时，无需手动指定 Commons 库版本。
+| # | 主题 | 规则 |
+|---|------|------|
+| 5 | 命名 | Classes: PascalCase, Constants: UPPER_SNAKE, Other: camelCase |
+| 6 | 依赖注入 | Constructor injection only, `@RequiredArgsConstructor` |
+| 7 | Null 处理 | Return `Optional<T>`, never return null from service methods |
+| 8 | 日期时间 | Use `OffsetDateTime`, never `Date` or `Calendar` |
+| 9 | 集合 | Return immutable: `List.of()`, `Collections.unmodifiableList()` |
+| 10 | 异常 | Extend `BusinessException`, never throw raw `RuntimeException` |
 
 ---
 ---
@@ -331,11 +209,9 @@ User created = restClient.post()
 
 ## 3. 参数校验（前置条件）
 
-### 3.1 强制校验规则
-
 所有 `public` / `protected` 方法的所有参数，必须在方法入口处进行校验。
 
-### 3.2 工具选择优先级
+### 工具选择优先级
 
 | 优先级 | 工具 | 适用场景 |
 |--------|------|----------|
@@ -344,11 +220,9 @@ User created = restClient.post()
 | 3 | `Preconditions` (Guava) | 非 Spring 项目或复杂校验场景 |
 | 4 | 自建工具类 | 以上均不可用时 |
 
-### 3.3 Spring Boot 项目示例（使用 `org.springframework.util.Assert`）
+### Spring Boot 示例（`org.springframework.util.Assert`）
 
 ```java
-import org.springframework.util.Assert;
-
 public void updateUser(@NonNull String userId, int age, List<String> tags) {
     Assert.hasText(userId, "userId must not be blank");
     Assert.notNull(tags, "tags must not be null");
@@ -358,19 +232,14 @@ public void updateUser(@NonNull String userId, int age, List<String> tags) {
 }
 ```
 
-### 3.4 非 Spring 项目示例（Guava Preconditions）
+### 非 Spring 示例（Guava `Preconditions`）
 
 ```java
-import java.util.Objects;
-import com.google.common.base.Preconditions;
-
 public void updateUser(@Nonnull String userId, int age, List<String> tags) {
     Objects.requireNonNull(userId, "userId must not be null");
-    Objects.requireNonNull(tags, "tags must not be null");
     Preconditions.checkArgument(!userId.isBlank(), "userId must not be blank");
     Preconditions.checkArgument(age >= 0 && age <= 150,
         "age must be in range [0, 150], was: %s", age);
-    Preconditions.checkArgument(!tags.isEmpty(), "tags must not be empty");
 }
 ```
 
@@ -378,18 +247,7 @@ public void updateUser(@Nonnull String userId, int age, List<String> tags) {
 
 ## 4. 内部断言（不变式与后置条件）
 
-### 4.1 assert 的使用原则
-
-`assert` 仅用于验证**代码内部逻辑假设**，不可用于外部输入校验。
-
-### 4.2 断言开启配置
-
-| 环境 | JVM 参数 | 说明 |
-|------|----------|------|
-| 开发/测试 | `-ea` | 开启断言 |
-| 生产 | `-da` | 关闭断言（默认） |
-
-**重要：** 断言失败应视为编程错误，不应被 try-catch 捕获处理。
+`assert` 仅用于验证**代码内部逻辑假设**，不可用于外部输入校验。开发/测试环境使用 `-ea` 开启，生产环境使用 `-da` 关闭（默认）。断言失败应视为编程错误，不应被 try-catch 捕获处理。
 
 ---
 
@@ -401,16 +259,7 @@ public void updateUser(@Nonnull String userId, int age, List<String> tags) {
 | `@Nonnull` / `@CheckForNull` | `jakarta.annotation` | Jakarta 注解 |
 | `@NonNull` | `lombok` | Lombok 项目使用 |
 
-> **注意：** Spring Boot 3.x 基于 Jakarta EE 10，注解包名从 `javax.annotation` 迁移至 `jakarta.annotation`。新项目应统一使用 `jakarta.annotation`，禁止使用旧版 `javax.annotation`。
-
-**强制要求：** 校验逻辑必须与注解声明的契约保持一致。
-
-```java
-// 正确：声明与校验一致
-public void process(@Nonnull String input) {
-    Objects.requireNonNull(input, "input must not be null");
-}
-```
+> **注意：** Spring Boot 3.x 使用 `jakarta.annotation`，禁止使用旧版 `javax.annotation`。校验逻辑必须与注解声明的契约保持一致。
 
 ---
 
@@ -419,15 +268,10 @@ public void process(@Nonnull String input) {
 信息格式：`[参数/状态名] must [约束条件], but was: [实际值]`
 
 ```java
-// 数值范围
 Preconditions.checkArgument(age >= 0 && age <= 150,
     "age must be in range [0, 150], but was: %s", age);
-
-// 非空字符串
 Preconditions.checkArgument(!name.isBlank(),
     "name must not be blank, but was: '%s'", name);
-
-// 状态检查
 if (!isInitialized()) {
     throw new IllegalStateException(
         "service must be initialized before use, current state: UNINITIALIZED");
@@ -438,34 +282,15 @@ if (!isInitialized()) {
 
 ## 7. 契约与继承
 
-子类重写方法时：
-- **不能放宽前置条件**（即允许更多非法输入）
-- **不能加强后置条件**（即输出更严格的保证）
-- **不能削弱类不变式**
+子类重写方法时：不能放宽前置条件、不能加强后置条件、不能削弱类不变式。
 
 ---
 
 ## 8. 类不变式（Class Invariants）
 
-```java
-public class BankAccount {
-    private String accountId;
-    private BigDecimal balance;
-
-    public BankAccount(@Nonnull String accountId, @Nonnull BigDecimal initialBalance) {
-        this.accountId = Objects.requireNonNull(accountId, "accountId must not be null");
-        this.balance = Objects.requireNonNull(initialBalance, "initialBalance must not be null");
-        Preconditions.checkArgument(initialBalance.compareTo(BigDecimal.ZERO) >= 0,
-            "initial balance must be non-negative, was: %s", initialBalance);
-        assert invariant() : "class invariant violated after construction";
-    }
-
-    private boolean invariant() {
-        return accountId != null && !accountId.isEmpty()
-            && balance != null && balance.compareTo(BigDecimal.ZERO) >= 0;
-    }
-}
-```
+- 在构造器末尾和每个修改状态的方法末尾，调用 `assert invariant()` 验证不变式。
+- `invariant()` 方法应为 `private`，返回 `boolean`，检查所有字段的合法性。
+- 不变式断言失败说明存在编程错误。
 
 ---
 
@@ -481,13 +306,6 @@ void updateUser_NullUserId_ShouldThrowException() {
         () -> service.updateUser(null, 25)
     );
     assertEquals("userId must not be null", exception.getMessage());
-}
-
-@ParameterizedTest
-@ValueSource(ints = {-1, 151, Integer.MIN_VALUE})
-void updateUser_InvalidAge_ShouldThrowException(int invalidAge) {
-    assertThrows(IllegalArgumentException.class,
-        () -> service.updateUser("user1", invalidAge));
 }
 ```
 
@@ -506,35 +324,15 @@ void updateUser_InvalidAge_ShouldThrowException(int invalidAge) {
 
 ---
 
-## 快速参考：参数校验模板
+## 快速参考：校验与断言模板
 
-```java
-// 非空
-Objects.requireNonNull(param, "paramName must not be null");
-
-// 字符串非空
-Assert.hasText(str, "str must not be blank");
-
-// 数值范围
-Assert.isTrue(value >= MIN && value <= MAX,
-    () -> "value must be in range [" + MIN + ", " + MAX + "], was: " + value);
-
-// 集合非空
-Assert.isTrue(!collection.isEmpty(), "collection must not be empty");
-
-// 状态检查
-Assert.state(isReady(), "service must be ready");
-```
-
-## 快速参考：断言模板
-
-```java
-// 后置条件
-assert result != null : "method must not return null";
-
-// 不变式
-assert invariant() : "class invariant violated";
-
-// 内部假设
-assert index >= 0 && index < size : "index out of bounds";
-```
+| 场景 | 代码 |
+|------|------|
+| 非空 | `Objects.requireNonNull(param, "paramName must not be null");` |
+| 字符串非空 | `Assert.hasText(str, "str must not be blank");` |
+| 数值范围 | `Assert.isTrue(value >= MIN && value <= MAX, () -> "value must be in range [...]");` |
+| 集合非空 | `Assert.isTrue(!collection.isEmpty(), "collection must not be empty");` |
+| 状态检查 | `Assert.state(isReady(), "service must be ready");` |
+| 后置条件 | `assert result != null : "method must not return null";` |
+| 不变式 | `assert invariant() : "class invariant violated";` |
+| 内部假设 | `assert index >= 0 && index < size : "index out of bounds";` |

@@ -21,19 +21,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 | Database Migration | @.claude/rules/db-migration.md |
 | Code Review Checklist | @.claude/rules/code-review.md |
 | Java Coding Standard | @.claude/rules/java-coding-standard.md |
-
-## Current Sprint
-
-| ID | Task | Status | Last Action |
-|----|------|--------|-------------|
-| 001 | User Management Module | In Progress | API test migration to WebTestClient + JSON fixture pattern completed |
-
-## Recently Completed
-
-1. API test refactoring: replaced TestRestTemplate integration tests with WebTestClient + JSON fixtures + DatabaseVerifier + @Sql seed data
-2. Downstream notification service integration (NotificationClientImpl + WireMock test stubs)
-3. Four-layer architecture: Domain -> Application -> Infrastructure -> Interfaces
-4. Claude Code config restructured into `.claude/` standard directory
+| Logging Conventions | @.claude/rules/logging.md |
 
 ## Workflow Enforcement
 

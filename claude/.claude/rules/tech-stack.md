@@ -1,7 +1,11 @@
 ---
-files: ["**/pom.xml", "**/*.java", "**/*.yml", "**/*.yaml", "**/*.properties"]
+paths:
+  - "**/pom.xml"
+  - "**/*.java"
+  - "**/*.yml"
+  - "**/*.yaml"
+  - "**/*.properties"
 ---
-
 # Tech Stack
 
 - Java 21

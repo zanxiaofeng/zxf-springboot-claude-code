@@ -1,7 +1,9 @@
 ---
-files: ["**/test/**/*.java", "**/*ApiTests.java", "**/*ContractTest.java"]
+paths:
+  - "**/test/**/*.java"
+  - "**/*ApiTests.java"
+  - "**/*ContractTest.java"
 ---
-
 # Testing Conventions
 
 ## Test Layers

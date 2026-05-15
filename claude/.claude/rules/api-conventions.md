@@ -1,7 +1,8 @@
 ---
-files: ["**/interfaces/**/*.java", "**/*.md"]
+paths:
+  - "**/interfaces/**/*.java"
+  - "**/*.md"
 ---
-
 # API Design Conventions
 
 ## URL Pattern

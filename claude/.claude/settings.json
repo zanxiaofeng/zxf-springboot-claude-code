@@ -36,5 +36,8 @@
   },
   "autoMemoryEnabled": true,
   "includeGitInstructions": true,
-  "effortLevel": "high"
+  "effortLevel": "high",
+  "env": {
+    "JAVA_HOME": "/home/davis/.jdks/ms-21"
+  }
 }

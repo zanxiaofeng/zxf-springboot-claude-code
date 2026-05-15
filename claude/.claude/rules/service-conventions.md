@@ -1,7 +1,7 @@
 ---
-files: ["**/application/**/*.java"]
+paths:
+  - "**/application/**/*.java"
 ---
-
 # Service Conventions
 
 ## Layer Rules

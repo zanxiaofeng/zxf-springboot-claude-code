@@ -1,7 +1,11 @@
 ---
-files: ["**/*.sql", "**/*.java", "**/*.yml", "**/*.yaml", "**/*.properties"]
+paths:
+  - "**/*.sql"
+  - "**/*.java"
+  - "**/*.yml"
+  - "**/*.yaml"
+  - "**/*.properties"
 ---
-
 # Database Conventions
 
 ## Migration Rules

@@ -1,7 +1,10 @@
 ---
-files: ["**/*.java", "**/*.yml", "**/*.yaml", "**/*.properties"]
+paths:
+  - "**/*.java"
+  - "**/*.yml"
+  - "**/*.yaml"
+  - "**/*.properties"
 ---
-
 # Downstream Integration Conventions
 
 ## Design Principle
