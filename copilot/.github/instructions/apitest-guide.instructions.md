@@ -1,6 +1,7 @@
 ---
+name: "API Test Guide"
+description: "API test conventions with WebTestClient, JSON fixtures, @Sql, DatabaseVerifier, and WireMock"
 applyTo: "**/apitest/**/*.java,**/test/resources/**"
-excludeAgent: "code-review"
 ---
 
 # API Test 编码规范

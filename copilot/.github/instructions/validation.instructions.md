@@ -1,4 +1,6 @@
 ---
+name: "Bean Validation"
+description: "Jakarta Bean Validation with annotations, validation groups, custom validators, and exception handling"
 applyTo: "**/interfaces/**/*.java,**/application/**/*.java,**/domain/**/*.java,**/infrastructure/**/*Config*.java,**/infrastructure/**/*ExceptionHandler*.java"
 ---
 

@@ -1,4 +1,6 @@
 ---
+name: "Architecture"
+description: "Four-layer hexagonal architecture with domain-driven design"
 applyTo: "**/domain/**/*.java,**/application/**/*.java,**/infrastructure/**/*.java,**/interfaces/**/*.java"
 ---
 

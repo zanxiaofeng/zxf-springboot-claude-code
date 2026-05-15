@@ -1,4 +1,6 @@
 ---
+name: "Service Conventions"
+description: "Service layer conventions for transactions, naming, and downstream calls"
 applyTo: "**/application/**/*.java"
 ---
 

@@ -1,4 +1,6 @@
 ---
+name: "Contract Testing"
+description: "Spring Cloud Contract testing with Groovy DSL and RestAssuredMockMvc"
 applyTo: "**/*.groovy,**/contract/**/*.java"
 ---
 

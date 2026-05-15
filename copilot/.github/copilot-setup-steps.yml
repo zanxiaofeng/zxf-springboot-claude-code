@@ -1,24 +1,39 @@
-name: Copilot Setup Steps
+name: "Copilot Setup Steps"
 
-# Pre-install dependencies for GitHub Copilot coding agent
-# This ensures the agent can build and test immediately without trial-and-error
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
 
-steps:
-  - name: Set up JDK 21
-    uses: actions/setup-java@v4
-    with:
-      java-version: '21'
-      distribution: 'temurin'
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
-  - name: Cache Maven packages
-    uses: actions/cache@v4
-    with:
-      path: ~/.m2
-      key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-      restore-keys: ${{ runner.os }}-m2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  - name: Install Maven dependencies
-    run: mvn dependency:resolve -q
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
 
-  - name: Compile project
-    run: mvn compile -q
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Install Maven dependencies
+        run: mvn dependency:resolve -q
+
+      - name: Compile project
+        run: mvn compile -q

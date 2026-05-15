@@ -1,6 +1,7 @@
 ---
+name: "TDD Workflow"
+description: "Test-driven development workflow for writing failing tests first, then implementing"
 applyTo: "**/*.java,**/*.groovy,**/*.md"
-excludeAgent: "code-review"
 ---
 
 # TDD Workflow

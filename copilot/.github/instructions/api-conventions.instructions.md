@@ -1,4 +1,6 @@
 ---
+name: "API Conventions"
+description: "REST API design conventions for URL patterns, HTTP methods, and response format"
 applyTo: "**/interfaces/**/*.java,**/*.md"
 ---
 

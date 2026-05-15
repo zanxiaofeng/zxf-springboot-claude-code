@@ -1,4 +1,6 @@
 ---
+name: "Downstream Integration"
+description: "Downstream service integration with RestTemplate, error handling, and WireMock testing"
 applyTo: "**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 ---
 

@@ -1,3 +1,9 @@
+---
+name: "Refactor Module"
+description: "Safely refactor a module with characterization tests, incremental changes, and continuous verification"
+agent: "agent"
+---
+
 Safely refactor a module with incremental changes and continuous verification.
 
 ## Pre-conditions

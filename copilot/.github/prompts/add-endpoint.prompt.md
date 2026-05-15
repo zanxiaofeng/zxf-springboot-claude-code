@@ -1,3 +1,9 @@
+---
+name: "Add Endpoint"
+description: "Add a new REST API endpoint following the contract-first approach"
+agent: "agent"
+---
+
 Add a new REST API endpoint following the contract-first approach.
 
 ## Pre-conditions

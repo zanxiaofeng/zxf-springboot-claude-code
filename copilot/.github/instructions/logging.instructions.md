@@ -1,4 +1,6 @@
 ---
+name: "Logging Conventions"
+description: "Logging conventions using @Slf4j with SLF4J placeholders and log level guidelines"
 applyTo: "**/*.java"
 ---
 

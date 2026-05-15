@@ -1,4 +1,6 @@
 ---
+name: "Test Conventions"
+description: "Testing conventions for API tests and contract tests with H2 and WireMock"
 applyTo: "**/test/**/*.java,**/*ApiTests.java,**/*ContractTest.java"
 ---
 

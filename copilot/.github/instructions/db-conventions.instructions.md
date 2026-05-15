@@ -1,4 +1,6 @@
 ---
+name: "Database Conventions"
+description: "Database conventions for Flyway migrations, entity rules, and H2 compatibility"
 applyTo: "**/*.sql,**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 ---
 

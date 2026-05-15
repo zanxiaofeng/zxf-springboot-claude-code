@@ -1,4 +1,6 @@
 ---
+name: "DB Migration"
+description: "Flyway database migration guide with directory structure and destructive change process"
 applyTo: "**/*.sql,**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 ---
 

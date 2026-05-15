@@ -1,4 +1,6 @@
 ---
+name: "Tech Stack"
+description: "Technology stack versions and dependencies (Java 21, Spring Boot 3.5, Maven)"
 applyTo: "**/pom.xml,**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 ---
 

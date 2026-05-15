@@ -1,4 +1,6 @@
 ---
+name: "Code Review"
+description: "Code review checklist for architecture, testing, and coding standards"
 applyTo: "**/*.java"
 ---
 

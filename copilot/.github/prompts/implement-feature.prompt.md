@@ -1,3 +1,9 @@
+---
+name: "Implement Feature"
+description: "Implement a new feature following the TDD workflow — from requirement analysis through tests and implementation"
+agent: "agent"
+---
+
 Implement a new feature following the TDD workflow. Start by reading the requirement doc, then follow the strict TDD cycle.
 
 ## Steps

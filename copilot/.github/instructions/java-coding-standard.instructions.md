@@ -1,4 +1,6 @@
 ---
+name: "Java Coding Standard"
+description: "Java coding standards for tool libraries, JDK 21 features, Lombok, and contract programming"
 applyTo: "**/*.java"
 ---
 
@@ -111,6 +113,8 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 
 - 若团队禁用 Lombok，则手动编写等价代码，但必须遵循可读性原则。
 - 避免滥用 `@Data` 在 JPA 实体上，可能导致循环依赖问题。
+- `@ToString.Exclude` 排除敏感字段（密码、密钥等），避免日志泄露。
+- JPA 实体使用 `@EqualsAndHashCode(onlyExplicitlyIncluded = true)` + `@EqualsAndHashCode.Include` 指定业务主键，避免懒加载字段触发 N+1 查询。
 
 ---
 
