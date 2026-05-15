@@ -1,5 +1,6 @@
 ---
-files: ["**/*.java", "**/*.groovy", "**/*.md"]
+applyTo: "**/*.java,**/*.groovy,**/*.md"
+excludeAgent: "code-review"
 ---
 
 # TDD Workflow
@@ -11,7 +12,7 @@ files: ["**/*.java", "**/*.groovy", "**/*.md"]
 4. **Minimal Implementation (Green)**: Implement Controller -> Service -> Repository in layers. Add downstream client interface in domain layer if needed.
 5. **Refactor**: Check against `.github/instructions/`, extract duplicates, optimize naming
 6. **Contract Test (API layer)**: Write Contract for each new endpoint, generate Stub and verify API contract
-7. **Documentation Update**: Update `docs/design/api-spec-v1.md`, `docs/design/domain-model.md`, and `CLAUDE.md` Sprint status
+7. **Documentation Update**: Update `docs/design/api-spec-v1.md`, `docs/design/domain-model.md`, and Sprint status
 
 ## Downstream Integration in TDD
 When a feature requires calling a downstream service:
