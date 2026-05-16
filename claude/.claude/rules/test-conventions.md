@@ -10,7 +10,7 @@ paths:
 | Layer | Tool | DB | Downstream | Naming |
 |-------|------|-----|------------|--------|
 | API Test | WebTestClient + @Sql + JSON fixtures + DatabaseVerifier | H2 | WireMock (MockFactory/Verifier) | *ApiTests |
-| Contract | @AutoConfigureStubRunner | H2 | RestAssuredMockMvc | *ContractTest |
+| Contract | @SpringBootTest(MOCK) + RestAssuredMockMvc | H2 | RestAssuredMockMvc | *ContractTest |
 
 ## Rules
 1. Tests must be independent, no @DependsOn

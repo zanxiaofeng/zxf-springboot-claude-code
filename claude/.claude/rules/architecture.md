@@ -18,7 +18,7 @@ This is a demo Spring Boot 3 REST API project following hexagonal architecture (
 │  Domain       Entity, Repository    │  Business entities, JPA annotations
 │               Interface, VO         │  allowed for simplicity
 ├─────────────────────────────────────┤
-│  Infrastructure RepositoryImpl,    │  Technical details
+│  Infrastructure JpaAdapter,        │  Technical details
 │               Config, Security      │
 └─────────────────────────────────────┘
 ```

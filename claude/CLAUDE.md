@@ -69,7 +69,7 @@ my-project/
 ├── src/main/java/.../
 │   ├── domain/                          # Entity, VO, Repository Interface, Downstream Client Interface
 │   ├── application/                     # Service, DTO, Mapper
-│   ├── infrastructure/                  # RepositoryImpl, Config, Security, Downstream Client Impl
+│   ├── infrastructure/                  # JpaAdapter, Config, Security, Downstream Client Impl
 │   └── interfaces/                      # Controller, ExceptionHandler
 ├── src/test/
 │   ├── apitest/                         # API tests (WebTestClient + JSON fixtures + @Sql)

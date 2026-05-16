@@ -91,28 +91,27 @@ public class UserQueryDTO {
 ### 字段验证示例
 
 ```java
-@Data @Builder @NoArgsConstructor @AllArgsConstructor
-public class UserCreateDTO {
+public record UserCreateDTO(
     @NotBlank(message = "用户名不能为空")
     @Size(min = 3, max = 20, message = "用户名长度3-20")
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9_]*$", message = "用户名必须字母开头")
-    private String username;
+    String username,
 
     @NotBlank @Email(message = "邮箱格式不正确") @Size(max = 100)
-    private String email;
+    String email,
 
     @NotBlank @Pattern(regexp = "^1[3-9]\\d{9}$", message = "手机号格式不正确")
-    private String phone;
+    String phone,
 
     @NotNull @Min(0) @Max(150)
-    private Integer age;
+    Integer age,
 
     @NotNull @DecimalMin("0.00") @Digits(integer = 9, fraction = 2)
-    private BigDecimal balance;
+    BigDecimal balance,
 
     @Valid @NotNull  // 级联验证嵌套对象
-    private AddressDTO address;
-}
+    AddressDTO address
+) {}
 ```
 
 ### 列表/集合元素验证
@@ -148,19 +147,18 @@ public interface ValidationGroups {
 }
 
 // DTO 使用分组
-@Data
-public class UserDTO {
+public record UserDTO(
     @Null(groups = Create.class, message = "创建时不能指定ID")
     @NotNull(groups = Update.class, message = "更新时ID不能为空")
-    private Long id;
+    Long id,
 
     @NotBlank(groups = {Create.class, Update.class})
     @Size(min = 3, max = 20, groups = {Create.class, Update.class})
-    private String username;
+    String username,
 
     @NotBlank(groups = Create.class)  // 仅创建时必填
-    private String password;
-}
+    String password
+) {}
 
 // Controller 使用分组
 @PostMapping

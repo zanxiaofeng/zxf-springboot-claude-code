@@ -20,7 +20,7 @@ Java 21 + Spring Boot 3.5.x + Maven 3.9+ REST API demo. Four-layer hexagonal arc
 src/main/java/com/example/demo/
 ├── domain/           # Entity, Repository Interface, Downstream Client Interface, BusinessException
 ├── application/      # Service (interface + impl), DTO (record), Mapper
-├── infrastructure/   # RepositoryImpl, Config, Security, Downstream Client Impl
+├── infrastructure/   # JpaAdapter, Config, Security, Downstream Client Impl
 └── interfaces/       # Controller, ExceptionHandler, ApiResponse<T>
 
 src/test/java/com/example/demo/
@@ -60,5 +60,5 @@ src/test/resources/
 - New APIs: Contract-First (write Contract Test before implementation)
 - Downstream calls: define interface in `domain/downstream/`, implement in `infrastructure/downstream/`, stub with WireMock in tests
 - See `.github/instructions/` for detailed conventions per layer
-- Validation: use `@Valid`/`@Validated` on Controller, validation annotations on DTOs, `ValidationExceptionHandler` for error responses — see `validation.instructions.md`
+- Validation: use `@Valid`/`@Validated` on Controller, validation annotations on DTOs, `GlobalExceptionHandler` for error responses — see `validation.instructions.md`
 - Logging: use `@Slf4j`, SLF4J placeholders, always include exception object in error logs — see `logging.instructions.md`

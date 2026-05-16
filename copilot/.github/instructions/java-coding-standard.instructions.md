@@ -147,8 +147,7 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 
 ```java
 // 注入 RestClient（替代 RestTemplate）
-@Autowired
-private RestClient restClient;
+private final RestClient restClient;
 
 // GET 请求
 String result = restClient.get()
