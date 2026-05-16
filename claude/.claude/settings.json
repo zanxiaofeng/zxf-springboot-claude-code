@@ -27,6 +27,10 @@
       "Bash(git push *)",
       "Bash(git reset --hard *)",
       "Bash(git checkout -f *)",
+      "Bash(git clean *)",
+      "Bash(git stash drop *)",
+      "Bash(mvn deploy *)",
+      "Bash(mvn release:*)",
       "Read(./.env)",
       "Read(./.env.*)",
       "Read(**/*secret*)",
@@ -35,9 +39,35 @@
     ],
     "defaultMode": "acceptEdits"
   },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd claude && mvn compile -q 2>&1 | tail -5",
+            "timeout": 30000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd claude && mvn test -q 2>&1 | tail -10",
+            "timeout": 120000
+          }
+        ]
+      }
+    ]
+  },
   "autoMemoryEnabled": true,
   "includeGitInstructions": true,
   "effortLevel": "high",
+  "language": "zh-CN",
   "env": {
     "JAVA_HOME": "/home/davis/.jdks/ms-21"
   }

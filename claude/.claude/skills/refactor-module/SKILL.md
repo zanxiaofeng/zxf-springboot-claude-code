@@ -1,6 +1,8 @@
 ---
 name: refactor-module
 description: Safely refactor a module with characterization tests, incremental changes, and continuous verification.
+arguments: module-name
+allowed-tools: Bash(mvn test) Bash(mvn compile) Read Write Edit Grep Glob
 ---
 
 # Refactor Module
@@ -14,7 +16,7 @@ description: Safely refactor a module with characterization tests, incremental c
 1. **Identify code smells** — duplication, long methods, unclear naming, tight coupling
 2. **Write characterization tests** if coverage is low
 3. **Apply refactoring incrementally** — one change at a time
-4. **Run tests after each change** — `mvn test` or `./scripts/run-integration-tests.sh`
+4. **Run tests after each change** — `mvn test` or `./scripts/fast-test.sh`
 5. **Update documentation** if public API changed
 
 ## Safety Rules

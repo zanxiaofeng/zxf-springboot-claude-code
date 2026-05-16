@@ -1,6 +1,8 @@
 ---
 name: add-endpoint
 description: Add a new REST API endpoint following the contract-first approach with API tests and Spring Cloud Contract tests.
+arguments: http-method resource-path
+allowed-tools: Bash(mvn test) Bash(mvn compile) Read Write Edit Grep Glob
 ---
 
 # Add Endpoint

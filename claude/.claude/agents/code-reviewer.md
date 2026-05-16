@@ -5,6 +5,9 @@ tools: Read, Grep, Glob, Bash
 model: inherit
 memory: project
 effort: high
+permissionMode: acceptEdits
+maxTurns: 30
+background: true
 color: green
 ---
 

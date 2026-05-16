@@ -18,6 +18,8 @@ target/
 .claude/plans/
 .claude/worktrees/
 .claude/scheduled_tasks.json
+CLAUDE.local.md
+.claude/agent-memory/
 
 # OS
 .DS_Store

@@ -1,9 +1,13 @@
 ---
 name: implement-feature
 description: Implement a new feature following the TDD workflow — from requirement analysis through API tests, implementation, contract tests, and documentation update.
+arguments: feature-name
+allowed-tools: Bash(mvn test) Bash(mvn compile) Read Write Edit Grep Glob
 ---
 
 # Implement Feature
+
+!`echo "Current branch: $(git branch --show-current 2>/dev/null || echo 'N/A')"`
 
 ## Pre-conditions
 - [ ] Requirement doc exists in `docs/requirements/`
@@ -12,7 +16,7 @@ description: Implement a new feature following the TDD workflow — from require
 ## Steps
 
 1. **Read requirement doc** — extract business rules and acceptance criteria
-2. **Prepare test data** — add seed data to `sql/init/data.sql`, create JSON fixtures under `test-data/{entity}/`
+2. **Prepare test data** — add seed data to `sql/init/data.sql`, create JSON fixtures under `test-data/$feature-name/`
 3. **Write failing API test (Red)** — WebTestClient + JSON fixtures + @Sql seed data + DatabaseVerifier
 4. **Minimal implementation (Green)** — Controller -> Service -> Repository in layers
 5. **Refactor** — check against conventions, extract duplicates, optimize naming
@@ -30,6 +34,6 @@ description: Implement a new feature following the TDD workflow — from require
 ## Output
 - Implementation code (Domain -> Application -> Infrastructure -> Interfaces)
 - API tests (`*ApiTests.java`)
-- JSON fixtures under `test-data/{entity}/`
+- JSON fixtures under `test-data/$feature-name/`
 - Contract tests (`*.groovy`)
 - Updated documentation
