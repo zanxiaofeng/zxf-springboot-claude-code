@@ -6,23 +6,23 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 
 ## Quick Navigation
 
-| Topic | Import |
-|-------|--------|
-| Architecture & Layers | @.claude/rules/architecture.md |
-| Tech Stack & Versions | @.claude/rules/tech-stack.md |
-| API Design Conventions | @.claude/rules/api-conventions.md |
-| Service Layer Conventions | @.claude/rules/service-conventions.md |
-| Database Conventions | @.claude/rules/db-conventions.md |
-| Testing Conventions | @.claude/rules/test-conventions.md |
-| **API Test Guide** | @.claude/rules/apitest-guide.md |
-| Downstream Integration | @.claude/rules/downstream-conventions.md |
-| TDD Workflow | @.claude/rules/tdd-workflow.md |
-| Contract Testing | @.claude/rules/contract-test.md |
-| Database Migration | @.claude/rules/db-migration.md |
-| Code Review Checklist | @.claude/rules/code-review.md |
-| Bean Validation | @.claude/rules/validation.md |
-| Java Coding Standard | @.claude/rules/java-coding-standard.md |
-| Logging Conventions | @.claude/rules/logging.md |
+| Topic | Rule File |
+|-------|-----------|
+| Architecture & Layers | `.claude/rules/architecture.md` |
+| Tech Stack & Versions | `.claude/rules/tech-stack.md` |
+| API Design Conventions | `.claude/rules/api-conventions.md` |
+| Service Layer Conventions | `.claude/rules/service-conventions.md` |
+| Database Conventions | `.claude/rules/db-conventions.md` |
+| Testing Conventions | `.claude/rules/test-conventions.md` |
+| **API Test Guide** | `.claude/rules/apitest-guide.md` |
+| Downstream Integration | `.claude/rules/downstream-conventions.md` |
+| TDD Workflow | `.claude/rules/tdd-workflow.md` |
+| Contract Testing | `.claude/rules/contract-test.md` |
+| Database Migration | `.claude/rules/db-migration.md` |
+| Code Review Checklist | `.claude/rules/code-review.md` |
+| Bean Validation | `.claude/rules/validation.md` |
+| Java Coding Standard | `.claude/rules/java-coding-standard.md` |
+| Logging Conventions | `.claude/rules/logging.md` |
 
 ## Workflow Enforcement
 

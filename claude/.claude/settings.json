@@ -32,7 +32,8 @@
       "Read(**/*secret*)",
       "Read(**/application-prod.yml)",
       "Read(**/application-prod.properties)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   },
   "autoMemoryEnabled": true,
   "includeGitInstructions": true,
