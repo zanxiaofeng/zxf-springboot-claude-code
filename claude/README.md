@@ -139,7 +139,7 @@ Rules use YAML frontmatter with `paths:` globs to conditionally load based on fi
 |------|-------|------------|
 | `architecture.md` | `**/*.java` | Editing Java files |
 | `tech-stack.md` | `**/pom.xml`, `**/*.java`, `**/*.yml` | Editing config or code |
-| `api-conventions.md` | Unconditional | Always loaded |
+| `api-conventions.md` | `**/interfaces/**/*.java`, `**/*.md` | Editing interfaces or docs |
 | `service-conventions.md` | `**/application/**/*.java` | Editing service layer |
 | `db-conventions.md` | `**/*.sql`, `**/*.java` | Editing SQL or Java |
 | `db-migration.md` | `**/*.sql`, `**/*.java` | Editing SQL or Java |
@@ -147,7 +147,7 @@ Rules use YAML frontmatter with `paths:` globs to conditionally load based on fi
 | `apitest-guide.md` | `**/apitest/**/*.java` | Editing API tests |
 | `contract-test.md` | `**/*.groovy`, `**/contract/**` | Editing contract tests |
 | `downstream-conventions.md` | `**/*.java` | Editing Java files |
-| `tdd-workflow.md` | Unconditional | Always loaded |
+| `tdd-workflow.md` | `**/*.java`, `**/*.groovy`, `**/*.md` | Editing code, tests, or docs |
 | `code-review.md` | `**/*.java` | Editing Java files |
 | `validation.md` | `**/interfaces/**`, `**/application/**` | Editing API/service layer |
 | `java-coding-standard.md` | `**/*.java` | Editing Java files |

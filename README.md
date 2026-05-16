@@ -63,7 +63,7 @@ CLAUDE.md                                # 主指令
 └── claude/                     # Claude Code 完整项目副本
     ├── CLAUDE.md
     ├── .claude/
-    │   ├── rules/                  # 15 个带 files 的规则
+    │   ├── rules/                  # 15 个带 paths 的规则
     │   ├── skills/                 # 3 个可复用工作流
     │   ├── agents/                 # 4 个子代理
     │   └── settings.json           # 权限配置
@@ -79,11 +79,12 @@ CLAUDE.md                                # 主指令
 | **机制** | 扁平文件 + `applyTo` frontmatter 条件加载 | 三层结构：rules + skills + agents |
 | **主文件** | `.github/copilot-instructions.md` | `CLAUDE.md`（项目根目录） |
 | **子指令** | `.github/instructions/*.instructions.md` | `.claude/rules/*.md` |
-| **路径限定语法** | `applyTo: "**/*.java"` | `files: ["**/*.java"]` |
-| **可复用工作流** | 内联在主文件（Prompt Templates 表格） | 独立目录 `skills/<name>/SKILL.md` |
-| **子代理** | 不支持 | `agents/code-reviewer.md`、`agents/security-auditor.md` |
+| **路径限定语法** | `applyTo: "**/*.java"`（逗号分隔字符串） | `paths: ["**/*.java"]`（YAML 列表） |
+| **可复用工作流** | `.github/prompts/*.prompt.md` 独立文件 | 独立目录 `skills/<name>/SKILL.md` |
+| **工作流参数** | 不支持参数化 | 支持 `arguments` 声明命名参数 |
+| **子代理** | 不支持 | `agents/code-reviewer.md`、`agents/security-auditor.md` 等 |
 | **权限控制** | 无 | `.claude/settings.json`（allow/deny 列表） |
-| **文件导入** | 不支持，用 Markdown 链接引用 | `@.claude/rules/xxx.md` 语法 |
+| **环境设置** | `copilot-setup-steps.yml`（CI 环境预设） | 无需（直接运行在本地环境） |
 
 ---
 
