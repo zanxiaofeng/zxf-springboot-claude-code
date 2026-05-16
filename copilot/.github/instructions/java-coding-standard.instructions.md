@@ -138,10 +138,12 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 | 特性 | 配置/说明 |
 |------|-----------|
 | Virtual Threads | `spring.threads.virtual.enabled=true` — 一键启用虚拟线程，无需代码改动 |
-| RestClient | 替代 RestTemplate 的现代 HTTP 客户端，Fluent API |
+| RestClient | 替代 RestTemplate 的现代 HTTP 客户端，Fluent API（新模块推荐） |
 | CDS 支持 | `spring-boot-maven-plugin` 支持 CDS 加速启动 |
 
-#### RestClient 示例（Spring Boot 3.5 推荐的 HTTP 客户端）
+> **本项目说明：** 本 Demo 项目使用 `RestTemplate` 作为下游 HTTP 客户端。新模块推荐迁移到 `RestClient`。
+
+#### RestClient 示例（新模块推荐）
 
 ```java
 // 注入 RestClient（替代 RestTemplate）
@@ -213,7 +215,7 @@ User created = restClient.post()
 
 ## 4. 冲突与规避
 
-- **HTTP 客户端：** Spring Boot 3.5+ 项目优先使用 `RestClient`，`RestTemplate` 已进入维护模式。
+- **HTTP 客户端：** Spring Boot 3.5+ 新模块优先使用 `RestClient`，`RestTemplate` 已进入维护模式。本 Demo 项目使用 RestTemplate。
 - **文件上传：** 若使用 MultipartFile，禁止额外引入 commons-fileupload。
 - **日志门面：** 若项目使用 SLF4J，避免引入 commons-logging。
 - **Bean 属性复制：** 优先使用 Spring `BeanUtils.copyProperties()`，避免 Apache Commons BeanUtils。
