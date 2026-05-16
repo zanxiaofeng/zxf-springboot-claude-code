@@ -39,13 +39,15 @@ AI 工具会自动发现并加载以下标准路径的配置：
 # GitHub Copilot
 .github/copilot-instructions.md          # 主指令
 .github/instructions/*.instructions.md   # 子指令（路径限定）
+.github/prompts/*.prompt.md              # 可复用工作流
+.github/workflows/copilot-setup-steps.yml # Coding Agent 环境配置
 
 # Claude Code
 CLAUDE.md                                # 主指令
 .claude/settings.json                    # 权限与项目设置
-.claude/rules/*.md                      # 路径限定规则
-.claude/skills/<name>/SKILL.md          # 可复用工作流
-.claude/agents/*.md                     # 子代理
+.claude/rules/*.md                       # 路径限定规则
+.claude/skills/<name>/SKILL.md           # 可复用工作流
+.claude/agents/*.md                      # 子代理
 ```
 
 项目包含两份完全独立的项目副本（代码 + AI 配置）：
@@ -54,14 +56,16 @@ CLAUDE.md                                # 主指令
 ├── copilot/                  # GitHub Copilot 完整项目副本
 │   ├── .github/
 │   │   ├── copilot-instructions.md
-│   │   └── instructions/           # 11 个带 applyTo 的子指令
+│   │   ├── instructions/           # 15 个带 applyTo 的子指令
+│   │   ├── prompts/                # 3 个可复用工作流
+│   │   └── workflows/              # Coding Agent 环境配置
 │   ├── docs/、scripts/、src/、pom.xml...
 └── claude/                     # Claude Code 完整项目副本
     ├── CLAUDE.md
     ├── .claude/
-    │   ├── rules/                  # 11 个带 files 的规则
+    │   ├── rules/                  # 15 个带 files 的规则
     │   ├── skills/                 # 3 个可复用工作流
-    │   ├── agents/                 # 2 个子代理
+    │   ├── agents/                 # 4 个子代理
     │   └── settings.json           # 权限配置
     ├── docs/、scripts/、src/、pom.xml...
 ```
@@ -85,7 +89,7 @@ CLAUDE.md                                # 主指令
 
 ## 核心 AI 配置内容
 
-### 11 个知识模块（两平台内容一致，组织方式不同）
+### 15 个知识模块（两平台内容一致，组织方式不同）
 
 | 模块 | 作用 |
 |------|------|
@@ -95,11 +99,15 @@ CLAUDE.md                                # 主指令
 | **service-conventions** | `@Transactional(readOnly = true)` 类级默认、接口+实现模式 |
 | **db-conventions** | Flyway 迁移命名、实体规则、MySQL/H2 兼容对照表 |
 | **test-conventions** | 测试分层（API/Integration/Contract）、测试数据准备 |
+| **apitest-guide** | API 测试完整指南（WebTestClient、JSON fixtures、DatabaseVerifier、WireMock stub） |
 | **downstream-conventions** | 下游接口在 domain、实现在 infrastructure、WireMock 测试规范 |
 | **tdd-workflow** | 七步 TDD 流程（Red → Green → Refactor → Contract → Docs） |
 | **contract-test** | Spring Cloud Contract Groovy DSL 模板和检查清单 |
 | **db-migration** | Flyway 目录结构、破坏性变更处理流程 |
 | **code-review** | 审查检查清单（JavaDoc、构造器注入、DTO record、Contract 覆盖） |
+| **java-coding-standard** | Java 编码规范（命名、不可变性、Optional、Stream、异常、泛型） |
+| **logging** | 日志规范（`@Slf4j`、结构化日志、敏感数据脱敏） |
+| **validation** | Bean Validation 模式（DTO 校验、自定义校验器、分组校验） |
 
 ### Claude 独有的高级功能
 
@@ -110,6 +118,8 @@ CLAUDE.md                                # 主指令
 | **Refactor 工作流** | `skills/refactor-module/SKILL.md` | 安全重构的增量变更流程 |
 | **代码审查代理** | `agents/code-reviewer.md` | 独立子代理执行架构合规和代码质量审查 |
 | **安全审计代理** | `agents/security-auditor.md` | 独立子代理执行 OWASP 安全检查 |
+| **TDD 引导代理** | `agents/tdd-guide.md` | 独立子代理强制执行 TDD 工作流，先写测试再实现 |
+| **构建错误修复代理** | `agents/build-error-resolver.md` | 独立子代理诊断并修复 Maven 构建和测试失败 |
 
 ---
 
@@ -154,11 +164,14 @@ CLAUDE.md                                # 主指令
 
 ### Docker 一键启动
 ```bash
+cd claude  # 或 cd copilot
 docker-compose up -d
 ```
 
 ### 本地开发
 ```bash
+cd claude  # 或 cd copilot
+
 # 1. 启动 MySQL
 docker-compose up -d mysql
 
@@ -171,6 +184,8 @@ mvn spring-boot:run
 
 ### 测试
 ```bash
+cd claude  # 或 cd copilot
+
 # 快速测试（跳过契约测试）
 ./scripts/fast-test.sh
 
@@ -188,8 +203,12 @@ mvn spring-boot:run
 | 文件/目录 | 说明 |
 |-----------|------|
 | `README.md` | 本文档（项目总览 + AI 配置说明） |
+| `CLAUDE.md` | Claude Code 根级项目指令（工作目录规范） |
 | `copilot/` | GitHub Copilot 完整项目副本（代码 + AI 配置） |
 | `claude/` | Claude Code 完整项目副本（代码 + AI 配置） |
-| `docs/` | 项目文档（需求、设计 ADR、API 规范、领域模型、规范、模板） |
-| `scripts/` | 便捷脚本（fast-test、full-ci、contract-tests、setup-dev、generate-openapi） |
-| `src/` | 源代码（Domain + Application + Infrastructure + Interfaces + Tests） |
+| `docs/` | 参考资料（AI Coding 文章、官方文档副本） |
+
+每个子项目内部结构相同：
+- `docs/` — 需求文档、设计 ADR、API 规范、领域模型、文档模板
+- `scripts/` — 便捷脚本（fast-test、full-ci、contract-tests、setup-dev、generate-openapi）
+- `src/` — 源代码（Domain + Application + Infrastructure + Interfaces + Tests）

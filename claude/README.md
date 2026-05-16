@@ -110,7 +110,7 @@ claude/
 ├── CLAUDE.local.md            # Personal overrides (gitignored)
 ├── .claude/
 │   ├── settings.json          # Permissions, hooks, env, effort level
-│   ├── rules/                 # Path-scoped instruction files (16 rules)
+│   ├── rules/                 # Path-scoped instruction files (15 rules)
 │   ├── skills/                # Reusable workflow skills (3 skills)
 │   └── agents/                # Custom subagents (4 agents)
 ├── .mcp.json                  # MCP server configuration
