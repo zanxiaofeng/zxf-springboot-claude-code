@@ -9,11 +9,10 @@ applyTo: "**/*.sql,**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 ## Directory Structure
 ```
 src/main/resources/db/
-├── migration/              -- Core DDL (environment-agnostic)
-│   ├── V1__create_users_table.sql
-│   └── V2__create_orders_table.sql
-└── migration/mysql/        -- MySQL-specific DDL (optional)
-    └── V1.1__mysql_specific_ddl.sql
+└── migration/              -- Core DDL (environment-agnostic, H2 & MySQL compatible)
+    ├── V1__create_users_table.sql
+    ├── V2__create_orders_table.sql
+    └── V3__add_user_bio_column.sql
 
 src/test/resources/sql/     -- Test data (@Sql scripts)
 ├── cleanup/                -- Truncate/delete before each test

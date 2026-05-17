@@ -17,7 +17,7 @@ applyTo: "**/*.java"
 - [ ] Flyway migration for DB changes
 - [ ] Error handling uses BusinessException
 - [ ] Downstream client interface exists in domain layer (if calling external services)
-- [ ] WireMock stubs present for downstream calls in integration tests
+- [ ] WireMock MockFactory/Verifier present for downstream calls in API tests
 
 ## Architecture Review
 - [ ] Four-layer separation maintained (Domain -> Application -> Infrastructure -> Interfaces)

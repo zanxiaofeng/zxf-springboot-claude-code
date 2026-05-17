@@ -113,13 +113,20 @@ Update user.
 ### DELETE /api/v1/users/{id}
 Delete user.
 
-**Response 204:** No content
+**Response 200:**
+```json
+{
+  "code": "SUCCESS",
+  "data": null,
+  "message": null
+}
+```
 
 ## Error Codes
-| Code | Description |
-|------|-------------|
-| SUCCESS | Success |
-| VALIDATION_ERROR | Validation failed |
-| USER_NOT_FOUND | User not found |
-| USER_ALREADY_EXISTS | User already exists |
-| INTERNAL_ERROR | Internal server error |
+| Code | HTTP Status | Description |
+|------|-------------|-------------|
+| SUCCESS | 200 | Success |
+| 002001 | 400 | Validation failed |
+| 001001 | 404 | User not found |
+| 001002 | 409 | User already exists |
+| 000001 | 500 | Internal server error |

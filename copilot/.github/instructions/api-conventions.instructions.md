@@ -34,9 +34,9 @@ applyTo: "**/interfaces/**/*.java,**/*.md"
 ## Error Response
 ```json
 {
-  "code": "VALIDATION_ERROR",
+  "code": "002001",
   "data": null,
-  "message": "Invalid request parameters",
+  "message": "Request validation failed",
   "timestamp": "2026-04-27T12:00:00+08:00",
   "traceId": "abc123",
   "errors": [

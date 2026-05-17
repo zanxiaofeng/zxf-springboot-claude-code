@@ -3,9 +3,9 @@
 ## Status
 - [x] Requirement Analysis
 - [x] Technical Design
-- [ ] Implementation
-- [ ] Testing
-- [ ] Completed
+- [x] Implementation
+- [x] Testing
+- [x] Completed
 
 ## Background
 User management is the core module of the system, providing basic CRUD operations for user accounts.
@@ -44,9 +44,9 @@ User management is the core module of the system, providing basic CRUD operation
 **Then** the user is updated and 200 OK is returned
 
 ### UC-005: Delete User
-**Given** a user exists  
-**When** a DELETE request to `/api/v1/users/{id}` is received  
-**Then** the user is deleted and 204 No Content is returned
+**Given** a user exists
+**When** a DELETE request to `/api/v1/users/{id}` is received
+**Then** the user is deleted and 200 OK is returned
 
 ## Non-Functional Requirements
 - Response time < 200ms (P95)

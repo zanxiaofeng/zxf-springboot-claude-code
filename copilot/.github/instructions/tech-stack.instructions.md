@@ -21,7 +21,7 @@ applyTo: "**/pom.xml,**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 ## Infrastructure
 - Lombok (boilerplate reduction: @Data, @Builder, @Slf4j, @RequiredArgsConstructor)
 - Apache Commons Lang 3 (StringUtils, ObjectUtils)
-- Flyway 10.x (database migration)
+- Flyway (version managed by Spring Boot BOM)
 - Spring Data JPA
 - Spring Validation
 - Spring Web

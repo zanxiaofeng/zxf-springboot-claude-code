@@ -253,32 +253,40 @@ public interface OrderService {
 ```java
 @Slf4j
 @RestControllerAdvice
-public class ValidationExceptionHandler {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ApiResponse<Void> handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
-        List<String> errors = e.getBindingResult().getFieldErrors().stream()
-                .map(err -> err.getField() + ": " + err.getDefaultMessage())
+    public ResponseEntity<ApiResponse<Void>> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpServletRequest request) {
+        String traceId = generateTraceId(request);
+        List<ApiResponse.FieldError> errors = ex.getBindingResult().getFieldErrors().stream()
+                .map(e -> ApiResponse.FieldError.builder()
+                        .field(e.getField())
+                        .message(e.getDefaultMessage())
+                        .rejectedValue(e.getRejectedValue())
+                        .build())
                 .toList();
-        log.warn("参数验证失败: {}", errors);
-        return ApiResponse.error("VALIDATION_ERROR", String.join("; ", errors));
+        return ResponseEntity.status(ErrorCode.VALIDATION_ERROR.getHttpStatus())
+                .header("X-Trace-Id", traceId)
+                .body(ApiResponse.error(ErrorCode.VALIDATION_ERROR, "Request validation failed", traceId, errors));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ApiResponse<Void> handleConstraintViolation(ConstraintViolationException e) {
-        List<String> errors = e.getConstraintViolations().stream()
-                .map(v -> v.getPropertyPath() + ": " + v.getMessage())
-                .toList();
-        log.warn("参数验证失败: {}", errors);
-        return ApiResponse.error("VALIDATION_ERROR", String.join("; ", errors));
+    public ResponseEntity<ApiResponse<Void>> handleConstraintViolation(
+            ConstraintViolationException ex, HttpServletRequest request) {
+        String traceId = generateTraceId(request);
+        return ResponseEntity.status(ErrorCode.VALIDATION_ERROR.getHttpStatus())
+                .header("X-Trace-Id", traceId)
+                .body(ApiResponse.error(ErrorCode.VALIDATION_ERROR, "Parameter validation failed", traceId));
     }
 
-    @ExceptionHandler(BindException.class)
-    public ApiResponse<Void> handleBindException(BindException e) {
-        List<String> errors = e.getFieldErrors().stream()
-                .map(err -> err.getField() + ": " + err.getDefaultMessage())
-                .toList();
-        return ApiResponse.error("VALIDATION_ERROR", String.join("; ", errors));
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ApiResponse<Void>> handleBusinessException(
+            BusinessException ex, HttpServletRequest request) {
+        String traceId = generateTraceId(request);
+        return ResponseEntity.status(ex.getErrorCode().getHttpStatus())
+                .header("X-Trace-Id", traceId)
+                .body(ApiResponse.error(ex.getErrorCode(), ex.getMessage(), traceId));
     }
 }
 ```

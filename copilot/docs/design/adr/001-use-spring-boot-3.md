@@ -26,4 +26,4 @@ Use Spring Boot 3.x with Java 21.
 - Micronaut: Similar to Spring Boot but less mature
 
 ## Date
-2024-01-15
+2026-01-15
