@@ -2,14 +2,20 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Repository Purpose
+## Project Purpose
 
-This is a **showcase repository** demonstrating AI Coding tool configuration best practices. It contains two identical Spring Boot 3 REST API projects, each with a complete, independent set of AI tool configurations:
+This is an **AI Agent Harness** — a scaffolding project providing industry-standard specifications, workflows, and sub-agent configurations for AI-assisted Spring Boot 3 Java API development. It ships two complete, tool-specific configurations:
 
-- **`claude/`** — Spring Boot project configured for Claude Code (`CLAUDE.md` + `.claude/rules/` + `.claude/skills/` + `.claude/agents/`)
-- **`copilot/`** — Spring Boot project configured for GitHub Copilot (`.github/copilot-instructions.md` + `.github/instructions/` + `.github/prompts/`)
+- **`claude/`** — Harness for Claude Code (`CLAUDE.md` + `.claude/rules/` + `.claude/skills/` + `.claude/agents/`)
+- **`copilot/`** — Harness for GitHub Copilot (`.github/copilot-instructions.md` + `.github/instructions/` + `.github/prompts/`)
 
-Both share identical source code, pom.xml, docker-compose.yml, scripts, and design docs. The **only difference** is the AI configuration layer.
+Both directories contain an identical Spring Boot 3 demo application to validate the harness. The demo code serves as a **reference implementation** proving the specifications work end-to-end.
+
+### Core Principles
+
+1. **Harness over demo** — The primary deliverable is the AI configuration layer (rules, workflows, agents), not the Spring Boot application itself
+2. **Universal standards** — Rules, workflows, and specifications in `claude/` and `copilot/` target **all Spring Boot 3 REST API projects**, not just this demo. They must reflect industry best practices, established standards, or battle-tested personal practices — not project-specific hacks
+3. **Compliant generated code** — All source code in both directories must conform to the standards defined in the harness rules. Code is the proof that the harness works, so it must be exemplary
 
 ## Working in Subdirectories
 
@@ -59,6 +65,15 @@ When adding or modifying content in one directory, apply the same change to the 
 | `.claude/rules/*.md` (with `files:` glob) | `.github/instructions/*.instructions.md` (with `applyTo:` glob) |
 | `.claude/skills/*/SKILL.md` | `.github/prompts/*.prompt.md` |
 | — | `.github/workflows/copilot-setup-steps.yml` (coding agent env setup) |
+
+## Updating Harness Specifications
+
+When modifying rules, workflows, or agents:
+
+1. **Think generically** — Every rule should apply to any Spring Boot 3 REST API project, not just this demo. Avoid hardcoding demo-specific entity names, field names, or business logic into specifications
+2. **Reference industry standards** — Ground rules in established practices: DDD patterns, REST conventions, Spring team recommendations, effective Java idioms
+3. **Demonstrate with examples** — Use `{Entity}`, `{Project}`, or generic names in specifications; the demo code provides concrete instances
+4. **Sync both harnesses** — Changes to Claude rules must be reflected in Copilot instructions, and vice versa
 
 ## Root `docs/` Directory
 

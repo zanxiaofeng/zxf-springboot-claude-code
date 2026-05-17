@@ -1,31 +1,49 @@
-# Spring Boot 3 REST API Demo + AI Coding Configuration Showcase
+# AI Agent Harness for Spring Boot 3 REST API
 
-这是一个可运行的 Spring Boot 3 REST API 演示项目，同时也是一个 **AI Coding 工具上下文配置的最佳实践示范**。项目展示了如何为 GitHub Copilot 和 Claude Code 构建完整、精确、工程化的指令系统，使 AI 助手能够在大规模代码库中保持高质量的代码输出和一致的工作流。
+本项目为 **基于 Spring Boot 3 的 Java REST API 项目提供 AI 编程脚手架（AI Agent Harness）**。通过为 GitHub Copilot 和 Claude Code 构建完整、精确、工程化的规范系统（架构规范、编码标准、工作流、子代理等），使 AI 助手能在任何同类项目中持续输出高质量、符合行业标准的代码。
+
+项目内含一个可运行的 Spring Boot 3 REST API 示例应用，作为脚手架规范的**参考实现**，验证所有规范端到端可用。
 
 ---
 
-## 为什么创建 Copilot 和 Claude 配置目录？
+## 项目定位
 
-### 问题背景
+### 脚手架 > 演示
 
-在大规模 Java 项目中使用 AI Coding 助手时，开发者通常遇到以下问题：
+本项目的核心交付物是 **AI 配置层**（rules、workflows、agents），而非 Spring Boot 应用本身。示例代码的作用是证明脚手架有效——它是规范的落地验证，不是最终产品。
+
+### 通用标准，而非项目定制
+
+`claude/` 和 `copilot/` 中的规范、工作流和代理配置面向 **所有 Spring Boot 3 REST API 项目**，不局限于本示例。它们基于：
+
+- **行业标准**：六边形架构、DDD 模式、RESTful 约定、Spring 官方推荐实践
+- **行业最佳实践**：TDD 工作流、契约优先、四层分层、领域事件
+- **个人总结的最佳实践**：API 测试策略、下游集成模式、异常体系设计
+
+规范中使用 `{Entity}`、`{Project}` 等通用占位符，示例代码提供具体实例。
+
+### 合规的生成代码
+
+所有示例代码必须严格遵守脚手架中定义的规范。代码是规范正确性的证据，因此必须是模范实现。
+
+---
+
+## 解决什么问题
+
+在 Java 后端项目中使用 AI 编程助手时，开发者通常遇到：
 
 - **上下文碎片化**：AI 不了解项目架构、分层规则和技术约束，生成的代码常违反团队规范
 - **重复纠正**：每次让 AI 生成代码后，都需要人工修正命名、包位置、事务注解、注入方式等基础问题
 - **测试策略混乱**：AI 不知道项目使用 WebTestClient + JSON fixtures 编写 API 测试，不了解 WireMock 的集成方式
-- **下游服务盲区**：AI 不理解"接口在 domain、实现在 infrastructure"的下游集成模式
 - **工作流不一致**：不同开发者使用 AI 的方式不同，有的跳过契约测试，有的忘记更新 API 文档
 
-### 解决方案：项目级 AI 配置
-
-本项目创建了 **两套完整且独立的 AI 配置**，分别针对 GitHub Copilot 和 Claude Code，将项目的工程约束、工作流规范、技术决策全部编码为 AI 可直接消费的上下文：
+本 Harness 将工程约束、行业最佳实践、工作流规范全部编码为 AI 可直接消费的上下文：
 
 | 目标 | 效果 |
 |------|------|
 | **架构一致性** | AI 生成的代码自动遵循四层架构（Domain → Application → Infrastructure → Interfaces） |
 | **测试规范** | AI 自动使用 WebTestClient + JSON fixtures + DatabaseVerifier 编写 API 测试 |
 | **契约优先** | AI 在实现 API 前先编写 Spring Cloud Contract 契约测试 |
-| **下游集成** | AI 自动在 domain 层定义接口、infrastructure 层实现、WireMock 中 stub |
 | **TDD 工作流** | AI 遵循 Red → Green → Refactor → Contract → Docs 的严格顺序 |
 | **代码审查** | Claude Code 子代理可执行架构合规、安全检查的自动化审查 |
 
@@ -50,17 +68,17 @@ CLAUDE.md                                # 主指令
 .claude/agents/*.md                      # 子代理
 ```
 
-项目包含两份完全独立的项目副本（代码 + AI 配置）：
+项目包含两套独立的 Harness 配置，共享同一份示例代码：
 
 ```
-├── copilot/                  # GitHub Copilot 完整项目副本
+├── copilot/                  # GitHub Copilot Harness
 │   ├── .github/
 │   │   ├── copilot-instructions.md
 │   │   ├── instructions/           # 15 个带 applyTo 的子指令
 │   │   ├── prompts/                # 3 个可复用工作流
 │   │   └── workflows/              # Coding Agent 环境配置
 │   ├── docs/、scripts/、src/、pom.xml...
-└── claude/                     # Claude Code 完整项目副本
+└── claude/                     # Claude Code Harness
     ├── CLAUDE.md
     ├── .claude/
     │   ├── rules/                  # 15 个带 paths 的规则
@@ -124,9 +142,9 @@ CLAUDE.md                                # 主指令
 
 ---
 
-## 项目代码概况
+## 参考实现（示例应用）
 
-这是一个四层架构的 Spring Boot 3 REST API 项目，用户管理模块为示例场景。
+这是一个四层架构的 Spring Boot 3 REST API 用户管理模块，用于验证 Harness 规范的端到端可用性。
 
 ### 技术栈
 
@@ -203,10 +221,10 @@ cd claude  # 或 cd copilot
 
 | 文件/目录 | 说明 |
 |-----------|------|
-| `README.md` | 本文档（项目总览 + AI 配置说明） |
-| `CLAUDE.md` | Claude Code 根级项目指令（工作目录规范） |
-| `copilot/` | GitHub Copilot 完整项目副本（代码 + AI 配置） |
-| `claude/` | Claude Code 完整项目副本（代码 + AI 配置） |
+| `README.md` | 本文档（Harness 总览 + 参考实现说明） |
+| `CLAUDE.md` | Claude Code 根级项目指令（核心原则 + 工作规范） |
+| `copilot/` | GitHub Copilot Harness + 参考实现 |
+| `claude/` | Claude Code Harness + 参考实现 |
 | `docs/` | 参考资料（AI Coding 文章、官方文档副本） |
 
 每个子项目内部结构相同：
