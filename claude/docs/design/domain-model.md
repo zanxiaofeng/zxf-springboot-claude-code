@@ -25,8 +25,7 @@ public enum UserStatus {
 None (standalone entity for demo).
 
 ## Value Objects
-- **Email**: Validates email format
-- **Password**: Validates password strength
+Validation is handled via Bean Validation annotations on DTO records (`@Email`, `@NotBlank`, `@Size`, etc.) rather than dedicated value object classes.
 
 ## Repository
 - `UserRepository` (interface in domain layer)

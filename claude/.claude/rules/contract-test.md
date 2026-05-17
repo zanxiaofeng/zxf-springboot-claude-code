@@ -8,13 +8,11 @@ paths:
 ## Directory
 ```
 src/test/resources/contracts/
-├── users/
-│   ├── shouldCreateUser.groovy
-│   ├── shouldReturnUserById.groovy
-│   ├── shouldReturn404WhenUserNotFound.groovy
-│   └── shouldRejectInvalidCreateUser.groovy
-└── orders/
-    └── ...
+└── users/
+    ├── shouldCreateUser.groovy
+    ├── shouldReturnUserById.groovy
+    ├── shouldReturn404WhenUserNotFound.groovy
+    └── shouldRejectInvalidCreateUser.groovy
 ```
 
 ## Groovy DSL Template

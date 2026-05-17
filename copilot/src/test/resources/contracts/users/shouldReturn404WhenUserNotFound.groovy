@@ -19,9 +19,8 @@ Contract.make {
             header 'Content-Type', 'application/json'
         }
         body([
-                code     : '000003',
-                data     : null,
-                message  : 'Resource not found',
+                code     : '001001',
+                message  : 'User not found',
                 timestamp: $(regex(iso8601WithOffset())),
                 traceId  : $(regex('[a-f0-9]{16}'))
         ])

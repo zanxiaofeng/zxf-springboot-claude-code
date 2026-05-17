@@ -28,7 +28,6 @@ Contract.make {
         }
         body([
                 code     : '002001',
-                data     : null,
                 message  : 'Request validation failed',
                 timestamp: $(regex(iso8601WithOffset())),
                 traceId  : $(regex('[a-f0-9]{16}')),

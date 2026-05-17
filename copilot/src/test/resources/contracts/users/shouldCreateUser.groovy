@@ -15,8 +15,8 @@ Contract.make {
             header 'Content-Type', 'application/json'
         }
         body([
-                username: 'john.doe',
-                email   : 'john.doe@example.com',
+                username: 'contract.user',
+                email   : 'contract@example.com',
                 password: 'SecurePass123!'
         ])
     }
@@ -31,12 +31,11 @@ Contract.make {
                 code     : 'SUCCESS',
                 data     : [
                         id       : $(regex(positiveInt())),
-                        username : 'john.doe',
-                        email    : 'john.doe@example.com',
+                        username : 'contract.user',
+                        email    : 'contract@example.com',
                         status   : 'ACTIVE',
                         createdAt: $(regex(iso8601WithOffset()))
                 ],
-                message  : null,
                 timestamp: $(regex(iso8601WithOffset()))
         ])
     }

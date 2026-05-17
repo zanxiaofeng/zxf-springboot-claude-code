@@ -61,7 +61,9 @@ my-project/
 │   │   └── refactor-module/SKILL.md
 │   └── agents/                          # Specialized subagents
 │       ├── code-reviewer.md
-│       └── security-auditor.md
+│       ├── security-auditor.md
+│       ├── tdd-guide.md
+│       └── build-error-resolver.md
 ├── docs/
 │   ├── requirements/                    # Requirement docs
 │   ├── design/                          # ADR, API spec, domain model

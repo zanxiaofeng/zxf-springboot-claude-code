@@ -4,15 +4,18 @@ import com.example.demo.domain.common.BusinessException;
 import com.example.demo.domain.common.ErrorCode;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * Global exception handler for all REST controllers.
@@ -26,6 +29,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     private static final String TRACE_ID_HEADER = "X-Trace-Id";
+    private static final Set<String> SENSITIVE_FIELDS = Set.of("password", "token", "secret", "apiKey");
 
     /**
      * Handles business exceptions.
@@ -59,9 +63,9 @@ public class GlobalExceptionHandler {
                 .map(e -> ApiResponse.FieldError.builder()
                         .field(e.getField())
                         .message(e.getDefaultMessage())
-                        .rejectedValue(e.getRejectedValue())
+                        .rejectedValue(SENSITIVE_FIELDS.contains(e.getField()) ? "***" : e.getRejectedValue())
                         .build())
-                .collect(Collectors.toList());
+                .toList();
         return ResponseEntity.status(ErrorCode.VALIDATION_ERROR.getHttpStatus())
                 .header(TRACE_ID_HEADER, traceId)
                 .body(ApiResponse.error(ErrorCode.VALIDATION_ERROR, "Request validation failed", traceId, errors));
@@ -83,6 +87,60 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(ErrorCode.NOT_FOUND.getHttpStatus())
                 .header(TRACE_ID_HEADER, traceId)
                 .body(ApiResponse.error(ErrorCode.NOT_FOUND, "Resource not found", traceId));
+    }
+
+    /**
+     * Handles type mismatch errors (e.g. non-numeric path variable).
+     *
+     * @param ex      the type mismatch exception
+     * @param request the HTTP request
+     * @return 400 error response
+     */
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiResponse<Void>> handleTypeMismatch(
+            MethodArgumentTypeMismatchException ex, HttpServletRequest request) {
+        String traceId = generateTraceId(request);
+        log.warn("[{}] Type mismatch: parameter '{}' with value '{}'", traceId, ex.getName(), ex.getValue());
+        return ResponseEntity.status(ErrorCode.BAD_REQUEST.getHttpStatus())
+                .header(TRACE_ID_HEADER, traceId)
+                .body(ApiResponse.error(ErrorCode.BAD_REQUEST,
+                        "Invalid value for parameter: " + ex.getName(), traceId));
+    }
+
+    /**
+     * Handles malformed request body (invalid JSON or empty body).
+     *
+     * @param ex      the message not readable exception
+     * @param request the HTTP request
+     * @return 400 error response
+     */
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<Void>> handleNotReadable(
+            HttpMessageNotReadableException ex, HttpServletRequest request) {
+        String traceId = generateTraceId(request);
+        log.warn("[{}] Malformed request body: {}", traceId, ex.getMessage());
+        return ResponseEntity.status(ErrorCode.BAD_REQUEST.getHttpStatus())
+                .header(TRACE_ID_HEADER, traceId)
+                .body(ApiResponse.error(ErrorCode.BAD_REQUEST, "Malformed request body", traceId));
+    }
+
+    /**
+     * Handles database constraint violations (e.g. duplicate unique key).
+     * Maps to 409 CONFLICT for duplicate entries.
+     *
+     * @param ex      the data integrity violation exception
+     * @param request the HTTP request
+     * @return 409 error response
+     */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ApiResponse<Void>> handleDataIntegrity(
+            DataIntegrityViolationException ex, HttpServletRequest request) {
+        String traceId = generateTraceId(request);
+        log.warn("[{}] Data integrity violation: {}", traceId, ex.getMessage());
+        return ResponseEntity.status(ErrorCode.USER_ALREADY_EXISTS.getHttpStatus())
+                .header(TRACE_ID_HEADER, traceId)
+                .body(ApiResponse.error(ErrorCode.USER_ALREADY_EXISTS,
+                        "Resource already exists", traceId));
     }
 
     /**

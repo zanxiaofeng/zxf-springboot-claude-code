@@ -12,7 +12,9 @@ import java.time.OffsetDateTime;
  * @param username  the username
  * @param email     the email address
  * @param status    the account status
+ * @param bio       the user bio
  * @param createdAt the creation timestamp
+ * @param updatedAt the last update timestamp
  * @author Demo Team
  * @since 1.0.0
  */
@@ -22,6 +24,7 @@ public record UserResponse(
         String email,
         UserStatus status,
         String bio,
-        OffsetDateTime createdAt
+        OffsetDateTime createdAt,
+        OffsetDateTime updatedAt
 ) {
 }

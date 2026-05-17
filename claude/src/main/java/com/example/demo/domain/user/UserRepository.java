@@ -63,6 +63,14 @@ public interface UserRepository {
     boolean existsByEmail(String email);
 
     /**
+     * Checks if a user exists with the given username.
+     *
+     * @param username the username
+     * @return true if exists
+     */
+    boolean existsByUsername(String username);
+
+    /**
      * Deletes a user by their ID.
      *
      * @param id the user ID

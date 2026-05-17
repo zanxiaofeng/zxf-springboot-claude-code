@@ -24,4 +24,4 @@ Use MySQL 8.0 in production and H2 in-memory database for tests.
 - Same DB for all environments: Simpler but slower feedback loop
 
 ## Date
-2024-01-15
+2026-01-15

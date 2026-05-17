@@ -22,12 +22,11 @@ Contract.make {
                 code     : 'SUCCESS',
                 data     : [
                         id       : 1,
-                        username : 'test.user',
-                        email    : 'test@example.com',
+                        username : 'john.doe',
+                        email    : 'john@example.com',
                         status   : 'ACTIVE',
                         createdAt: $(regex(iso8601WithOffset()))
                 ],
-                message  : null,
                 timestamp: $(regex(iso8601WithOffset()))
         ])
     }

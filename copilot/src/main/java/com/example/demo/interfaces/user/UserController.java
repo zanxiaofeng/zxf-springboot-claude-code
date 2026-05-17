@@ -83,7 +83,7 @@ public class UserController {
      * Deletes a user by ID.
      *
      * @param id the user ID
-     * @return 204 No Content
+     * @return 200 OK
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable Long id) {

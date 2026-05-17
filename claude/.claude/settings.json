@@ -46,7 +46,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd claude && mvn compile -q 2>&1 | tail -5",
+            "command": "mvn compile -q 2>&1 | tail -5",
             "timeout": 30000
           }
         ]
@@ -57,7 +57,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "cd claude && mvn test -q 2>&1 | tail -10",
+            "command": "mvn test -q 2>&1 | tail -10",
             "timeout": 120000
           }
         ]

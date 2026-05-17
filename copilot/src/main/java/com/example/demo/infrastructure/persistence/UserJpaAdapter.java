@@ -60,6 +60,12 @@ public class UserJpaAdapter implements UserRepository {
 
     /** {@inheritDoc} */
     @Override
+    public boolean existsByUsername(String username) {
+        return jpaRepository.existsByUsername(username);
+    }
+
+    /** {@inheritDoc} */
+    @Override
     public void deleteById(Long id) {
         jpaRepository.deleteById(id);
     }

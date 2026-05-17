@@ -10,7 +10,7 @@ paths:
 ## Design Principle
 - Downstream service interfaces belong to the **domain layer** (`domain/downstream/`)
 - Implementations belong to the **infrastructure layer** (`infrastructure/downstream/`)
-- Use `RestTemplate` for HTTP calls with configured timeouts
+- Use `RestTemplate` for HTTP calls with configured timeouts (note: `RestClient` is preferred for new projects, but this project uses `RestTemplate` consistently)
 - Never call downstream directly from Controller or Service without going through the domain interface
 
 ## Timeout Configuration

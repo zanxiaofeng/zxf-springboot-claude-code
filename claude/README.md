@@ -9,7 +9,7 @@ my-project/
 ├── docs/                                 # Documentation
 │   ├── requirements/                     # Requirements
 │   ├── design/                           # Design docs (ADR, API spec, domain model)
-│   └── conventions/                      # Team conventions
+│   └── templates/                        # Document templates
 ├── src/
 │   ├── main/java/.../
 │   │   ├── domain/                       # Domain layer (Entity, Value Object, Repository Interface)

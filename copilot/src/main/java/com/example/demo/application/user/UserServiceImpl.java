@@ -43,6 +43,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserResponse createUser(CreateUserRequest request) {
+        if (userRepository.existsByUsername(request.username())) {
+            throw new BusinessException(ErrorCode.USER_ALREADY_EXISTS, request.username());
+        }
         if (userRepository.existsByEmail(request.email())) {
             throw new BusinessException(ErrorCode.USER_ALREADY_EXISTS, request.email());
         }
