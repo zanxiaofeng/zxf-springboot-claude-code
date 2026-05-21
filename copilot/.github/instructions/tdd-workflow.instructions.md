@@ -17,8 +17,8 @@ applyTo: "**/*.java,**/*.groovy,**/*.md"
 
 ## Downstream Integration in TDD
 When a feature requires calling a downstream service:
-1. Define `NotificationClient` interface in `domain/downstream/`
-2. Implement `NotificationClientImpl` in `infrastructure/downstream/`
-3. Add `RestTemplateConfig` in `infrastructure/config/` if not already present
+1. Define `{ServiceName}Client` interface in `domain/downstream/`
+2. Implement `{ServiceName}ClientImpl` in `infrastructure/downstream/`
+3. Add `{Feature}Config` in `infrastructure/config/` if not already present
 4. Add downstream base URL to `application.yml` and `application-test.yml`
-5. Create MockFactory/Verifier in `apitest/support/mocks/` for WireMock stubs
+5. Create `{Service}MockFactory`/`{Service}MockVerifier` in `apitest/support/mocks/` for WireMock stubs

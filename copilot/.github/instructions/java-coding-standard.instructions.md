@@ -10,7 +10,7 @@ applyTo: "**/*.java"
 **生效日期：** 2026-03-23
 **适用范围：** 所有基于 Java 21+ 的后端项目（含 Spring Boot 3.5+）
 
----
+***
 
 ## 1. 核心原则
 
@@ -36,7 +36,7 @@ applyTo: "**/*.java"
 | 4 | Apache Commons | 经典补充库（commons-lang3、commons-io 等） |
 | 5 | 其他第三方库 | Guava、Hutool 等，仅在以上均无法简洁实现时按需引入 |
 
----
+***
 
 ## 2. 各层次详细规范
 
@@ -93,7 +93,7 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 }
 ```
 
----
+***
 
 ### 2.2 Lombok 简化代码
 
@@ -116,7 +116,7 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 - `@ToString.Exclude` 排除敏感字段（密码、密钥等），避免日志泄露。
 - JPA 实体使用 `@EqualsAndHashCode(onlyExplicitlyIncluded = true)` + `@EqualsAndHashCode.Include` 指定业务主键，避免懒加载字段触发 N+1 查询。
 
----
+***
 
 ### 2.3 Spring / Spring Boot 内置能力
 
@@ -141,7 +141,7 @@ try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
 | RestClient | 替代 RestTemplate 的现代 HTTP 客户端，Fluent API（新模块推荐） |
 | CDS 支持 | `spring-boot-maven-plugin` 支持 CDS 加速启动 |
 
-> **本项目说明：** 本 Demo 项目使用 `RestTemplate` 作为下游 HTTP 客户端。新模块推荐迁移到 `RestClient`。
+> **说明：** 已有项目使用 `RestTemplate` 作为下游 HTTP 客户端可继续使用。新模块推荐使用 `RestClient`。
 
 #### RestClient 示例（新模块推荐）
 
@@ -163,7 +163,7 @@ User created = restClient.post()
     .body(User.class);
 ```
 
----
+***
 
 ### 2.4 Apache Commons 库
 
@@ -184,7 +184,7 @@ User created = restClient.post()
 - 只引入具体模块，避免 commons 父依赖。
 - 在 pom.xml 或 build.gradle 中添加注释说明引入原因。
 
----
+***
 
 ### 2.5 其他第三方库（Guava、Hutool 等）
 
@@ -201,7 +201,7 @@ User created = restClient.post()
 | 验证码生成 | Hutool `CaptchaUtil` | 开箱即用，无需自己绘图 |
 | HTTP 快速调用 | Hutool `HttpUtil` | 一行代码完成，适合简单场景 |
 
----
+***
 
 ## 3. 依赖管理规范
 
@@ -210,7 +210,7 @@ User created = restClient.post()
 3. **显式注释** — 引入非 JDK/Spring 依赖时，必须在构建文件或代码中添加注释说明原因。
 4. **冲突检查** — 引入新依赖前，运行 `mvn dependency:tree` 或 `gradle dependencies` 检查版本冲突。
 
----
+***
 
 ## 4. 冲突与规避
 
@@ -221,7 +221,7 @@ User created = restClient.post()
 - **集合工具：** Spring 项目中使用 Spring 的 `CollectionUtils`；避免混用多个库的集合工具。
 - **异步编程：** 优先使用 JDK `CompletableFuture`。
 
----
+***
 
 ## 5. 命名规范
 
@@ -252,7 +252,7 @@ User created = restClient.post()
 - Business exceptions extend `BusinessException`
 - Never throw raw `RuntimeException`
 
----
+***
 
 ## 决策流程
 
@@ -270,7 +270,7 @@ User created = restClient.post()
         否 → 手工实现，保持可读性
 ```
 
----
+***
 
 ## 附录：常用工具库推荐版本
 
@@ -285,8 +285,8 @@ User created = restClient.post()
 
 > **注意：** Spring Boot 3.5.x 通过 BOM 管理了大部分依赖版本。使用 `spring-boot-dependencies` BOM 时，无需手动指定 Commons 库版本。
 
----
----
+***
+***
 
 # Java 契约编程规范
 
@@ -294,7 +294,7 @@ User created = restClient.post()
 **生效日期：** 2026-03-23
 **适用范围：** 所有基于 Java 21+ 的服务端、客户端及基础库代码（含 Spring Boot 3.5+）
 
----
+***
 
 ## 1. 目的
 
@@ -302,7 +302,7 @@ User created = restClient.post()
 2. 通过"快失败"（Fail Fast）原则，尽早暴露错误，降低调试成本。
 3. 提高代码可读性，使方法的依赖与约束显式化，契约即文档。
 
----
+***
 
 ## 2. 核心原则
 
@@ -332,7 +332,7 @@ User created = restClient.post()
 
 异常信息必须包含：参数/状态名称、预期的约束条件、实际值（若安全且有助于排查）。
 
----
+***
 
 ## 3. 参数校验（前置条件）
 
@@ -379,7 +379,7 @@ public void updateUser(@Nonnull String userId, int age, List<String> tags) {
 }
 ```
 
----
+***
 
 ## 4. 内部断言（不变式与后置条件）
 
@@ -396,7 +396,7 @@ public void updateUser(@Nonnull String userId, int age, List<String> tags) {
 
 **重要：** 断言失败应视为编程错误，不应被 try-catch 捕获处理。
 
----
+***
 
 ## 5. 使用注解声明契约
 
@@ -417,7 +417,7 @@ public void process(@Nonnull String input) {
 }
 ```
 
----
+***
 
 ## 6. 异常信息规范
 
@@ -439,7 +439,7 @@ if (!isInitialized()) {
 }
 ```
 
----
+***
 
 ## 7. 契约与继承
 
@@ -448,7 +448,7 @@ if (!isInitialized()) {
 - **不能加强后置条件**（即输出更严格的保证）
 - **不能削弱类不变式**
 
----
+***
 
 ## 8. 类不变式（Class Invariants）
 
@@ -472,7 +472,7 @@ public class BankAccount {
 }
 ```
 
----
+***
 
 ## 9. 测试契约
 
@@ -496,7 +496,7 @@ void updateUser_InvalidAge_ShouldThrowException(int invalidAge) {
 }
 ```
 
----
+***
 
 ## 10. 代码审查清单
 
@@ -509,7 +509,7 @@ void updateUser_InvalidAge_ShouldThrowException(int invalidAge) {
 - [ ] 类不变式是否在关键方法后得到维护？
 - [ ] 测试是否覆盖了契约的边界情况？
 
----
+***
 
 ## 快速参考：参数校验模板
 

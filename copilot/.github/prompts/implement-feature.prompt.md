@@ -17,7 +17,7 @@ Implement a new feature following the TDD workflow. Start by reading the require
 
 ## Downstream Integration (if applicable)
 1. Define `{Service}Client` interface in `domain/downstream/`
-2. Create `{Service}ClientImpl` in `infrastructure/downstream/` — see `downstream-conventions.instructions.md` for HTTP client usage
+2. Create `{Service}ClientImpl` in `infrastructure/downstream/` — see `downstream-conventions.instructions.md` for RestTemplate/RestClient usage
 3. Add base URL to `application.yml` and `application-test.yml`
 4. Create MockFactory/Verifier in `apitest/support/mocks/`
 

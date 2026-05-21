@@ -8,7 +8,7 @@ applyTo: "**/interfaces/**/*.java,**/application/**/*.java,**/domain/**/*.java,*
 
 **适用范围：** JDK 21 + Spring Boot 3.5 + Jakarta Validation 3.0
 
----
+***
 
 ## 1. 分层验证职责
 
@@ -18,7 +18,7 @@ applyTo: "**/interfaces/**/*.java,**/application/**/*.java,**/domain/**/*.java,*
 | Service | `@Validated` + Bean Validation 或 `Assert` | 业务验证（存在性、状态、权限） |
 | Entity | `@PrePersist` / `@PreUpdate` | 不变式（数据一致性约束） |
 
----
+***
 
 ## 2. Controller 层参数验证
 
@@ -66,7 +66,7 @@ public class UserQueryDTO {
 }
 ```
 
----
+***
 
 ## 3. DTO 字段验证注解
 
@@ -135,7 +135,7 @@ public class ConfigUpdateRequest {
 }
 ```
 
----
+***
 
 ## 4. 验证组（分组验证）
 
@@ -170,7 +170,7 @@ public ApiResponse<Void> update(
         @RequestBody @Validated(ValidationGroups.Update.class) UserDTO dto) { ... }
 ```
 
----
+***
 
 ## 5. 自定义验证注解
 
@@ -217,7 +217,7 @@ public @interface EnumValue {
 - 验证器中 `null` 值返回 `true`（让 `@NotNull`/`@NotBlank` 处理空值）
 - 需要多条错误信息时，用 `context.disableDefaultConstraintViolation()` + `buildConstraintViolationWithTemplate()`
 
----
+***
 
 ## 6. 返回值验证（可选）
 
@@ -246,7 +246,7 @@ public interface OrderService {
 }
 ```
 
----
+***
 
 ## 7. 全局异常处理
 
@@ -291,7 +291,7 @@ public class GlobalExceptionHandler {
 }
 ```
 
----
+***
 
 ## 8. 最佳实践
 

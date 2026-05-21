@@ -7,7 +7,7 @@ applyTo: "**/domain/**/*.java,**/application/**/*.java,**/infrastructure/**/*.ja
 
 基于六边形架构（Hexagonal / Ports & Adapters）与领域驱动设计（DDD）的四层架构最佳实践。适用于 Spring Boot 3.x + JPA 项目。
 
----
+***
 
 ## 1. 分层与依赖规则
 
@@ -44,7 +44,7 @@ applyTo: "**/domain/**/*.java,**/application/**/*.java,**/infrastructure/**/*.ja
 
 > **核心原则：** Domain 是最内层，不依赖任何业务层。Infrastructure 和 Application 都依赖 Domain 的接口（Port），Domain 不知道谁在使用它。
 
----
+***
 
 ## 2. 包结构
 
@@ -108,7 +108,7 @@ com.example.{project}
 | Value Object | 业务名词 | `Email`, `Money`, `Address` |
 | ErrorCode | `{模块编号}{错误编号}` | `001001` (用户模块 001, 错误 001) |
 
----
+***
 
 ## 3. Domain 层
 
@@ -341,7 +341,7 @@ public class {Entity}DomainService {
 - 只涉及单个聚合内部状态 → Entity 方法
 - 涉及多个聚合、需要查询外部数据、跨聚合一致性 → Domain Service
 
----
+***
 
 ## 4. Application 层
 
@@ -442,7 +442,6 @@ public record {Entity}Query(
 @Component
 @RequiredArgsConstructor
 public class {Entity}Mapper {
-    private final PasswordEncoder passwordEncoder;  // 按需注入
 
     public {Entity} toEntity(Create{Entity}Request request) {
         return {Entity}.builder()
@@ -471,7 +470,7 @@ public class {Entity}Mapper {
 - 手动映射，显式且可追踪
 - 跨层转换只在此发生（Entity ↔ DTO）
 
----
+***
 
 ## 5. Infrastructure 层
 
@@ -550,6 +549,7 @@ public class {ServiceName}ClientImpl implements {ServiceName}Client {
 ```java
 @Configuration
 public class {Feature}Config {
+    // 推荐 RestClient（Spring Boot 3.2+），RestTemplate 也可用于已有项目
     @Bean
     public RestTemplate downstreamRestTemplate(RestTemplateBuilder builder) {
         return builder
@@ -557,10 +557,20 @@ public class {Feature}Config {
                 .setReadTimeout(Duration.ofSeconds(5))
                 .build();
     }
+
+    // 新项目推荐
+    @Bean
+    public RestClient downstreamRestClient(RestClient.Builder builder,
+                                           @Value("${app.downstream.{service}.base-url}") String baseUrl) {
+        return builder
+                .baseUrl(baseUrl)
+                .defaultHeader("Content-Type", "application/json")
+                .build();
+    }
 }
 ```
 
----
+***
 
 ## 6. Interfaces 层
 
@@ -652,7 +662,7 @@ public class GlobalExceptionHandler {
 - 所有异常转为 `ApiResponse<Void>` + traceId
 - 敏感字段（password, token, secret）在 FieldError 中脱敏为 `***`
 
----
+***
 
 ## 7. 跨领域关注点
 
@@ -724,8 +734,8 @@ public class {Entity}EventSubscriber {
 @Column(name = "deleted_at")
 private OffsetDateTime deletedAt;
 
-// Repository 查询自动过滤
-@Where(clause = "deleted_at IS NULL")
+// Repository 查询自动过滤（Hibernate 6.4+ 使用 @SQLRestriction 替代已废弃的 @Where）
+@SQLRestriction("deleted_at IS NULL")
 @Entity
 public class {Entity} { ... }
 
@@ -747,7 +757,7 @@ public ResponseEntity<ApiResponse<Page<{Entity}Response>>> list(
 }
 ```
 
----
+***
 
 ## 8. 反模式（禁止）
 
@@ -768,7 +778,7 @@ public ResponseEntity<ApiResponse<Page<{Entity}Response>>> list(
 | 13 | **Repository 返回 DTO** | Repository 是 Domain 层组件，不应知道 DTO | Repository 只操作 Entity |
 | 14 | **用 `@Builder.Default` 设置时间戳** | 只在使用 Builder 时生效，其他创建方式会丢失默认值 | 用 `@PrePersist` / JPA Auditing |
 
----
+***
 
 ## 9. 新增业务模块 Checklist
 

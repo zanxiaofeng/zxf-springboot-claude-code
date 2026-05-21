@@ -25,8 +25,8 @@ applyTo: "**/pom.xml,**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 - Spring Data JPA
 - Spring Validation
 - Spring Web
-- Spring Security (CSRF disabled for demo)
-- RestTemplate (downstream HTTP client)
+- Spring Security (CSRF configuration per project requirements)
+- RestTemplate / RestClient (downstream HTTP client; RestClient preferred for new projects)
 
 ## Downstream Integration
 - WireMock 3.x (test stubbing for downstream services)

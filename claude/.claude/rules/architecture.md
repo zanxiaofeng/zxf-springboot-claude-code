@@ -441,7 +441,6 @@ public record {Entity}Query(
 @Component
 @RequiredArgsConstructor
 public class {Entity}Mapper {
-    private final PasswordEncoder passwordEncoder;  // 按需注入
 
     public {Entity} toEntity(Create{Entity}Request request) {
         return {Entity}.builder()
@@ -549,11 +548,22 @@ public class {ServiceName}ClientImpl implements {ServiceName}Client {
 ```java
 @Configuration
 public class {Feature}Config {
+    // 推荐 RestClient（Spring Boot 3.2+），RestTemplate 也可用于已有项目
     @Bean
     public RestTemplate downstreamRestTemplate(RestTemplateBuilder builder) {
         return builder
                 .setConnectTimeout(Duration.ofSeconds(3))
                 .setReadTimeout(Duration.ofSeconds(5))
+                .build();
+    }
+
+    // 新项目推荐
+    @Bean
+    public RestClient downstreamRestClient(RestClient.Builder builder,
+                                           @Value("${app.downstream.{service}.base-url}") String baseUrl) {
+        return builder
+                .baseUrl(baseUrl)
+                .defaultHeader("Content-Type", "application/json")
                 .build();
     }
 }
@@ -723,8 +733,8 @@ public class {Entity}EventSubscriber {
 @Column(name = "deleted_at")
 private OffsetDateTime deletedAt;
 
-// Repository 查询自动过滤
-@Where(clause = "deleted_at IS NULL")
+// Repository 查询自动过滤（Hibernate 6.4+ 使用 @SQLRestriction 替代已废弃的 @Where）
+@SQLRestriction("deleted_at IS NULL")
 @Entity
 public class {Entity} { ... }
 

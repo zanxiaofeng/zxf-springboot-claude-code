@@ -8,11 +8,11 @@ paths:
 ## Directory
 ```
 src/test/resources/contracts/
-└── users/
-    ├── shouldCreateUser.groovy
-    ├── shouldReturnUserById.groovy
-    ├── shouldReturn404WhenUserNotFound.groovy
-    └── shouldRejectInvalidCreateUser.groovy
+└── {entity}/
+    ├── shouldCreate{Entity}.groovy
+    ├── shouldReturn{Entity}ById.groovy
+    ├── shouldReturn404When{Entity}NotFound.groovy
+    └── shouldRejectInvalidCreate{Entity}.groovy
 ```
 
 ## Groovy DSL Template
@@ -21,20 +21,20 @@ Contract.make {
     description "..."
     request {
         method POST()
-        url '/api/v1/users'
+        url '/api/v1/{resources}'
         headers { header 'Content-Type', 'application/json' }
-        body([ username: 'john.doe', email: 'john@example.com', password: 'SecurePass123!' ])
+        body([ {field1}: 'test-value-1', {field2}: 'test-value-2' ])
     }
     response {
         status 201
         headers {
             header 'Content-Type', 'application/json'
-            header 'Location', $(regex('/api/v1/users/\\d+'))
+            header 'Location', $(regex('/api/v1/{resources}/\\d+'))
         }
         body([
             id: $(regex(positiveInt())),
-            username: 'john.doe',
-            email: 'john@example.com',
+            {field1}: 'test-value-1',
+            {field2}: 'test-value-2',
             createdAt: $(regex(iso8601WithOffset())),
             status: 'ACTIVE'
         ])
@@ -44,7 +44,7 @@ Contract.make {
 
 ## Base Test Class
 ```java
-@SpringBootTest(classes = DemoApplication.class, webEnvironment = MOCK)
+@SpringBootTest(classes = {Project}Application.class, webEnvironment = MOCK)
 @ActiveProfiles("test")
 public abstract class ContractBaseTest {
     @Autowired

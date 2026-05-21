@@ -1,4 +1,4 @@
-# CLAUDE.md — Spring Boot 3 REST API Demo
+# CLAUDE.md — Spring Boot 3 REST API Project
 
 ## Project Identity
 
@@ -27,7 +27,7 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 ## Workflow Enforcement
 
 - **New Feature**: Must read requirements under `docs/requirements/` first, then execute TDD flow
-- **New API**: Must follow Contract-First — write Contract Test before implementation
+- **New API**: Must follow TDD — write failing API test first, implement to pass, then formalize with Contract Test
 - **DB Changes**: Must go through Flyway migration, update `docs/design/domain-model.md`
 - **Downstream Integration**: Must define client interface in `domain/downstream/`, implement in `infrastructure/downstream/`, stub with WireMock in tests
 
@@ -35,7 +35,8 @@ You are a senior Java backend engineer for this Spring Boot 3 REST API project, 
 
 - No real MySQL in tests (use H2 only)
 - No business logic in Controllers
-- No skipping Contract Test before implementing APIs
+- No implementing API endpoints without failing tests first
+- No shipping endpoints without both API test and Contract test
 - No modifying Flyway Migration files already merged to main
 - No field @Autowired (constructor injection only)
 

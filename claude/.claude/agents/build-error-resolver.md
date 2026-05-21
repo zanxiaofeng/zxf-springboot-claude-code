@@ -6,7 +6,7 @@ model: inherit
 memory: project
 effort: high
 permissionMode: acceptEdits
-maxTurns: 20
+maxTurns: 30
 color: yellow
 ---
 
@@ -42,3 +42,4 @@ You are a build error specialist for Spring Boot 3 / Maven projects. Your role i
 | `@Sql file not found` | Check classpath path, verify file exists under `src/test/resources/` |
 | `Bean creation error` | Check Spring config, missing `@Component`/`@Service` |
 | `Flyway validate failed` | Never modify existing migration, add new one |
+| `package javax.* does not exist` | Replace `javax.*` imports with `jakarta.*` (Spring Boot 3 uses Jakarta EE 9+) |

@@ -9,7 +9,7 @@ applyTo: "**/*.java,**/*.yml,**/*.yaml,**/*.properties"
 ## Design Principle
 - Downstream service interfaces belong to the **domain layer** (`domain/downstream/`)
 - Implementations belong to the **infrastructure layer** (`infrastructure/downstream/`)
-- Use `RestTemplate` for HTTP calls with configured timeouts (note: `RestClient` is preferred for new projects, but this project uses `RestTemplate` consistently)
+- Use `RestTemplate` or `RestClient` for HTTP calls with configured timeouts (`RestClient` is preferred for new projects)
 - Never call downstream directly from Controller or Service without going through the domain interface
 
 ## Timeout Configuration
@@ -27,11 +27,11 @@ public RestTemplate downstreamRestTemplate(RestTemplateBuilder builder) {
 - Downstream failures must not break the main business flow
 - Return `false` or default value on failure
 - Log errors at WARN or ERROR level
-- Consider circuit breaker for production (not in demo)
+- Consider circuit breaker for production (requires Resilience4j or similar library)
 
 ## Testing with WireMock
-1. Use `NotificationMockFactory` (in `apitest/support/mocks/`) to create stubs
-2. Use `NotificationMockVerifier` to confirm downstream was called (or not called)
+1. Use `{Service}MockFactory` (in `apitest/support/mocks/`) to create stubs
+2. Use `{Service}MockVerifier` to confirm downstream was called (or not called)
 3. WireMock is auto-reset in `BaseApiTest` via `@BeforeEach`
 4. WireMock port is dynamically assigned via `@AutoConfigureWireMock(port = 0)`
 

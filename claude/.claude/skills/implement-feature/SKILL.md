@@ -26,8 +26,8 @@ allowed-tools: Bash(mvn test) Bash(mvn compile) Read Write Edit Grep Glob
 ## Downstream Integration Steps (if applicable)
 
 1. Define `{Service}Client` interface in `domain/downstream/`
-2. Create `{Service}ClientImpl` in `infrastructure/downstream/` using RestTemplate
-3. Add `RestTemplateConfig` in `infrastructure/config/` if not present
+2. Create `{Service}ClientImpl` in `infrastructure/downstream/` using RestTemplate or RestClient
+3. Add `{Feature}Config` in `infrastructure/config/` if not present
 4. Add downstream base URL to `application.yml` and `application-test.yml`
 5. Create MockFactory/Verifier in `apitest/support/mocks/` for WireMock stubs
 
@@ -37,3 +37,7 @@ allowed-tools: Bash(mvn test) Bash(mvn compile) Read Write Edit Grep Glob
 - JSON fixtures under `test-data/$feature-name/`
 - Contract tests (`*.groovy`)
 - Updated documentation
+
+## Validation
+- `mvn test` passes
+- `./scripts/run-contract-tests.sh` passes (if contract tests added)

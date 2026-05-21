@@ -17,17 +17,17 @@ paths:
 2. Use @Sql seed data (not runtime API calls) to prepare data
 3. One assertion subject per test (Given/When/Then)
 4. No real MySQL in tests (use H2)
-5. Downstream calls must be stubbed via WireMock (NotificationMockFactory/Verifier)
+5. Downstream calls must be stubbed via WireMock ({Service}MockFactory/{Service}MockVerifier)
 6. JSON fixtures in `test-data/{entity}/` with `${variable}` template support
 7. Use JSONAssert + JsonComparatorFactory for response validation (ignores dynamic fields)
 
 ## API Test Structure
 ```java
 // Test class extends BaseApiTest
-public class UserApiTests extends BaseApiTest {
+public class {Entity}ApiTests extends BaseApiTest {
     // Given: load JSON fixture + setup WireMock mock
-    String request = JsonLoader.load("user/post/request.json", Map.of("username", "new.user", ...));
-    NotificationMockFactory.mockNotificationAccepted();
+    String request = JsonLoader.load("{entity}/post/request.json", Map.of("{field}", "value", ...));
+    {Service}MockFactory.mock{Service}{Scenario}();
 
     // When: call API via WebTestClient helper
     ResponseEntity<String> response = httpPostAndAssert(url, commonHeadersAndJson(),
@@ -37,7 +37,7 @@ public class UserApiTests extends BaseApiTest {
     JSONAssert.assertEquals(expected, response.getBody(), jsonComparator);
 
     // And: verify DB state + downstream calls
-    assertThat(databaseVerifier.countUsers()).isEqualTo(initialCount + 1);
-    NotificationMockVerifier.verifyNotificationCalledWith(username, email);
+    assertThat(databaseVerifier.count{Entities}()).isEqualTo(initialCount + 1);
+    {Service}MockVerifier.verify{Service}CalledWith(fieldValue1, fieldValue2);
 }
 ```

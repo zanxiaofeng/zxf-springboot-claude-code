@@ -32,3 +32,7 @@ allowed-tools: Bash(mvn test) Bash(mvn compile) Read Write Edit Grep Glob
 - Rename — unclear naming
 - Introduce Parameter Object — long parameter lists
 - Replace Conditional with Polymorphism — complex switch/if chains
+
+## Validation
+- `mvn test` passes after each change
+- `mvn compile` succeeds

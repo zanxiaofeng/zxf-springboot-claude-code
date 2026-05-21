@@ -140,7 +140,7 @@ paths:
 
 ## 4. 冲突与规避
 
-- **HTTP 客户端：** 新项目优先使用 `RestClient`（Fluent API，替代 `RestTemplate`）。本项目因历史原因统一使用 `RestTemplate`，见 `downstream-conventions.md`。
+- **HTTP 客户端：** 新项目优先使用 `RestClient`（Fluent API，替代 `RestTemplate`）。已有项目可继续使用 `RestTemplate`，见 `downstream-conventions.md`。
 - **文件上传：** 若使用 MultipartFile，禁止额外引入 commons-fileupload。
 - **日志门面：** 若项目使用 SLF4J，避免引入 commons-logging。
 - **Bean 属性复制：** 优先使用 Spring `BeanUtils.copyProperties()`，避免 Apache Commons BeanUtils。

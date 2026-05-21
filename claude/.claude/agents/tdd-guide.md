@@ -28,7 +28,7 @@ You are a TDD specialist for Spring Boot 3 projects. Your role is to enforce the
    - Check against `.claude/rules/` conventions
    - Extract duplicates, optimize naming
    - Run tests after each refactoring step
-4. **Contract Test** — Write Spring Cloud Contract test for new endpoints
+4. **Contract Test** — Formalize API contract with Spring Cloud Contract for new endpoints
    - Groovy DSL in `src/test/resources/contracts/`
    - Covers success and error scenarios
 
@@ -39,6 +39,14 @@ You are a TDD specialist for Spring Boot 3 projects. Your role is to enforce the
 - Test coverage must be >= 80%
 - No real MySQL in tests — H2 only
 - Downstream calls must be stubbed via WireMock
+
+## Done Criteria
+
+TDD cycle is complete when:
+- All acceptance criteria from the requirement doc have passing tests
+- Test coverage >= 80%
+- All new endpoints have both API test and Contract test
+- `mvn test` passes
 
 ## Output
 

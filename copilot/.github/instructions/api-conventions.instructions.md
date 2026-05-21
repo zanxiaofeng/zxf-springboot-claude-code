@@ -48,7 +48,27 @@ applyTo: "**/interfaces/**/*.java,**/*.md"
 ## Downstream Side Effects
 When an endpoint triggers a downstream call, document it in the API spec:
 - Endpoint URL, payload format, failure mode
-- Example: `POST /api/v1/users` sends `POST /api/v1/notifications/user-created`
+- Example: `POST /api/v1/{resource}` sends `POST /api/v1/{downstream-service}/{event-name}`
+
+## Adding a New Endpoint
+
+### Pre-conditions
+- [ ] API spec updated in `docs/design/api-spec-v1.md`
+- [ ] DTOs defined as record
+- [ ] Service interface has the method
+
+### Steps
+1. Add method to Service implementation
+2. Create/update Controller endpoint
+3. Write API test (WebTestClient + JSON fixtures + @Sql seed data)
+4. Write Contract Test
+5. Update OpenAPI spec
+
+### Validation
+- URL follows `/api/v1/{resource}` pattern
+- HTTP Method matches action
+- Response uses `ApiResponse<T>`
+- Contract Test covers success and error scenarios
 
 ## Adding a New Endpoint
 

@@ -1,10 +1,10 @@
-# Copilot Instructions — Spring Boot 3 REST API Demo
+# Copilot Instructions — Spring Boot 3 REST API Project
 
 ## Build & Test Commands
 
 - **Build:** `mvn compile -q`
 - **Run all tests:** `mvn test`
-- **Run API tests only:** `mvn test -pl . -Dtest="com.example.demo.apitest.*ApiTests"`
+- **Run API tests only:** `mvn test -Dtest="*ApiTests"`
 - **Run contract tests:** `./scripts/run-contract-tests.sh`
 - **Fast test (skip contract):** `./scripts/fast-test.sh`
 - **Full CI:** `./scripts/full-ci.sh`
@@ -12,18 +12,18 @@
 
 ## Project Overview
 
-Java 21 + Spring Boot 3.5.x + Maven 3.9+ REST API demo. Four-layer hexagonal architecture (Domain → Application → Infrastructure → Interfaces). MySQL 8.0 production, H2 in-memory for tests.
+Java 21 + Spring Boot 3.5.x + Maven 3.9+ REST API project. Four-layer hexagonal architecture (Domain → Application → Infrastructure → Interfaces). MySQL 8.0 production, H2 in-memory for tests.
 
 ## Repository Structure
 
 ```
-src/main/java/com/example/demo/
+src/main/java/{base-package}/
 ├── domain/           # Entity, Repository Interface, Downstream Client Interface, BusinessException
 ├── application/      # Service (interface + impl), DTO (record), Mapper
 ├── infrastructure/   # JpaAdapter, Config, Security, Downstream Client Impl
 └── interfaces/       # Controller, ExceptionHandler, ApiResponse<T>
 
-src/test/java/com/example/demo/
+src/test/java/{base-package}/
 ├── apitest/          # API tests: WebTestClient + JSON fixtures + @Sql + DatabaseVerifier
 │   └── support/      # BaseApiTest, JsonLoader, JsonComparatorFactory, DatabaseVerifier, mocks/
 └── contract/         # Contract base test (Spring Cloud Contract generates tests from .groovy)
@@ -57,7 +57,7 @@ src/test/resources/
 
 - No real MySQL in tests — use H2 only
 - All DDL via Flyway migration (`V{version}__{description}.sql`), never modify merged migrations
-- New APIs: Contract-First (write Contract Test before implementation)
+- New APIs: TDD (write failing API test first, implement to pass, then formalize with Contract Test)
 - Downstream calls: define interface in `domain/downstream/`, implement in `infrastructure/downstream/`, stub with WireMock in tests
 - See `.github/instructions/` for detailed conventions per layer
 - Validation: use `@Valid`/`@Validated` on Controller, validation annotations on DTOs, `GlobalExceptionHandler` for error responses — see `validation.instructions.md`
