@@ -1,6 +1,9 @@
 ---
 paths:
-  - "**/*.java"
+  - "**/domain/**/*.java"
+  - "**/application/**/*.java"
+  - "**/infrastructure/**/*.java"
+  - "**/interfaces/**/*.java"
 ---
 # 四层架构规范
 
@@ -539,8 +542,8 @@ public class {ServiceName}ClientImpl implements {ServiceName}Client {
 ```
 
 **下游调用规则：**
-- 下游失败不得中断主业务流程（catch + log + 返回默认值）
-- 超时配置：connect 3s / read 5s
+- 端口在 `domain/downstream/`，实现在 `infrastructure/downstream/`
+- For downstream error handling, timeout configuration, and WireMock testing conventions, see `.claude/rules/downstream-conventions.md`
 - 考虑使用 Domain Event + `@TransactionalEventListener` 解耦，避免在事务内做 HTTP 调用
 
 ### 5.3 Config

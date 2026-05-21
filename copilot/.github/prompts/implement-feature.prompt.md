@@ -7,6 +7,8 @@ agent: "agent"
 Implement a new feature following the TDD workflow. Start by reading the requirement doc, then follow the strict TDD cycle.
 
 ## Steps
+0. **Validate pre-conditions** — check that `docs/requirements/{feature-name}.md` exists.
+   If not found: output `Requirement doc not found. Create it first using the template in docs/templates/requirement-template.md.` and stop.
 1. Read the requirement doc in `docs/requirements/`
 2. Prepare test data: add seed data to `sql/init/data.sql`, create JSON fixtures under `test-data/{entity}/`
 3. Write failing API test (Red) with WebTestClient + JSON fixtures + @Sql, stub downstream via WireMock

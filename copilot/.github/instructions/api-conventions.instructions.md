@@ -1,7 +1,7 @@
 ---
 name: "API Conventions"
 description: "REST API design conventions for URL patterns, HTTP methods, and response format"
-applyTo: "**/interfaces/**/*.java,**/*.md"
+applyTo: "**/interfaces/**/*.java,**/docs/**/*.md"
 ---
 
 # API Design Conventions
@@ -50,42 +50,12 @@ When an endpoint triggers a downstream call, document it in the API spec:
 - Endpoint URL, payload format, failure mode
 - Example: `POST /api/v1/{resource}` sends `POST /api/v1/{downstream-service}/{event-name}`
 
-## Adding a New Endpoint
+To add a new endpoint, use the `add-endpoint` prompt or follow the step-by-step process defined there.
 
-### Pre-conditions
-- [ ] API spec updated in `docs/design/api-spec-v1.md`
-- [ ] DTOs defined as record
-- [ ] Service interface has the method
-
-### Steps
-1. Add method to Service implementation
-2. Create/update Controller endpoint
-3. Write API test (WebTestClient + JSON fixtures + @Sql seed data)
-4. Write Contract Test
-5. Update OpenAPI spec
-
-### Validation
-- URL follows `/api/v1/{resource}` pattern
-- HTTP Method matches action
-- Response uses `ApiResponse<T>`
-- Contract Test covers success and error scenarios
-
-## Adding a New Endpoint
-
-### Pre-conditions
-- [ ] API spec updated in `docs/design/api-spec-v1.md`
-- [ ] DTOs defined as record
-- [ ] Service interface has the method
-
-### Steps
-1. Add method to Service implementation
-2. Create/update Controller endpoint
-3. Write API test (WebTestClient + JSON fixtures + @Sql seed data)
-4. Write Contract Test
-5. Update OpenAPI spec
-
-### Validation
-- URL follows `/api/v1/{resource}` pattern
-- HTTP Method matches action
-- Response uses `ApiResponse<T>`
-- Contract Test covers success and error scenarios
+## API Versioning Strategy
+- **URL-based versioning**: `/api/v1/...`, `/api/v2/...`
+- **When to bump version**: breaking changes (removing fields, changing types, renaming endpoints)
+- **Non-breaking changes** (adding optional fields, new endpoints) do NOT require version bump
+- **Version coexistence**: both versions run simultaneously, old version deprecated with sunset header
+- **Controller organization**: `{Entity}V1Controller`, `{Entity}V2Controller` — separate classes, same or different packages
+- **Deprecation**: `@Deprecated` annotation + `Sunset` response header, minimum 6 months overlap before removal

@@ -15,6 +15,9 @@ allowed-tools: Bash(mvn test) Bash(mvn compile) Read Write Edit Grep Glob
 
 ## Steps
 
+0. **Validate pre-conditions** — check that `docs/requirements/{feature-name}.md` exists.
+   If not found: output `Requirement doc not found: docs/requirements/{feature-name}.md. Create it first using the template in docs/templates/requirement-template.md.` and stop.
+
 1. **Read requirement doc** — extract business rules and acceptance criteria
 2. **Prepare test data** — add seed data to `sql/init/data.sql`, create JSON fixtures under `test-data/$feature-name/`
 3. **Write failing API test (Red)** — WebTestClient + JSON fixtures + @Sql seed data + DatabaseVerifier

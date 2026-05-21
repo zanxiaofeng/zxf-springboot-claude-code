@@ -14,6 +14,11 @@ allowed-tools: Bash(mvn test) Bash(mvn compile) Read Write Edit Grep Glob
 
 ## Steps
 
+0. **Validate pre-conditions** — verify:
+   - `docs/design/api-spec-v1.md` contains the endpoint definition
+   - Service interface has the required method
+   If any condition fails: output the specific missing item and stop.
+
 1. **Add method to Service implementation** — business logic in Service layer
 2. **Create/update Controller endpoint** — return `ApiResponse<T>`, URL follows `/api/v1/{resource}`
 3. **Write API test** — WebTestClient + JSON fixtures + @Sql seed data

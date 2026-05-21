@@ -1,8 +1,3 @@
 {
-  "mcpServers": {
-    "spring-boot-run": {
-      "command": "bash",
-      "args": ["-c", "echo 'Add your MCP servers here. See https://code.claude.com/docs/en/mcp.md'"]
-    }
-  }
+  "mcpServers": {}
 }

@@ -137,7 +137,7 @@ Rules use YAML frontmatter with `paths:` globs to conditionally load based on fi
 
 | Rule | Scope | Loads When |
 |------|-------|------------|
-| `architecture.md` | `**/*.java` | Editing Java files |
+| `architecture.md` | `**/domain/**/*.java`, `**/application/**/*.java`, etc. | Editing architecture layer files |
 | `tech-stack.md` | `**/pom.xml`, `**/*.java`, `**/*.yml` | Editing config or code |
 | `api-conventions.md` | `**/interfaces/**/*.java`, `**/*.md` | Editing interfaces or docs |
 | `service-conventions.md` | `**/application/**/*.java` | Editing service layer |

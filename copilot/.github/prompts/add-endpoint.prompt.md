@@ -12,6 +12,10 @@ Add a new REST API endpoint following the contract-first approach.
 - Service interface has the method
 
 ## Steps
+0. **Validate pre-conditions** — verify:
+   - `docs/design/api-spec-v1.md` contains the endpoint definition
+   - Service interface has the required method
+   If any condition fails: output the specific missing item and stop.
 1. Add method to Service implementation
 2. Create/update Controller endpoint returning `ApiResponse<T>`
 3. Write API test (WebTestClient + JSON fixtures + @Sql seed data)

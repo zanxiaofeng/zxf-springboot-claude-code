@@ -123,10 +123,12 @@ This project includes comprehensive GitHub Copilot configuration for AI-assisted
 │   ├── tech-stack.instructions.md       # Technology versions and dependencies
 │   ├── test-conventions.instructions.md # Test layer conventions
 │   └── validation.instructions.md       # Bean validation patterns
-└── prompts/                             # Reusable prompt files (*.prompt.md)
+└── prompts/                             # Reusable prompt files (5 prompts)
     ├── add-endpoint.prompt.md           # Guide for adding new REST endpoints
+    ├── code-review.prompt.md            # Systematic code review for quality and architecture
     ├── implement-feature.prompt.md      # Full TDD feature implementation workflow
-    └── refactor-module.prompt.md        # Safe refactoring guide
+    ├── refactor-module.prompt.md        # Safe refactoring guide
+    └── security-audit.prompt.md         # OWASP Top 10 security audit
 ```
 
 ### How It Works

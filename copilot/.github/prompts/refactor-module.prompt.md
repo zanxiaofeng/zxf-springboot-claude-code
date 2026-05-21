@@ -21,7 +21,16 @@ Safely refactor a module with incremental changes and continuous verification.
 - Never refactor without passing tests
 - One refactoring at a time
 - Prefer small commits
-- If tests break, revert and reassess
+- If tests break, revert and reassess:
+  - `git checkout -- <file>` to discard uncommitted changes
+  - `git stash` to save current work and switch approach
+  - Reassess by re-identifying the code smell and considering an alternative refactoring
+
+## Reassessment Criteria
+When tests break after a refactoring step:
+1. Check if the refactoring introduced a bug (fix the refactoring)
+2. Check if the test was coupled to implementation details (fix the test, not the code)
+3. If neither, consider a different refactoring approach or break the change into smaller steps
 
 ## Validation
 - `mvn test` passes after each change

@@ -23,6 +23,5 @@ applyTo: "**/application/**/*.java"
 - Methods: action + entity, e.g., `createUser`, `findUserById`
 
 ## Downstream Calls
-- Inject `{Service}Client` interface (from domain layer)
-- Never call downstream implementation directly
-- Downstream failures must not break the main response
+
+For downstream integration rules (interface pattern, error handling, WireMock testing), see `downstream-conventions.instructions.md`.
